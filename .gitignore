@@ -37,6 +37,9 @@
 .vscode/
 *.bak
 *.sav
+*.md
+original texts/
+Costos TT2.xlsx
 
 # Excepción: ¡QUEREMOS SUBIR EL PDF!
 # Por defecto git ignora pdfs generados, pero aquí forzamos a NO ignorar tu tesis
