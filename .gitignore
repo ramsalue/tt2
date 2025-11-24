@@ -1,0 +1,43 @@
+# Archivos auxiliares de LaTeX (Ignorar todo esto)
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.vrb
+*.xdy
+*.tdo
+
+# Archivos de editores (TexStudio, VSCode, etc.)
+*.fls
+*.fdb_latexmk
+.vscode/
+*.bak
+*.sav
+
+# Excepción: ¡QUEREMOS SUBIR EL PDF!
+# Por defecto git ignora pdfs generados, pero aquí forzamos a NO ignorar tu tesis
+!*.pdf

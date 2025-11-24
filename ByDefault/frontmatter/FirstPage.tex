@@ -1,0 +1,106 @@
+%=========== Portada ========================
+\newcommand*{\maketitlepage}
+{\begingroup
+	\begin{center}			
+		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}	
+		\begin{minipage}{0.48\textwidth} \begin{flushleft}
+				\includegraphics[scale = 0.63]{Imágenes/logo_upiita.png}
+		\end{flushleft}\end{minipage}
+		\begin{minipage}{0.48\textwidth} \begin{flushright}
+				\includegraphics[scale = 0.35]{Imágenes/IPN.jpg}
+		\end{flushright}\end{minipage}
+		\vspace*{0.2cm}
+		\textsc{\huge Instituto Polit\'ecnico\\ \vspace{5px} Nacional}\\[0.7cm]	
+		\textsc{\LARGE Unidad Profesional Interdisciplinaria en \\ \vspace{5px} Ingenier\'ia y			
+			Tecnolog\'ias Avanzadas}
+		
+		%--------------------- Nombre de la Asignatura ------------------------------------
+		\begin{minipage}{0.9\textwidth} 
+			\begin{center}																	
+				\textsc{\LARGE \@asignatura}
+			\end{center}
+		\end{minipage}\\[0.5cm]
+		%-------------------- Nombre de la Tarea ----------------------------------------
+		\vspace*{1cm}	
+		\HRule \\[0.4cm]																
+		{ \huge \bfseries\@titulo}\\[0.4cm]
+		\HRule \\[1.5cm]												
+		% Nombre de los que presentan
+		\begin{minipage}{0.96\textwidth}	
+			\begin{flushleft} \large
+				%\raggedright
+				\emph{Presentan:}\\
+				\@alumno\\
+				\vspace*{0.5cm}	
+			\end{flushleft}	
+		\end{minipage}		
+		
+		%Nombre de los asesores
+		\begin{minipage}{0.96\textwidth}		
+			\vspace{-0.6cm}
+			\begin{flushright} \large											
+				\vspace{1 cm} 
+				\emph{Asesores:} \\							
+				\@asesores\\
+			\end{flushright}																	%------------------- Equipo, Grupo --------------------------------------------
+		\end{minipage}	
+		
+		\endgroup}
+
+\begin{titlepage}
+	\vtop{
+		\null\vspace{-28mm}
+		\centerline{\includegraphics[width=1.18\textwidth]{figure/auxiliary/GrayHeaderPattern - Copy white.jpg}}
+	}	
+	\thispagestyle{empty}
+	\begin{figure}[ht]
+		\minipage{0.80\textwidth}
+		\includegraphics[height=4cm]{figure/auxiliary/IPN.png}
+		\endminipage
+		\minipage{0.60\textwidth}
+		\includegraphics[height= 2.8cm]{figure/auxiliary/UPIITA.png}
+		\endminipage
+	\end{figure}
+	
+	\begin{center}
+		\textsc{\LARGE Instituto Politécnico Nacional}\\
+		\vspace{3mm}
+		\textsc{\Large  Unidad Profesional Interdisciplinaria en\\ Ingeniería y Tecnologías Avanzadas}\\
+		\vspace{1cm}
+		%\Large\textbf{\coursecode\ - \coursename}\\[1cm]
+		\Large\textbf{Trabajo Terminal II}\\
+		\vspace{0.5cm}
+		\rule{\linewidth}{0.2mm}\\[0.5cm]
+		{\Large\bfseries{Ortesis robótica para asistencia del movimiento de coxofemoral y rodilla en adultos con hemiplejia derecha}}\\
+		\rule{\linewidth}{0.2mm}\\[0.5cm]
+		\begin{flushleft}
+			\begin{minipage}{0.5\textwidth}												
+			\begin{flushleft} \large														
+				\emph{Autores:}\\	
+				Balderas Reyes Diego Esaú\\
+				Martínez Maldonado Sebastián\\
+				Piña Hernández Alberto\\
+				Ramírez Sabino Luis Enrique
+			\end{flushleft}																	
+		\end{minipage}		
+		\end{flushleft}
+		%%%
+		\begin{flushright}
+			\begin{minipage}{0.6\textwidth}		
+			\vspace{0.1cm}										
+			\begin{flushright} \large															
+				\emph{Asesores:} \\																
+				M. en C. Arodi Rafael Carvallo Domínguez\\
+                Dr. Rafael Santiago Godoy
+															
+			\end{flushright}																
+		\end{minipage}	
+		\end{flushright}
+		\vspace*{1.2cm}
+		\flushleft{\textbf{\Large Ing. Mecatrónica}	}\\																	
+		\vspace{1cm} 																				
+		\begin{center}																					
+			{\large \today}																	
+		\end{center}
+	\end{center}
+\end{titlepage}

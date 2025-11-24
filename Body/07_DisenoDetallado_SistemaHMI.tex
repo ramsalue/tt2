@@ -1,0 +1,231 @@
+\clearpage
+\subsubsection{S6. Sistema de comunicación Humano–Máquina}\label{S6_HMI}
+Este sistema está compuesto por dos módulos. El primero de ellos referido a las entradas y salidas del sistema, y está pensado principalmente para interactuar con el responsable de la sesión, en este caso, el fisioterapeuta es quien será el responsable de programar los ejercicios al inicio de cada sesión. El segundo módulo está dirigido a almacenar la información que el usuario declare al inicio de la sesión.
+\paragraph{M10. Módulo E/S}\mbox{} \\
+Una vez establecidas las características esenciales para la selección de la pantalla táctil, el siguiente paso consistió en evaluar las opciones disponibles para determinar cuál se adapta mejor al proyecto. Para ello, se empleó un proceso estructurado que permite comparar cada alternativa con base en criterios clave.\\ \\
+El primer paso en esta evaluación fue la identificación de los criterios fundamentales, los cuales se agrupan en categorías como técnicas, de usabilidad, de diseño y económicas. Estos criterios reflejan las necesidades del proyecto y garantizan que la pantalla seleccionada cumpla con los requisitos funcionales y no funcionales (tabla \ref{hmi_req}).
+
+\begin{table}[h!]
+	\centering
+	\caption{Requerimientos para la interfaz humano-máquina.\label{hmi_req}}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Criterio}                                                          & \textbf{Descripción}                                                                                                                                     & \textbf{Tipo}          \\ \hline
+		\begin{tabular}[c]{@{}c@{}}Calidad de imagen \\ y resolución\end{tabular}  & \begin{tabular}[c]{@{}c@{}}La pantalla debe mostrar\\  imágenes nítidas y claras\\ con una resolución adecuada\\ para la GUI médica.\end{tabular}        & Técnico / Visual       \\ \hline
+		\begin{tabular}[c]{@{}c@{}}Precisión y respuesta \\ táctil\end{tabular}    & \begin{tabular}[c]{@{}c@{}}El panel táctil debe ser \\ sensible, con respuesta \\ rápida y reconocimiento \\ multitouch preciso.\end{tabular}            & Usabilidad / Funcional \\ \hline
+		\begin{tabular}[c]{@{}c@{}}Compatibilidad con \\ Raspberry Pi\end{tabular} & \begin{tabular}[c]{@{}c@{}}Debe ser compatible con\\ Raspberry Pi sin \\ problemas de drivers, \\ conectividad plug-and-play ideal.\end{tabular}         & Técnico / Hardware     \\ \hline
+		\begin{tabular}[c]{@{}c@{}}Diseño físico y \\ montaje externo\end{tabular} & \begin{tabular}[c]{@{}c@{}}La pantalla debe ser \\ externa, sin montaje directo \\ sobre la Raspberry Pi,\\  para flexibilidad y ergonomía.\end{tabular} & Diseño / Ergonomía     \\ \hline
+		Precio y disponibilidad                                                    & \begin{tabular}[c]{@{}c@{}}Debe ser accesible,\\ con buen balance \\ costo-beneficio y\\ fácil de adquirir en México.\end{tabular}                       & Económico / Logístico  \\ \hline
+		Tamaño útil de pantalla                                                    & \begin{tabular}[c]{@{}c@{}}El tamaño debe permitir\\ visualizar bien la interfaz\\ y los controles, sin ser \\ demasiado grande o pequeño.\end{tabular}  & Técnico / Diseño       \\ \hline
+	\end{tabular}
+\end{table}
+
+La tabla \ref{ms_hmi} presenta un análisis comparativo entre varias opciones de pantallas táctiles en función de criterios esenciales para su implementación. Se evaluaron aspectos como calidad de imagen y resolución, precisión del panel táctil, compatibilidad con Raspberry Pi, diseño físico, precio y disponibilidad, y tamaño útil de la pantalla.
+\begin{table}[h!]
+	\centering
+	\caption{Matriz de selección subjetiva de pantallas.\label{ms_hmi}}
+	\scalebox{1}{\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Criterios}                                                              & \textbf{\begin{tabular}[c]{@{}c@{}}Waveshare \\ 7” HDMI \\ Capacitiva\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}DFRobot \\ 7” Touch Display \\ (HDMI)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Raspberry Pi \\ Official 7” Display\end{tabular}} \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Calidad de imagen\\ y resolución\end{tabular}        & \begin{tabular}[c]{@{}c@{}}Excelente \\ (1024×600)\end{tabular}                     & \begin{tabular}[c]{@{}c@{}}Excelente \\ (1024×600)\end{tabular}                        & \begin{tabular}[c]{@{}c@{}}Regular \\ (800×480)\end{tabular}                         \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Precisión \\ y respuesta táctil\end{tabular}         & \begin{tabular}[c]{@{}c@{}}Excelente \\ (multitouch)\end{tabular}                   & \begin{tabular}[c]{@{}c@{}}Excelente \\ (multitouch)\end{tabular}                      & \begin{tabular}[c]{@{}c@{}}Buena \\ (capacitiva, \\ menos sensible)\end{tabular}     \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Compatibilidad \\ con Raspberry Pi\end{tabular}      & \begin{tabular}[c]{@{}c@{}}Excelente \\ (HDMI + USB, \\ plug \& play)\end{tabular}  & \begin{tabular}[c]{@{}c@{}}Buena \\ (requiere configuración)\end{tabular}              & \begin{tabular}[c]{@{}c@{}}Excelente \\ (DSI oficial)\end{tabular}                   \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Diseño físico \\ y montaje externo\end{tabular}      & \begin{tabular}[c]{@{}c@{}}Excelente \\ (pantalla externa)\end{tabular}             & \begin{tabular}[c]{@{}c@{}}Buena \\ (requiere montaje extra)\end{tabular}              & \begin{tabular}[c]{@{}c@{}}Bajo \\ (se monta sobre Pi)\end{tabular}                  \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Precio y \\ disponibilidad en \\ México\end{tabular} & \begin{tabular}[c]{@{}c@{}}Buena \\ (accesible)\end{tabular}                        & \begin{tabular}[c]{@{}c@{}}Regular \\ (menos común)\end{tabular}                       & \begin{tabular}[c]{@{}c@{}}Excelente \\ (muy accesible)\end{tabular}                 \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Tamaño útil \\ de pantalla\end{tabular}              & \begin{tabular}[c]{@{}c@{}}Buena \\ (7” widescreen)\end{tabular}                    & \begin{tabular}[c]{@{}c@{}}Buena \\ (7” widescreen)\end{tabular}                       & \begin{tabular}[c]{@{}c@{}}Regular \\ (7” pero menor\\  área útil)\end{tabular}      \\ \hline
+	\end{tabular}}
+\end{table}
+
+Después de realizar la matriz de selección subjetiva se compararon cada uno de los criterios en una matriz binaria para poder determinar la prioridad de cada criterio frente a los otros, y así determinar su prioridad para poder elegir la pantalla más apropiada. La matriz binaria se presenta en la tabla \ref{mb_hmi}.\\
+
+Posteriormente, se completó la matriz de ponderación donde se procedió a calcular el porcentaje total de viabilidad para cada una de las opciones de pantalla. Esto se hizo multiplicando la calificación asignada a cada criterio por su ponderación correspondiente tomando en cuenta los valores asignados en la matriz de selección subjetiva y en la matriz binaria. En la tabla \ref{mp_hmi} se muestran dichos valores y ponderaciones asignadas.\\
+
+Una vez realizadas todas las multiplicaciones, se sumaron los resultados para cada opción. Los puntajes indican que la opción \textbf{Waveshare 7”} es la más viable y eficaz para integrar al sistema, por lo tanto, se seleccionó esta pantalla para el desarrollo de la interfaz humano-máquina en el siguiente paso del proyecto.
+\begin{table}[h!]
+	\centering
+	\caption{Matriz binaria de pantallas.\label{mb_hmi}}
+	\scalebox{0.9}{\rotatebox{90}{\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+				\hline
+				\textbf{Criterios}                                                          & \textbf{\begin{tabular}[c]{@{}c@{}}Calidad de \\ imagen y \\ resolución\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Precisión y\\ respuesta \\ táctil\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Compatibilidad \\ con \\ Raspberry Pi\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Diseño físico\\  y montaje \\ externo\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Precio y\\  disponibilidad\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tamaño útil\\  de pantalla\end{tabular}} & Total & \begin{tabular}[c]{@{}c@{}}Rango\end{tabular} \\ \hline
+				\begin{tabular}[c]{@{}c@{}}Calidad de\\ imagen y\\  resolución\end{tabular} & \cellcolor[HTML]{BFBFBF}                                                              & 1                                                                                  & 1                                                                                      & 1                                                                                      & 1                                                                           & 1                                                                           & 5     & 5                                                      \\ \hline
+				\begin{tabular}[c]{@{}c@{}}Precisión y \\ respuesta táctil\end{tabular}     & 0                                                                                     & \cellcolor[HTML]{BFBFBF}                                                           & 1                                                                                      & 1                                                                                      & 1                                                                           & 1                                                                           & 4     & 4                                                      \\ \hline
+				\begin{tabular}[c]{@{}c@{}}Compatibilidad \\ con Raspberry Pi\end{tabular}  & 0                                                                                     & 0                                                                                  & \cellcolor[HTML]{BFBFBF}                                                               & 1                                                                                      & 1                                                                           & 1                                                                           & 3     & 3                                                       \\ \hline
+				\begin{tabular}[c]{@{}c@{}}Diseño físico y\\ montaje externo\end{tabular}   & 0                                                                                     & 0                                                                                  & 0                                                                                      & \cellcolor[HTML]{BFBFBF}                                                               & 1                                                                           & 1                                                                           & 2     & 2                                                       \\ \hline
+				\begin{tabular}[c]{@{}c@{}}Precio y \\ disponibilidad\end{tabular}          & 0                                                                                     & 0                                                                                  & 0                                                                                      & 0                                                                                      & \cellcolor[HTML]{BFBFBF}                                                    & 1                                                                           & 1     & 1                                                       \\ \hline
+				\begin{tabular}[c]{@{}c@{}}Tamaño\\útil de\\ pantalla\end{tabular}          & 0                                                                                     & 0                                                                                  & 0                                                                                      & 0                                                                                      & 0                                                                           & \cellcolor[HTML]{BFBFBF}                                                    & 0     & 0                                                      \\ \hline
+	\end{tabular}}}
+\end{table}
+\clearpage
+\begin{table}[h!]
+	\centering
+	\caption{Matriz de ponderación de pantallas. \label{mp_hmi}}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		\textbf{Total} & \textbf{Criterio}                                                            & \textbf{Ponderación} & \textbf{Waveshare} & \textbf{DFRobot} & \textbf{\begin{tabular}[c]{@{}c@{}}Raspberry Pi \\ Oficial\end{tabular}} \\ \hline
+		5              & \begin{tabular}[c]{@{}c@{}}Calidad de \\ imagen y resolución\end{tabular}    & 0.333                & 5                & 5              & 3                              \\ \hline
+		4              & \begin{tabular}[c]{@{}c@{}}Precisión \\ y respuesta táctil\end{tabular}      & 0.267                & 5                & 5              & 5                              \\ \hline
+		3              & \begin{tabular}[c]{@{}c@{}}Compatibilidad \\ con Raspberry Pi\end{tabular}   & 0.200                & 5                & 4               & 5                             \\ \hline
+		2              & \begin{tabular}[c]{@{}c@{}}Diseño   físico \\ y montaje externo\end{tabular} & 0.133                & 5                & 4               & 2                              \\ \hline
+		1              & \begin{tabular}[c]{@{}c@{}}Precio  y \\ disponibilidad\end{tabular}          & 0.067                & 4                 & 3               & 5                             \\ \hline
+		0              & \begin{tabular}[c]{@{}c@{}}Tamaño   \\ útil de pantalla\end{tabular}         & 0.000                & 4                 & 4               & 3                              \\ \hline
+		& \begin{tabular}[c]{@{}c@{}}Puntaje  \\ total (\%)\end{tabular}               &                      & 4.933               & 4.8             & 3.935                            \\ \hline
+	\end{tabular}
+\end{table}
+
+\paragraph*{Desarrollo de la propuesta solución\\}
+El sistema propuesto incluye una interfaz física compuesta por tres elementos principales:
+\begin{itemize}
+	\item \textbf{Elemento 1 – Carcasa:} Diseñada para alojar y proteger la pantalla Waveshare de 7”, ofreciendo estabilidad y un montaje seguro en el entorno terapéutico.
+	\item \textbf{Elemento 2 – Tapa de protección:} Cubre y resguarda los componentes internos, evitando el contacto directo con el usuario y posibles daños por uso continuo.
+	\item \textbf{Elemento 3 – Pantalla Waveshare de 7”:} Actúa como interfaz HMI, permitiendo visualizar parámetros, seleccionar terapias y enviar instrucciones directamente a los motores de la ortesis robótica.
+\end{itemize}
+
+Esta estructura facilita una interacción segura y eficiente con el sistema, centralizando el control de la terapia desde una unidad compacta y funcional [Fig. \ref{hmi:picture1}].
+\begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=8cm]{figure/s6_hmi/Picture1.png}
+	\caption[Módulo E/S.]{Módulo E/S.\label{hmi:picture1}}
+\end{figure}
+
+En la Fig. \ref{hmi:picture2} se muestra una Raspberry Pi 4 conectada a una pantalla táctil Waveshare de 7 pulgadas. La conexión se realiza mediante un cable HDMI para video y un cable USB para la función táctil. Ambos dispositivos están alimentados externamente. Este montaje permite usar la pantalla como interfaz gráfica (HMI) para aplicaciones como control de sistemas o rehabilitación robótica.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=16cm]{figure/s6_hmi/Picture2.jpg}
+	\caption[Conexiones Waveshare 7 in con microcontrolador.]{Conexiones Waveshare 7 in con microcontrolador.\label{hmi:picture2}}
+\end{figure}
+
+A continuación, en la tabla \ref{tab:p02} se describen las características destacadas de la pantalla Waveshare 7", mientras que en la Fig. \ref{hmi:picture3} se muestran las partes relacionadas con la numeración descrita en la tabla ya mencionada.
+\begin{table}[h!]
+	\centering
+	\caption{Características técnicas de la pantalla Waveshare 7".\label{tab:p02}}
+	\begin{tabular}{|c|p{10cm}|}
+		\hline
+		\textbf{Nº} & \textbf{Descripción} \\ \hline
+		1 & Diseño anti-interferencias del cable FFC para LCD. Mejora la estabilidad del sistema, especialmente en aplicaciones industriales. \\ \hline
+		2 & Protección EMI y ESD. Protege contra interferencias electromagnéticas y descargas electrostáticas, cumpliendo con la certificación CE. \\ \hline
+		3 & Ajuste de voltaje VCOM. Permite optimizar el efecto visual de la pantalla ajustando el voltaje de operación del cristal líquido. \\ \hline
+		4 & Traductor de protocolo USB. Convierte la señal táctil a un protocolo estándar multitáctil para un control fluido y preciso. \\ \hline
+		5 & Puntos de soldadura para USB y alimentación. Facilitan la conexión de una fuente de alimentación externa mediante ruptura de interfaz USB. \\ \hline
+		6 & Puntos de ajuste para retroiluminación con señal PWM. Permiten controlar el brillo de la retroiluminación mediante PWM. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=9cm]{figure/s6_hmi/Picture3.jpg}
+	\caption[Características destacadas de Waveshare 7".]{Características destacadas de Waveshare 7".\label{hmi:picture3}}
+\end{figure}
+
+Detallando el funcionamiento de la interfaz de usuario propuesta se tiene lo siguiente:
+\paragraph*{Pantalla de inicio\\} Esta pantalla representa la interfaz principal del sistema de rehabilitación con ortesis robótica. Se muestra al usuario después de encender y calibrar el equipo, y funciona como punto de partida para iniciar la terapia.\\ Incluye un botón central con la leyenda “Comenzar rehabilitación”, que permite avanzar a la selección del tipo de ejercicio. El diseño es intuitivo, con elementos gráficos que representan el objetivo terapéutico y el logotipo de UPIITA-IPN, que identificará la institución.\\ En la Fig. \ref{hmi:picture4} se muestra dicha pantalla.
+
+\paragraph*{Pantalla de calibración\\} Esta pantalla indica que el sistema de ortesis robótica se encuentra en proceso de calibración automática, una etapa esencial antes de comenzar la rehabilitación. En esta fase, el sistema ajusta sus parámetros para garantizar un funcionamiento preciso, seguro y personalizado.\\
+Esta interfaz mantiene informado al usuario mientras el sistema se prepara para iniciar la sesión terapéutica. En la Fig. \ref{hmi:picture5} se muestra la pantalla de calibración.
+
+\paragraph*{Pantalla de confirmación de calibración\\} 
+Esta pantalla aparece una vez que el sistema ha completado correctamente el proceso de auto calibración. Muestra el mensaje “Sistema calibrado”, indicando que el dispositivo está listo para iniciar la sesión de rehabilitación.\\
+Además, se presenta un botón con la leyenda “Comenzar sesión”, que permite al usuario avanzar hacia la ejecución de los ejercicios previamente configurados. Esta interfaz proporciona una transición clara entre la etapa de preparación técnica y el inicio de la terapia, asegurando que el usuario sepa que todo está listo para proceder. Esta pantalla se muestra en la Fig. \ref{hmi:picture6}.
+\paragraph*{Pantalla de selección de tipo de rehabilitación\\}
+Permite elegir entre ejercicios de flexión/extensión o abducción/aducción, según las necesidades del paciente.\\
+Cada opción representa un tipo de ejercicio terapéutico específico, permitiendo adaptar el sistema a las necesidades funcionales del paciente. Esta selección es clave para configurar correctamente los parámetros del entrenamiento que se ingresarán en el siguiente paso. [Fig. \ref{hmi:picture7}].
+ \begin{figure}[h!]
+	\centering
+	\subcaptionbox{Inicio.\label{hmi:picture4}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture4.png}}
+	\subcaptionbox{Calibración.\label{hmi:picture5}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture5.png}}
+	\subcaptionbox{Sistema calibrado.\label{hmi:picture6}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture6.png}}
+	\subcaptionbox{Selección de ejercicios.\label{hmi:picture7}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture7.png}}
+	\caption[Interfaz gráfica - Inicio.]{Interfaz gráfica - Inicio.\label{hmi:interfaz01}}
+\end{figure}
+
+\paragraph*{Pantalla de configuración del ejercicio de abducción/aducción\\}
+Esta pantalla permite al usuario configurar los parámetros del ejercicio de abducción y aducción antes de iniciar la terapia. La interfaz está organizada en tres secciones principales que facilitan la personalización del entrenamiento [Fig. \ref{hmi:picture8}]:
+\begin{itemize}
+	\item \textbf{Sección izquierda:} Sección izquierda – Control de ángulo:
+	Incluye dos botones para aumentar o disminuir el valor del ángulo de abducción/aducción. El valor ajustado se muestra en un cuadro de texto ubicado sobre los botones, permitiendo verificar el ángulo configurado en todo momento.
+	\item \textbf{Sección central:} Se encuentran tres botones funcionales:
+	\begin{itemize}
+		\item Un botón para agregar un paso de abducción/aducción, lo que permite combinar ejercicios en una misma rutina.
+		\item Un botón para comenzar la terapia con los parámetros definidos.
+		\item Un botón para salir del menú actual y regresar a la pantalla anterior.
+	\end{itemize}
+	\item \textbf{Sección derecha:} Incluye un teclado numérico en pantalla y un cuadro de texto donde se ingresa el número de repeticiones deseadas. Esto permite establecer con precisión la cantidad de veces que se realizará el movimiento durante la sesión.
+\end{itemize}
+
+\paragraph*{Pantalla de configuración del ejercicio de flexión/extensión\\}
+Esta pantalla permite configurar los parámetros necesarios para realizar el ejercicio de flexión y extensión, adaptando el movimiento a las necesidades específicas del paciente antes de iniciar la terapia [Fig. \ref{hmi:picture9}].
+\begin{itemize}
+	\item \textbf{Sección izquierda:} Incluye dos botones para incrementar o decrementar la distancia de flexión/extensión. El valor configurado se muestra en un cuadro de texto ubicado justo encima de los botones, permitiendo visualizar en tiempo real la distancia establecida.
+	\item \textbf{Sección central:} Se encuentran tres botones funcionales:
+	\begin{itemize}
+		\item Agregar paso de flexión/extensión, lo que permite combinar diferentes tipos de ejercicios en una misma rutina.
+		\item Comenzar terapia, que inicia la sesión con los parámetros configurados.
+		\item Salir del menú, para cancelar o modificar la selección actual.
+	\end{itemize}
+	\item \textbf{Sección derecha:} Contiene un teclado numérico virtual y un cuadro de texto para ingresar el número de repeticiones que se desea ejecutar durante la sesión terapéutica.
+\end{itemize}
+ \begin{figure}[h!]
+	\centering
+	\subcaptionbox{Programación de abducción/aducción.\label{hmi:picture8}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture8.png}}
+	\subcaptionbox{Programación de flexión/extensión.\label{hmi:picture9}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture9.png}}
+	\caption[Interfaz gráfica - Programación.]{Interfaz gráfica - Programación.\label{hmi:interfaz02}}
+\end{figure}
+
+\paragraph*{Pantalla de rehabilitación en curso\\}
+Presenta datos en el tiempo de ejecución: ángulo de movimiento, tipo de terapia, repeticiones. En la parte inferior derecha se encuentra un botón con la función de cancelar la rutina actual, el cual permite detener el ejercicio y regresar el sistema a la pantalla principal (Home). Esto procurando la seguridad del paciente en caso de incomodidad o necesidad de detener el proceso [Fig. \ref{hmi:picture10}].
+
+\paragraph*{Pantalla de rehabilitación completada\\}
+Esta pantalla indica que la sesión de rehabilitación ha finalizado exitosamente, mostrando el mensaje “Rehabilitación completada”. La interfaz presenta un resumen del estado general del ejercicio, incluyendo valores significativos que permiten al usuario y al terapeuta tener una referencia del desempeño durante la sesión.\\
+En la parte inferior central se encuentra un botón que permite regresar al menú principal, cerrando el ciclo de la terapia y dejando el sistema listo para futuras sesiones. En la Fig. \ref{hmi:picture11} se muestra dicha pantalla.
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Sesión en curso.\label{hmi:picture10}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture10.png}}
+	\subcaptionbox{Sesión finalizada.\label{hmi:picture11}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/s6_hmi/Picture11.png}}
+	\caption[Interfaz gráfica - Funcionamiento.]{Interfaz gráfica - Funcionamiento.\label{hmi:interfaz11}}
+\end{figure}
+
+\paragraph*{Propuesta de desarrollo de interfaz con PyQt5\\}
+Se recomienda usar la biblioteca PyQt5 para el desarrollo de la HMI debido a las siguientes ventajas:
+\begin{itemize}
+	\item \textbf{Compatibilidad:} Funciona en Raspberry Pi sin necesidad de software adicional.
+	\item \textbf{Flexibilidad:} Permite diseñar interfaces adaptadas a sistemas de rehabilitación.
+	\item \textbf{Manejo de eventos:} Facilita la interacción entre componentes y funciones.
+	\item \textbf{Integración:} Compatible con bibliotecas de control de motores y sensores.
+\end{itemize}
+Esta propuesta representa una opción para crear interfaces funcionales y mantenibles en sistemas embebidos, sin requerir hardware adicional ni licencias costosas.
+
+
+
+
+
+\paragraph{M11. Módulo de almacenamiento}\mbox{}\\
+
+Este módulo tiene como función principal permitir el almacenamiento de datos. Esto incluye la información necesaria para la operación del Raspberry Pi 4 y los archivos de configuración que definen todo el funcionamiento. Un almacenamiento fiable es crucial para la funcionalidad del sistema y para el seguimiento del progreso del paciente.
+
+El medio de almacenamiento principal para el sistema reside directamente en la unidad de procesamiento, la Raspberry Pi 4. Se utiliza una tarjeta MicroSD insertada en la ranura correspondiente de la tarjeta.
+
+El contenido almacenado en la tarjeta MicroSD es diverso y abarca los elementos esenciales para el funcionamiento completo de la ortesis robótica:
+
+\begin{itemize} % Uso de itemize con viñetas
+    \item \textbf{Sistema Operativo y Software del Sistema:} La tarjeta MicroSD contiene el sistema operativo principal (Raspberry Pi OS), que es la base sobre la cual se ejecuta todo el software de control. Esto incluye los códigos a implementar en la programación, las librerías necesarias, la interfaz gráfica y la comunicación entre los módulos.
+    \item \textbf{Archivos de Configuración:} Se almacenan archivos que contienen parámetros de configuración del sistema y de los ejercicios. Esto puede incluir los valores de pulsos por revolución (PPR) de los drivers, el paso del tornillo, limites de rangos de movimiento, entre otros ajustes que permiten adaptar el sistema a las necesidades del software.
+\end{itemize}
+
+Para asegurar un rendimiento adecuado, la elección de la tarjeta MicroSD es importante. Por lo que buscamos utilizar una tarjeta de una clase que garantice velocidades de lectura y escritura suficientes para el sistema operativo y el guardado de datos, como una tarjeta MicroSD de clase 10 o superior, cuya velocidad de lectura mínima es de 10 MB/s.
+La capacidad de almacenamiento necesaria se determina considerando el espacio que requiere el sistema operativo y el software. Una capacidad recomendada para el sistema operativo Raspberry Pi OS es de 32GB, pero para el software puede llegar a ser necesario tener capacidades mayores pueden ofrecer un margen adicional y la Raspberry Pi 4 es capaz de soportar un almacenamiento de hasta 128 GB, por lo que tenemos la posibilidad de elegir entre una MicroSD entre 32 GB y 128 GB sin problema.
+
+% Puedes incluir una figura mostrando una tarjeta MicroSD y la Raspberry Pi con la ranura.
+\begin{figure}[h!]
+     \centering
+      \includegraphics[width=0.5\textwidth]{figure/S7_control/PI_SD.png}
+     \caption{Tarjeta MicroSD y ranura en la Raspberry Pi}
+     \label{fig:sd_card_pi}
+ \end{figure}

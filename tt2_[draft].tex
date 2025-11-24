@@ -1,0 +1,67 @@
+\documentclass[12pt,a4paper]{article}
+%\title {Plantilla para trabajos UPIITA}
+\input{UPIITA.tex}
+
+\begin{document}
+	\setcounter{page}{1}
+	\pagenumbering{Roman}
+	\input{ByDefault/frontmatter/FirstPage.tex} % Portada
+	%\thispagestyle{plain}
+	%\includepdf[pages=-]{figure/Firmas_Avance.pdf} %Portada con firmas
+	%\includepdf[pages=-]{figure/Firmas_Registro.pdf} %Portada con firmas
+	\input{ByDefault/frontmatter/Dedicatoria.tex} 
+	%\newpage
+	\input{ByDefault/frontmatter/Agradecimientos.tex} 
+	\newpage
+	\renewcommand{\contentsname}{Tabla de contenidos} % Poner título independiente al preestablecido
+	\tableofcontents % Insertar tabla de contenidos
+	\newpage
+	\input{ByDefault/frontmatter/Abstract.tex} % Resumen and abstract
+	\newpage
+	\addcontentsline{toc}{section}{Listado de figuras}
+	\renewcommand{\listfigurename}{Listado de figuras} % Poner título independiente al preestablecido
+	\listoffigures   % Insertar listado de figuras
+	\addcontentsline{toc}{section}{Listado de tablas}
+	\renewcommand{\listtablename}{Listado de tablas} % Poner título independiente al preestablecido
+	\listoftables   % Insertar listado de figuras
+	\newpage
+	\input{ByDefault/frontmatter/Nomenclatura.tex} 
+        %\newpage
+	%\input{ByDefault/frontmatter/Simbologia.tex}
+	\thispagestyle{fancy}
+	%\fancyfoot{}
+	%\cfoot{\thepage}
+\newpage
+\setcounter{page}{1}  % Reinicia la numeración de las páginas
+\pagenumbering{arabic}
+\input{Body/01_Introduccion.tex}
+\input{Body/02_PlanteamientoProblema.tex}
+\input{Body/03_Justificacion.tex}
+\input{Body/04_Objetivos.tex}
+\input{Body/05_Antecedentes.tex}
+\input{Body/06_MarcoTeorico.tex}
+%\input{Body/07_DisenoConceptual_Parte1.tex} %Incluye desde necesidades hasta arquitectura física
+%\input{Body/07_DisenoConceptual_Parte2.tex} %Incluye propuestas de solución
+%\input{Body/07_DisenoDetallado_SistemaEstructural.tex}
+%\input{Body/07_DisenoDetallado_SistemaSeguridadElectrico.tex}
+%\input{Body/07_DisenoDetallado_SistemaSeguridadMecanico.tex}
+%\input{Body/07_DisenoDetallado_SistemaEnergia.tex}
+%\input{Body/07_DisenoDetallado_SistemaMovimiento.tex}
+%\input{Body/07_DisenoDetallado_SistemaHMI.tex}
+%\input{Body/07_DisenoDetallado_SistemaControl.tex}
+%\input{Body/07_DiseñoDetallado_Integración.tex}
+\input{Body/08_ImplementaciónSistema_1.tex} %Sistema estructural S1
+\input{Body/08_ImplementaciónSistema_2.tex} %Sistemas de seguridad S2 y S3
+\input{Body/08_ImplementaciónSistema_3.tex} %Sistema de energí y control S4, S5, S7
+\input{Body/08_ImplementaciónSistema_4.tex} %Sistema de comunicación S6
+\input{Body/09_AnálisisResultados.tex}
+\input{Body/09_AnálisisIngenieria.tex}
+\input{Body/09_AnálisisValorCostos.tex}
+\input{Body/10_PlaneaciónGestiónProyecto.tex}
+\input{ByDefault/backmatter/Conclusiones} %Conclusiones y recomendaciones de trabajo a futuro
+\newpage
+% Referencias
+\addcontentsline{toc}{section}{Referencias}
+\input{ByDefault/backmatter/References}
+\input{ByDefault/backmatter/Appendix_1.tex}
+\end{document}

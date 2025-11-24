@@ -1,0 +1,364 @@
+\clearpage
+\subsubsection{S7. Sistema de control} \label{S7_Sistema de control}
+Este sistema está compuesto por tres módulos. El primero de ellos referido a sensores que nos ayudará a conocer la posición de inicio de los actuadores, permitiéndonos calibrar el mecanismo y tener una correcta dirección al mover los actuadores lineal y rotativo. El segundo módulo está dirigido a controlar la salida o respuesta de estos sensores de ser necesario, con esto evitamos interferencias y aseguramos una correcta entrada de datos de los motores. Finalmente, el tercer modulo se refiere a la unidad de procesamiento que utilizaremos para realizar el control de todo nuestro proyecto.
+
+\paragraph{M12. Módulo de sensores} \mbox{}\\
+
+
+El módulo de sensores cumplirá con dar las especificaciones de los sensores a utilizar, de igual manera se darán las razones del porqué se sugirieron estos sensores.
+
+Principalmente, el objetivo de los sensores es localizar los limites de carrera que indicaran el movimiento máximo de los actuadores en uno de sus extremos, la calibración será automática y moverá los actuadores lentamente hasta que sean detectados por estos sensores para definir un punto de inicio.
+
+Debido al funcionamiento del proyecto, se decidió capturar el extremo lejano del actuador lineal como fin de carrera (Cuando la pierna se encuentra extendida de acuerdo con sus dimensiones únicas y apoyado de un tope mecánico) y para el actuador rotativo su ángulo mínimo como inicio de carrera (Cuando se realiza una abducción/aducción de 0°).
+
+Para el actuador lineal se decidió en utilizar un sensor óptico ubicado en la base del motor, con esto se proporcionará la distancia total en la que se ha recorrido el actuador lineal, se eligió un pequeño sensor de distancia por tiempo de vuelo (ToF) \textit{"VL5310X"} como se ve en la Fig. \ref{fig:S7_SensorOpt} cuyas especificaciones primordiales se muestran en la tabla \ref{tab:vl5310x_specs}. 
+
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.4\textwidth]{figure/S7_control/S7_VL53L1X.jpg}}
+	
+	\caption[Sensór Óptico VL53L1X.]{Sensór Óptico VL53L1X. SUS especificaciones se encuentran en anexo \ref{fig:Data_Vl42l1x}}
+	\label{fig:S7_SensorOpt}
+\end{figure}
+
+\begin{table}[h!]
+	\centering
+	\caption{Especificaciones del sensor VL5310X\label{tab:vl5310x_specs}}
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Característica} & \textbf{Especificación} \\
+		\hline
+		Voltaje de Operación & 3V - 5V \\
+		\hline
+		Rango de medición & 4 cm a 400 cm \\
+		\hline
+		Precisión & +-20mm \\
+		\hline
+		Compatibilidad I2C & Sistemas de 3.3V y 5V \\
+		\hline
+	\end{tabular}
+\end{table}
+Este sensor opera a tres modos de distancia (corto, medio y largo), dentro de la hoja de especificaciones del sensor, podemos encontrar las distancias que el sensor puede detectar bajo una fuerte exposición a luz ambiental, como se ve en la tabla \ref{tabla:VL5310X_distance}.
+
+\begin{table}[h!]
+\centering
+\caption{Máxima distancia vs. Máxima distancia bajo fuerte luz ambiental}
+\scalebox{0.9}{\begin{tabular}{|c|c|c|}
+\hline
+Modo de distancia & Máxima distancia en oscuridad & Máxima distancia bajo fuerte luz ambiental \\
+\hline
+Corto & 136 cm & 135 cm \\
+Medio & 290 cm & 76 cm \\
+Largo & 360 cm & 73 cm \\
+\hline
+\end{tabular}}
+\label{tabla:VL5310X_distance}
+\end{table}
+
+Para nuestro proyecto, la distancia máxima que buscamos medir para el actuador lineal se encuentra por debajo de los 100 cm, por lo que podemos usar este sensor a un modo de distancia corto aún debajo de fuerte luz ambiental sin ningún problema. De igual manera podemos observar que la lectura del sensor puede operar con valores lógicos compatibles con la \textit{Raspberry Pi 4}.
+
+Para el actuador rotativo, optamos por utilizar un interruptor de limite (\textit{Limit Switch}), que actuará como un sensor de inicio de carrera, este se planea colocar en un límite de la cama, en el área donde reposarían las piernas, de lado interno de las piernas, esto reflejaría un estado de reposo donde el cuerpo se encuentra recostado y con ángulo de 0° de abducción/aducción de cadera. En la Fig. \ref{fig:LM}. Se muestran representaciones de este interruptor.\\
+
+\begin{figure}[h!]
+    \centering
+  	\subcaptionbox{Limit switch con palanca.\label{fig:LM_1}}
+  	{\includegraphics [trim = 0 0cm 0 0, clip,width=5cm]{figure/S7_control/LM_Palanca.jpg}}
+  	\subcaptionbox{Limit switch con rodillo.\label{fig:LM_2}}
+  	{\includegraphics [trim = 0 0cm 0 0, clip,width=5cm]{figure/S7_control/LM_Rodillo.jpg}}
+  	\caption[Diferentes modelos de Limit switch]{Diferentes modelos de Limit switch.\label{fig:LM}}
+\end{figure}
+  	
+ 
+
+
+Este tipo de interruptores cuentan con un contacto normalmente abierto “NO” y uno normalmente cerrado “NC”, para aplicaciones de seguridad, usaremos el contacto “NC” del switch, porque una falla en el cableado, como un cable roto, podría detectar como una activación del límite en un contacto “NO”.
+
+Además, si bien hemos decidido por un sensor óptico para el limite de carrera del actuador lineal, también la idea de intercambiarlo a un interruptor de limite acoplado en el tope mecánico ubicado en el extremo alejado de la pierna, de esta manera no dependemos de la precisión del sensor óptico, que, dependiendo las condiciones, podría fallar. O incluso, unir estas dos ideas para mejorar la condición inicial en el actuador lineal.
+
+
+
+
+
+\paragraph{M13. Módulo de acondicionamiento de señales}\mbox{}\\
+
+En este módulo detallamos el acondicionamiento que necesitarían las señales de salida de los sensores previamente mencionados.
+
+Para el interruptor de limite tenemos un tipo de señal digital ya que solo leemos un estado abierto/cerrado, por lo que necesitamos asegurar que la señal digital sea clara y estable para el modulo evitando estados indefinidos y, opcionalmente, manejar el rebote mecánico.
+
+Cuando un interruptor está abierto, el pin de entrada del microcontrolador al que está conectado puede quedar en un estado de alta impedancia, susceptible al ruido eléctrico. Una resistencia de pull-up (conectada entre el pin de entrada y el voltaje de alimentación) o pull-down (conectada entre el pin de entrada y tierra) le da al pin de entrada un estado definido cuando el interruptor está abierto, como se observa en la Fig. \ref{fig:S7_pupdown}.
+
+
+
+\begin{figure}[h!]
+    \centering
+  	\subcaptionbox{Arreglo Pull-Down.\label{fig:Pdown}}
+  	{\includegraphics [trim = 0 0cm 0 0, clip,width=5cm]{figure/S7_control/P_Down.png}}
+  	\subcaptionbox{Arreglo Pull-Up.\label{fig:Pup}}
+  	{\includegraphics [trim = 0 0cm 0 0, clip,width=4.5cm]{figure/S7_control/P_Upp.png}}
+  	\caption[Arreglo de resistencias Pull-up y Pull-down.]{Arreglo de resistencias Pull-up y Pull-down.\label{fig:S7_pupdown}}
+\end{figure}
+
+Debido a que optamos por el uso de un contacto NC, la opción que escogeríamos sería usar una resistencia Pull-up, de manera que, al presionar el interruptor, se reciba una entrada lógica positiva.
+
+
+
+En la configuración con resistencia pull-up, como la ilustrada en la \ref{fig:Pup}, la corriente que fluye a través de la resistencia de pull-up y hacia el pin de entrada del microcontrolador es un factor a considerar. Esta corriente se puede calcular directamente aplicando la Ley de Ohm:
+
+$$ I_{\text{entrada}} = \frac{V_{\text{cc}}}{R_{\text{PullUp}}} $$
+
+Es deseable que esta corriente sea relativamente baja, por esta razón, los valores típicos para las resistencias de pull-up suelen ser relativamente altos.
+
+Para determinar el valor adecuado de la resistencia de pull-up, es posible definir una corriente máxima deseada que fluirá en el sistema. Consideramos un voltaje de alimentación de 3.3 V para la lógica del microcontrolador y buscamos una corriente máxima de entrada de 16 mA. Aplicando la Ley de Ohm, la resistencia teórica necesaria se calcula como la relación entre el voltaje y la corriente:
+
+$$ R_{\text{PullUp}} = \frac{V_{\text{cc}}}{I_{\text{entrada}}} $$
+
+Sustituyendo los valores deseados:
+
+$$ R_{\text{PullUp}} = \frac{3\text{.}3 \text{V}}{16 \text{mA}} = \frac{3\text{.}3 \text{V}}{0\text{.}016 \text{A}} = 206\text{.}25 \Omega $$
+
+El valor teórico calculado es de 206.25 $\Omega$. Dado que no es común encontrar resistencias comerciales con este valor exacto, se puede seleccionar una resistencia comercial disponible que sea mayor a este, para que no sobrepase la corriente máxima.
+
+Sin embargo, no es necesario que la corriente a través de la resistencia sea la máxima de 16 mA. Eso podría considerarse un desperdicio de energía. La función de la resistencia es simplemente definir el estado bajo cuando no hay entrada.
+
+Un valor más seguro para la corriente que pasa por la resistencia pull-down la definimos entre 0.1 mA y 1 mA. Usar una corriente más baja consume menos energía. Así que propondremos una resistencia pull-down de 10 k$\Omega$.
+
+Sustituyendo los nuevos valores:
+$$ {I_{\text{entrada}}} = \frac{3\text{.}3 \text{V}}{10 \text{k}\Omega} = \frac{3\text{.}3 \text{V}}{10,000 \text{k}\Omega} = 0\text{.}33 {\text{mA}} $$
+
+Esta corriente de 0.33 mA es baja, segura y suficiente para que la resistencia haga su trabajo.
+
+\mbox{}\\
+Pero también hay que tener en cuenta que en la \textit{Raspberry Pi 4}, se pueden usar resistencias pull-up y pull-down internas, aunque a veces una resistencia externa es preferible por robustez o valores específicos. Por lo que uso podría depender del comportamiento del interruptor físico.
+\mbox{}\\
+Por otro lado, un interruptor mecánico puede rebotar al ser activado, generando varios pulsos rápidos en lugar de uno solo. Esto puede hacer que se detecte múltiples activaciones. El anti rebote puede hacerse en hardware con un simple circuito RC acoplado al arreglo de resistencias pull-up como se observa en la Fig. \ref{fig:S7_creb}.\\
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.55\textwidth]{figure/S7_control/CRebote.png}}
+	
+	\caption[Circuito antirrebote acoplado a un arreglo Pull-up.]{Circuito antirrebote acoplado a un arreglo Pull-up.}
+	\label{fig:S7_creb}
+\end{figure}
+
+El funcionamiento de este circuito es el siguiente: cuando el botón está suelto, la resistencia conecta el pin a Vcc, manteniéndolo en un nivel alto y el capacitor está cargado a través de la resistencia.
+
+Cuando se presiona el botón, conectas el pin a tierra y el voltaje en el pin intenta bajar a 0V. El capacitor comienza a descargarse a tierra.
+
+Durante los rebotes, el botón se conecta y desconecta rápidamente de tierra. Pero el capacitor ya ha empezado a descargarse. Aunque haya desconexiones momentáneas, el capacitor retiene algo de carga y evita que el voltaje en el pin suba instantáneamente a Vcc. El voltaje en el pin sigue bajando gradualmente a medida que el capacitor se descarga y solo cuando el rebote termina y el botón hace un contacto firme con tierra, el capacitor termina de descargarse y el voltaje en el pin alcanza los 0V.
+
+El capacitor y la resistencia actúan como un filtro de paso bajo que suaviza las transiciones rápidas causadas por el rebote, asegurando que el voltaje en el pin de la Raspberry Pi cambie de nivel lógico solo después de que el rebote haya terminado y el voltaje se haya estabilizado.
+
+Para el cálculo del capacitor nos basamos en el tiempo de carga y descarga del capacitor a través de la resistencia, que está determinado por la constante de tiempo $\tau$. La fórmula es:
+
+$$ {\tau} = {R_{\text{Antirrebote}}}\times{C_{\text{Antirrebote}}} $$
+
+Donde $tau$ se mide en segundos, la resistencia en Ohms y el capacitor en Faradios.
+
+Para fines prácticos, se considera que el capacitor está completamente cargado o descargado después de un tiempo igual a 5 veces la constante de tiempo.
+
+Queremos que este tiempo de estabilización sea mayor que el tiempo máximo de rebote del botón. Los tiempos de rebote varían según el tipo y la calidad del botón, pero típicamente están en el rango de unos pocos milisegundos.
+
+Para elegir el valor del capacitor, ya elegimos un valor de reistencia de 10 k$\Omega$, además estimamos un tiempo máximo de rebote de 1 ms, a partir de este tiempo elegimos un tiempo de estabilización deseado mayor que el tiempo máximo de rebote estimado. Usaremos 5 ms como ejemplo, pero de acuerdo al comportamiento del antirrebote, este tiempo puede cambiar.
+
+Ahora, podemos calcular el valor de la capacitancia:
+
+$$ 5 \times (R_{\text{antirrebote}} \times C_{\text{antirrebote}}) = \text{T}_{\text{Estabilización}} $$
+
+Despejando el valor del capacitor:
+
+$$ C_{\text{antirrebote}} = \frac{\text{T}_{\text{Estabilización}}}{5 \times R_{\text{antirrebote}}} $$
+
+Finalmente, despejando los valores de resistencia y de tiempo de estabilización calculamos el valor del capacitor:
+
+$$ C_{\text{antirrebote}} = \frac{0\text{.}005 \text{s}}{5 \times 10,000  \Omega} = \frac{0\text{.}005  \text{s}}{50,000  \Omega} = 0\text{.}0000001 \text{ } \text{Faradios} $$
+
+Dado que el Faradio es una unidad de capacitancia muy grande, este resultado se expresa más convenientemente en microfaradios ($\mu\text{F}$, $10^{-6}$ F) o nanofaradios ($\text{nF}$, $10^{-9}$ F). Así, 0.0000001 F equivale a $0.1 , \mu\text{F}$ o $100 , \text{nF}$. Un capacitor con un valor de $0.1 , \mu\text{F}$ sería una opción comercial adecuada para este circuito, lo cual, combinado con una resistencia de 10 k$\Omega$, proporcionaría un tiempo de estabilización de aproximadamente 5 ms, suficiente para filtrar la mayoría de los rebotes de un interruptor mecánico.
+
+
+\mbox{}\\
+ El antirrebote también se puede implementar en software, ignorando cambios rápidos después de la primera detección, este comportamiento se observa en la Fig. \ref{fig:S7_dreb}.
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.4\textwidth]{figure/S7_control/Diag_antir.png}}
+	
+	\caption[Diagrama de flujo para un programa antirrebote.]{Diagrama de flujo para un programa antirrebote.}
+	\label{fig:S7_dreb}
+\end{figure}
+
+
+Dado que la calibración a realizar moverá los actuadores de forma lenta, el antirrebote por software puede ser suficiente y elimina la necesidad de hardware adicional.
+
+\mbox{}\\
+Para el sensor óptico \textit{VL5310X}, que proporciona una señal digital a través de la comunicación I2C, el acondicionamiento necesario es mínimo. Como se detalla en la tabla \ref{tab:vl5310x_specs}, este sensor presenta compatibilidad con sistemas que operan a 3.3V y la unidad de procesamiento principal, la \textit{Raspberry Pi}, utiliza lógica de 3.3V en sus pines, y el sensor es capaz de operar sus entradas y salidas a este mismo voltaje, sus señales digitales de distancia son directamente compatibles y legibles por el microcontrolador. Por consiguiente, no se requiere la implementación de hardware de acondicionamiento adicional, como conversores de nivel de voltaje.
+
+
+
+\paragraph{M14. Módulo de procesamiento}\mbox{}\\
+
+Este módulo constituye la unidad central de procesamiento del sistema de control. Su función principal es ejecutar la lógica de control, procesar la información recibida de los sensores, interpretar las instrucciones del usuario, calcular y generar las señales de pulso para los actuadores, y gestionar el estado general del sistema. Es el encargado de implementar el seguimiento de trayectoria y coordinar todos los subsistemas para lograr los movimientos articulares deseados.
+
+Basándose en el análisis y la matriz de selección conceptual, se ha seleccionado la \textit{Raspberry Pi 4}, como se ve en la Fig. \ref{fig:rasp}, como la plataforma principal para este módulo, debido a su gran flexibilidad en programación y integración con los distintos sistemas, además de que es capaz de gestionar interfaces gráficas.
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.4\textwidth]{figure/S7_control/Raspberry_Pi4.png}}
+	
+	\caption[Raspberry Pi 4.]{Raspberry Pi 4.}
+	\label{fig:rasp}
+\end{figure}
+
+Entre las especificaciones de la \textit{Raspberry Pi} podemos encontrar:
+\begin{itemize}
+    \item Procesador: Broadcom BCM2711, Cortex-A72 de cuatro núcleos (ARM v8) SoC de 64 bits a 1,5 GHz.
+    \item Memoria RAM: De hasta 8GB LPDDR4.
+    \item 2 puertos USB 3.0.
+    \item 2 puertos USB 2.0.
+    \item Entrada/Salida de Propósito General (GPIO): estándar de 40 pines.
+    \item 2 puertos micro HDMI (hasta 4Kp60 admitidos).
+    \item Soporte de tarjeta SD.
+    \item Potencia de entrada de 5V DC a través del conector USB-C.
+    \item 5V DC a través de los GPIO.
+    \item Temperatura de funcionamiento 0–50ºC.
+    \item Dimensiones: (88 x 58 x 18,5) mm.
+\end{itemize}
+
+El software se desarrollará sobre el sistema operativo \textit{Linux} (\textit{Raspberry Pi OS}), que es el sistema operativo en el que trabaja esta tarjeta. El lenguaje de programación a utilizar será \textit{Python} debido a que es un lenguaje con el que hemos trabajado y es posible de utilizar en la \textit{Raspberry}.
+
+Para las entradas consideradas en el módulo tenemos:
+\begin{itemize}
+    \item Datos de Sensores
+    \begin{enumerate}
+        \item Distancia/Posición lineal del sensor óptico.
+        \item Estado del Limit Switch.
+    \end{enumerate}
+\end{itemize}
+
+Para las salidas consideradas en el módulo tenemos:
+\begin{itemize}
+    \item Señales de control para actuadores, como son los pulsos de paso y dirección para los drivers de los motores paso a paso. De igual manera, si es necesario, usaremos las señales de enable y de alarma de cada driver.
+    \item Datos y Estado para la Interfaz
+    \begin{enumerate}
+        \item Posición o ángulo actual de las articulaciones.
+        \item Progreso de la rutina (repeticiones completadas).
+        \item Estado del sistema (calibrando, en ejecución, pausado, detenido, errores).
+        \item Trayectoria de movimiento actual.
+    \end{enumerate}
+\end{itemize}
+
+\paragraph*{Funcionalidad y procesos clave}\mbox{}\\
+
+Para detallar el funcionamiento del sistema, creamos un diagrama de flujo, como se muestra en la Fig. \ref{fig:S7_DiagF}, donde se expresan los principales procesos a ejecutar.
+
+
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.8\textwidth]{figure/S7_control/S7_DiagFlujo.png}}
+	
+	\caption[Diagrama de flujo de los procesos a realizar por sistema.]{Diagrama de flujo de los procesos a realizar por sistema.}
+	\label{fig:S7_DiagF}
+\end{figure}
+
+
+A partir de este diagrama de flujo, también realizamos una máquina de estados, como se muestra en la Fig. \ref{fig:S7_MaqEst}, que describe el comportamiento de un sistema mediante un número de estados y las transiciones entre ellos:
+
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.9\textwidth]{figure/S7_control/Maq_estados.png}}
+	
+	\caption[Máquina de estados del sistema.]{Máquina de estados del sistema.}
+	\label{fig:S7_MaqEst}
+\end{figure}
+
+
+La \textit{Raspberry Pi 4}, como unidad central de procesamiento del sistema, es responsable de ejecutar los algoritmos y la lógica de control que permiten el movimiento asistido de la ortesis. Esto incluye la interpretación de las señales de los sensores, el procesamiento de las instrucciones del usuario, el cálculo de las trayectorias de movimiento deseadas y la generación de los pulsos para los drivers de los motores.
+
+Uno de los procesos que se llevan a cabo en este módulo son los cálculos cinemáticos. Estos cálculos permiten relacionar el movimiento rotacional de los motores paso a paso con el movimiento lineal o angular de las articulaciones de la ortesis, y viceversa. Son esenciales tanto para determinar la posición y velocidad actual a partir de los pulsos enviados como para calcular los pulsos necesarios para alcanzar una posición o velocidad deseada.
+
+\begin{itemize}
+    \item Cálculo de la Velocidad Lineal del Actuador (cm/s):
+\end{itemize}
+
+    Este cálculo permite determinar la velocidad de desplazamiento del actuador lineal basándose en la frecuencia de los pulsos que envía al controlador del motor lineal. Para estos cálculos se planteará una velocidad lineal lenta, propuesta por un fisioterapeuta entre 1 y 5 cm/s, pero para métodos prácticos, la usaremos como una variable que podremos despejar.\\
+    Los datos necesarios para este cálculo son la frecuencia de pulsos (\text{Frecuencia\_Pulsos}), los pulsos configurados por revolución en el driver del actuador lineal (\text{LPPRev\_driver}), y el paso del tornillo que convierte la rotación del motor en movimiento lineal (\text{Paso\_cm}). La fórmula para obtener la velocidad lineal es:
+    \[
+    \text{V}_{\text{lineal (cm/s)}} = \left( \frac{\text{Frecuencia\_Pulsos}}{\text{LPPRev\_driver}} \right) \times \text{Paso\_cm}
+    \]
+    \[
+    \left[ \frac{\text{cm}}{\text{s}} \right] = \left[ \frac{\text{Pulsos/s}}{\text{Pulsos/rev}} \right] \times \left[ \frac{\text{cm}}{\text{rev}} \right]
+    \]
+    A la inversa, para lograr una velocidad lineal objetivo ($\text{V}_{\text{lineal (cm/s)}}$), se calcula la frecuencia de pulsos requerida de la siguiente manera:
+    \[
+    \text{Frecuencia}_{\text{Pulsos}} = \frac{\left( \text{V}_{\text{lineal (cm/s)}} \times \text{LPPRev}_{\text{driver}} \right)}{\text{Paso}_{\text{cm}}}
+    \]
+    \[
+    \left[ \frac{\text{Pulsos}}{\text{s}} \right] = \left[ \frac{(\text{cm/s}) \times (\text{Pulsos/rev})}{\text{cm/rev}} \right]
+    \]
+
+    \begin{itemize}
+        \item Cálculo de la Distancia Lineal Recorrida por el Actuador (cm):
+    \end{itemize}
+    
+    Para conocer la posición lineal actual del actuador, el procesador llevará un conteo de los pulsos enviados al motor lineal desde un punto de referencia conocido (la posición de inicio), y multiplicando el número total de pulsos enviados por la distancia lineal que corresponde a cada pulso (determinada por el \text{LPPRev\_driver} y el \text{Paso\_cm}), se obtiene la distancia total recorrida. La fórmula a utilizar es:
+    \[
+    \text{D}_{\text{lineal\_cm}} = \left( \frac{\text{LPulsos\_Enviados}}{\text{LPPRev}_{\text{driver}}} \right) \times \text{Paso}_{\text{cm}}
+    \]
+    \[
+    [\text{cm}] = \left[ \frac{\text{Pulsos}}{\text{Pulsos/rev}} \right] \times \left[ \frac{\text{cm}}{\text{rev}} \right]
+    \]
+    Para la inicialización del conteo de pulsos durante la rutina de calibración lineal, se utiliza la lectura del sensor óptico \textit{VL53L1X}. Este sensor proporciona una lectura de distancia en milímetros (\text{Lectura\_mm}) en la posición de inicio, esta lectura se utiliza para establecer el conteo inicial de pulsos (\text{LPulsos\_inicial}) que corresponde a esa posición. La conversión de la lectura del sensor a un equivalente en pulsos se realiza considerando el paso del tornillo y la configuración de pulsos por revolución en el driver del actuador lineal. Por lo que, si se desea convertir una lectura en mm a pulsos equivalentes a esa distancia tenemos la siguiente conversión:
+    \[
+    \text{LPulsos}_{\text{inicial}} = \text{Lectura}_{\text{mm}} \times \frac{10 \text{ cm}}{1 \text{ mm}} \times \frac{\text{LPPRev}_{\text{driver}}}{\text{Paso}_{\text{cm}}}
+    \]
+    \[
+    [\text{Pulsos}] = [\text{mm}] \times [\text{cm/mm}] \times \left[ \frac{\text{Pulsos/rev}}{\text{cm/rev}} \right]
+    \]
+
+    \begin{itemize}
+        \item Cálculo de la Posición Angular del Motor Rotativo (Grados):
+    \end{itemize}
+    Similar al actuador lineal, para el movimiento rotacional se calcula la posición angular actual del motor rotativo manteniendo un conteo neto de los pulsos enviados desde una posición angular de referencia (0°, definida durante la calibración). Conociendo los pulsos por revolución configurados en el driver del actuador rotativo (\text{RPPR\_driver}) y sabiendo que una revolución equivale a 360 grados, se puede determinar la posición angular actual mediante la fórmula:
+    \[
+    \text{PosAngular}_{\text{grados}} = \left( \frac{\text{RPulsos\_Enviados}}{\text{RPPR}_{\text{driver}}} \right) \times 360^\circ
+    \]
+    \[
+    [^\circ] = \left[ \frac{\text{Pulsos}}{\text{Pulsos/rev}} \right] \times [^\circ\text{/rev}]
+    \]
+    Este cálculo permite al sistema conocer la orientación angular del eje rotatorio.
+
+
+La ejecución de los movimientos se basa en un algoritmo de control implementado en el módulo de procesamiento. Este algoritmo tiene como objetivo principal lograr que el actuador lineal y rotativo sigan una trayectoria de movimiento, ajustando continuamente las señales de pulso enviadas a los drivers de motor. Esta ajuste se realiza basándose en el la posición actual de los actuadores.
+
+La lógica de control se fundamenta en la retroalimentación, el sistema compara la posición deseada en un instante dado con el estado actual del actuador. La diferencia entre estos dos valores constituye el error de seguimiento.
+Este error es el que se utiliza para calcular la siguiente acción que se aplicará a los actuadores, con el fin de reducir el error y hacer que el estado actual se acerque al estado deseado.
+
+La relación fundamental se puede expresar de manera conceptual como:
+
+$$ \text{Error} = \text{Valor deseado} - \text{Valor actual} $$
+
+$$ \text{Acción de Control} = f(\text{Error}) $$
+
+Donde el "Valor deseado"  es la posición objetivo, y el "Valor actual" es la información correspondiente utilizada por el controlador principal. La "Acción de control" es la señal (en este caso, la frecuencia y dirección de pulsos para los drivers) que se envía a los actuadores para corregir el movimiento.
+
+Para nuestro sistema, el control se implementa para cada eje de movimiento (lineal y rotacional) de manera coordinada:
+
+\begin{enumerate}
+    
+\item Define la trayectoria deseada: A partir de los parámetros de ejercicio ingresados por el usuario, se genera una secuencia de puntos de posición objetivo para cada actuador.
+
+\item Obtiene información del estado actual: Utiliza la información procesada de los sensores de limite de carrera, en conjunto con el conteo de pulsos comandados a los drivers, para determinar la posición actual del actuador respecto a la referencia de inicio.
+La operación de lazo cerrado a nivel del motor es gestionada internamente por los drivers HSS utilizando la retroalimentación de sus encoders.
+
+\item Calcula el error de posición: En cada ciclo de control, se compara la posición actual con la posición deseada en ese instante de la trayectoria.
+
+\item Determina la acción de control (pulsos): Basándose en el error de posición, se calcula la frecuencia y dirección de los pulsos que deben enviarse a los drivers de motor.
+
+\item Envía los pulsos a los drivers: La frecuencia y dirección de pulsos calculadas se envían a los drivers HSS para mover los motores y corregir la posición del actuador.
+\end{enumerate}
+
+Este ciclo de obtención de información del estado, cálculo del error, determinación de la acción de control y envío de pulsos se repite a una frecuencia de control alta y constante, lo que permite que el mecanismo siga suavemente la trayectoria deseada.
+
+

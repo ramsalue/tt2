@@ -1,0 +1,68 @@
+\subsection{Configuración del sistema de comunicación (S6)}\label{Implementación S6}
+
+\subsubsection{Diseño de la interfaz humano-máquina (HMI)}
+La interfaz humano-máquina se diseñó como el principal medio de interacción entre el fisioterapeuta y el sistema de ortesis. A continuación, se describe el flujo de operación a través de las distintas pantallas diseñadas.\\
+Al energizar el sistema, se presenta la pantalla de bienvenida [Fig. \ref{fig:HMI_Inicio}]. Esta pantalla presenta el botón de comenzar rehabilitación para inicializar el sistema.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Inicio.png}
+	\caption{Pantalla de bienvenida de la HMI.\label{fig:HMI_Inicio}}
+\end{figure}
+
+Al presionar el botón, el sistema inicia su secuencia de arranque, mostrando la pantalla CALIBRANDO SISTEMA [Fig. \ref{fig:HMI_Calibracion}]. Durante esta fase, los actuadores se desplazan a sus posiciones de origen (home) detectadas por los sensores de límite.
+
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Proceso de calibración en curso.\label{fig:HMI_Calibrando}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Calibracion.png}}
+	\subcaptionbox{Confirmación de calibración completada.\label{fig:HMI_Calibrado}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Calibrado.png}}
+	\caption{Pantallas del proceso de calibración del sistema.\label{fig:HMI_Calibracion}}
+\end{figure}
+
+Una vez completada la calibración, la interfaz muestra el mensaje SISTEMA CALIBRADO [Fig. \ref{fig:HMI_Calibrado}] y se habilita el botón de comenzar sesión. Este botón dirige al usuario a la pantalla de selección de terapia [Fig. \ref{fig:HMI_Seleccion}], donde puede elegir entre los dos modos de operación: Abducción-Aducción o Flexión-Extensión.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Seleccion.png}
+	\caption{Pantalla de selección del tipo de rehabilitación.\label{fig:HMI_Seleccion}}
+\end{figure}
+
+Las pantallas de configuración [Fig. \ref{fig:HMI_Config}] permiten al fisioterapeuta definir los parámetros de la sesión. El usuario puede alternar entre las configuraciones de ambos movimientos usando los botones en la parte superior. Para cada tipo de ejercicio, se deben definir dos parámetros principales:
+\begin{itemize}
+	\item \textbf{Límites de movimiento:} El usuario utiliza los botones de movimiento manual (flechas) para posicionar la ortesis en el rango deseado y presiona GUARDAR LÍMITE. La interfaz proporciona retroalimentación visual al registrar la posición.
+	\item \textbf{Número de repeticiones:} Se introduce la cantidad de ciclos mediante el teclado numérico en pantalla.
+\end{itemize}
+Una vez definidos los parámetros, se habilita el botón COMENZAR TERAPIA.
+
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Configuración de parámetros para Abducción / Aducción.\label{fig:HMI_Conf_Abduccion}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Abduccion_Aduccion.png}}
+	\subcaptionbox{Configuración de parámetros para Flexión / Extensión.\label{fig:HMI_Conf_Flexion}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Flexion_Extension.png}}
+	\caption{Pantallas de configuración de parámetros de la sesión.\label{fig:HMI_Config}}
+\end{figure}
+
+Durante la ejecución de la rutina, la pantalla REHABILITACIÓN EN PROCESO [Fig. \ref{fig:HMI_Terapia}] muestra la información relevante de la sesión: un resumen de la terapia configurada y un contador de las repeticiones en curso. En esta pantalla, el usuario tiene la opción de DETENER RUTINA en cualquier momento.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Terapia.png}
+	\caption{Pantalla de sesión de rehabilitación en curso.\label{fig:HMI_Terapia}}
+\end{figure}
+
+Al finalizar la sesión o al presionar DETENER RUTINA, el sistema entra en una fase de retorno, mostrando la pantalla REGRESANDO A POSICIÓN DE INICIO [Fig. \ref{fig:HMI_Mover_home}]. Esto indica que los actuadores se están moviendo a su posición de origen antes de regresar al menú principal, dejando el sistema listo para una nueva sesión.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/pantallas_interfaz/App Ver1.0/Mover_home.png}
+	\caption{Pantalla de retorno a la posición de inicio.\label{fig:HMI_Mover_home}}
+\end{figure}
+\subsubsection{Programación de microcontrolador e integración con interfaz humano-máquina}
+Para la protección de la interfaz táctil, se completó la fabricación aditiva (impresión 3D) de la carcasa diseñada, la cual aloja la pantalla y facilita su montaje ergonómico para el fisioterapeuta.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Carcasa impresa de la HMI.\label{fig:carcasa}}
+\end{figure}

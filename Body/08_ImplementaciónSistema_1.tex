@@ -1,0 +1,113 @@
+\clearpage
+\section{Implementación del sistema}\label{Implementacion del sistema}
+En esta sección se describe la construcción física de cada uno de los sistemas que conforman el proyecto. Así mismo, se detallan los cambios realizados al diseño planteado en Trabajo Terminal I con el objetivo de obtener un funcionamiento adecuado al integrar los distintos sistemas del proyecto. Además, se realizan pruebas para verificar el funcionamiento de cada uno y de forma integral. 
+\subsection{Hoja de especificaciones del usuario}
+\label{sec:hoja_usuario}
+El sistema de ortesis robótica está diseñado para un rango de usuarios que cumpla con las siguientes características antropométricas, obtenidas de estudios de población mexicana \cite{TT2_01}, \cite{TT2_02}:
+
+\begin{table}[h!]
+	\centering
+	\caption{Hoja de especificaciones antropométricas (resumen).}
+	\begin{tabular}{|l|c|c|c|c|c|}
+		\hline
+		\textbf{Parámetro} &\textbf{Unidad} & \textbf{ID} & \textbf{P5} & \textbf{P95} & \textbf{Mín / Máx (diseño)} \\
+		\hline
+		Longitud total de pierna	 & cm &1&81 & 94 & 81-94 $\pm$ 10mm \\ \hline
+		Longitud a altura rodilla	 & cm &2& 43.4 & 52.6 & 43.4-52.6 $\pm$ 10mm \\ \hline
+		Perímetro pantorrilla 		 & cm &3& 31.5 & 42 & 31.5-42 $\pm$ 10mm \\ \hline
+		Altura sentado 				 & cm &4& 82.5 & 95 & 82.5-95 $\pm$ 10mm \\ \hline
+		Longitud nalga-poplíteo 	 & cm &5& 43.2 & 52.6 & 43.2-52.6 $\pm$ 10mm \\ \hline
+		Longitud nalga-rodilla 		 & cm &6& 53.7 & 64 & 53.7-64 $\pm$ 10mm \\ \hline
+		Altura poplítea				 & cm &7& 37.4 & 45.3&37.4-45.3 $\pm$ 10mm\\ \hline
+		Altura rodilla sentado		 & cm &8&47.3&55.6&47.3-55.6 $\pm$ 10mm\\ \hline
+		Anchura codos				 & cm &9& 44.3 & 62 & 44.3-62 $\pm$ 10mm \\ \hline
+		Anchura cadera (sentado) 	 & cm &10& 32.8 & 42.3 & 32.8-42.3 $\pm$ 10mm \\ \hline
+		Peso corporal (P95) 		 & kg && 55 & 97.3 & \textbf{Carga diseño = 92} \\
+		\hline
+	\end{tabular}
+\end{table}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.2\textwidth]{figure/P06.png}
+	\caption[Dimensión antropométrica de longitud de pierna.]{Dimensión antropométrica de longitud de pierna.\label{fig:P06}}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Longitud a altura de rodilla y perímetro de pantorrilla.\label{fig:P07}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/P07.png}}\\
+	\subcaptionbox{Longitudes y alturas en posición sentado.\label{fig:P08}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/P08.png}}
+	\caption[Dimensiones antropométricas contempladas para diseño del sistema.]{Dimensiones antropométricas contempladas para diseño del sistema.\label{fig:P07P08}}
+\end{figure}
+Estas dimensiones determinan:
+\begin{itemize}
+	\item La distancia y ajuste de los puntos de sujeción mecánica.
+	\item La fuerza nominal requerida de los actuadores lineales y rotativos.
+	\item La configuración de las rutinas de movimiento, para mantener seguridad y comodidad.
+\end{itemize}
+
+El diseño mecánico y los mecanismos de sujeción (véase Anexo \ref{sec:planos de manufactura}, \nameref{sec:planos de manufactura}) se dimensionaron considerando el percentil 95 para garantizar compatibilidad con la mayoría de los usuarios.
+
+\subsection{Adquisición y verificación de componentes}\label{subsec:adquisicion}
+Parte importante para la construcción del proyecto recayó en la adquisición de los componentes a utilizar, tomando en cuenta su capacidad para desempeñar su función esperada, así como los tiempos de envío y entrega una vez realizados los pedidos.
+%% DESCRIBIR LO QUE SE COMPRÓ CON BASE EN LA LISTA DE MATERIALES EN LA TABLA DE COSTOS
+\subsubsection{Gestión de proveedores y materiales}\label{subsubsec:gestion_proveedores}
+La fase de implementación dio inicio con la adquisición de los componentes y materiales estructurales definidos en el diseño detallado desarrollado en Trabajo Terminal I. La selección de los componentes se basó en el cumplimiento de las especificaciones técnicas, mientras que para la selección de proveedores  se tomó en cuenta la disponibilidad en el mercado nacional, costos y tiempos de entrega.\\
+Se gestionó la compra de todos los elementos, desde los perfiles estructurales PTR y de aluminio, hasta los componentes necesarios como los drivers \texttt{HSS57} y \texttt{HSS86}, los motores a pasos Nema 23 y Nema 34, y la unidad de procesamiento (Raspberry Pi 4).
+\subsection{Inspección de componentes críticos}\label{subsec:inspeccion_componentes}
+Una vez recibidos los materiales, se realizó una inspección visual y técnica para verificar que correspondieran a las especificaciones requeridas para el proyecto.\\
+
+Se verificó que la unidad de procesamiento [Fig. \ref{fig:comp_rpi}] corresponde al modelo Raspberry Pi 4 Model B con 4GB de RAM. Para la HMI, se recibió la pantalla táctil Waveshare de 7 pulgadas [Fig. \ref{fig:comp_waveshare}], confirmando su compatibilidad de conexión HDMI y USB. Los sensores y los interruptores de límite fueron inspeccionados visualmente. 
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Unidad de procesamiento Raspberry Pi 4.\label{fig:comp_rpi}}
+	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\subcaptionbox{Pantalla HMI Waveshare de 7 pulgadas.\label{fig:comp_waveshare}}
+	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\caption{Componentes principales del sistema de control y comunicación.}
+\end{figure}
+
+\subsubsection{Sistema de Movimiento (S5)}
+Se realizó la inspección de los dos conjuntos de actuadores (Fig. \ref{fig:comp_motores}):
+\begin{itemize}
+	\item \textbf{Actuador Lineal (M8):} Se recibió el motor Nema 23 y su controlador HSS57. Se constató que las especificaciones de torque (2.0 N.m) y corriente (4.2 A) coincidan con las requeridas en el diseño.
+	\item \textbf{Actuador rotativo (M9):} Se recibió el motor Nema 34 y su controlador HSS86. Se verificó su capacidad de torque (4.5 N.m) para manejar el mecanismo de abducción-aducción.
+\end{itemize}
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Motor Nema 23 (57HSE) y driver HSS57.\label{fig:comp_nema23}}
+	{\includegraphics [width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\subcaptionbox{Motor Nema 24 (86HSE4N) y driver HSS86.\label{fig:comp_nema34}}
+	{\includegraphics [width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\caption{Conjuntos de motor y driver adquiridos para el sistema de movimiento.\label{fig:comp_motores}}
+\end{figure}
+
+\subsubsection{Sistema de Energía (S4) y Seguridad (S2)}
+Se verificaron las fuentes de alimentación conmutadas (Fig. \ref{fig:comp_fuentes}). Se confirmó el modelo MEAN WELL LRS-600-48 para la etapa de potencia (48V, 12.5A) y el modelo MEAN WELL LRS-50-5 para la etapa de control (5V, 10A). De igual manera, se inspeccionaron los componentes de seguridad como el botón de paro de emergencia y el módulo relevador de 5V.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Fuentes de alimentación MEAN WELL para potencia y control.\label{fig:comp_fuentes}}
+\end{figure}
+
+
+\subsection{Manufactura y ensamble del sistema estructural (S1)}\label{Implementacion S1}
+La construcción del sistema estructural fue dividido en secciones comenzando por base de la cama que soportaría a los mecanismos de flexión-extensión, abducción-aducción, así como el montaje de componentes electrónicos y actuadores requeridos para los sistemas de control, seguridad eléctrica y comunicación humano-máquina.
+\subsubsection{Construcción de la cama de soporte}
+\subsubsection{Construcción del mecanismo de flexión-extensión}
+\subsubsection{Construcción del mecanismo de abducción-aducción}
+\subsubsection{Integración de mecanismos y montaje final}
+Durante las fases finales del ensamble, se realizaron los barrenos para la fijación de los interruptores de límite directamente sobre la estructura, ajustando su posición para permitir el movimiento de los mecanismos de flexión-extensión y abducción-aducción. Durante este proceso se encontró fricción excesiva con partes de la estructura por lo que se recurrió al desbaste de zonas de la estructura con el fin de permitir un desplazamiento suave y evitar atascamientos. 
+% Debo mencionar más sobre esta subsubsección que aún está incompleta. Agregar la referencia a la imagen donde describa como se están montando los interruptores de límite
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Ajuste dimensional a estructura para montaje de interruptores de límite.\label{fig:limit_switch_montaje}}
+\end{figure}
+
+
+
+
+
+
+

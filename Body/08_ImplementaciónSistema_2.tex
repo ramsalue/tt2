@@ -1,0 +1,30 @@
+\subsection{Implementación de sistemas de seguridad (S2 y S3)}\label{Implementacion S2 y S3}
+Debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo, existía un riesgo de daño mecánico en caso de colisión por fallo de control. Para atender este riesgo es que se implementan los sistemas se seguridad eléctrico y mecánico diseñados para el proyecto que se integran como una protección de tres capas, las cuales se describen a continuación.
+\subsubsection{Límites electrónicos (software y sensores)}
+Los interruptores se posicionaron en los finales de carrera hasta los cuales los mecanismos de flexión-extensión y abducción-aducción deben llegar, detectando así el final del recorrido seguro e interrumpiendo la generación de pulsos por software. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Interruptores de límite posicionados en estructura.\label{fig:limit_switch}}
+\end{figure}
+\subsubsection{Ensamble de topes mecánicos}
+Se integraron al sistema estructural los topes mecánicos que impiden el descarrilamiento del mecanismo de flexión-extensión, o la apertura excesiva del ángulo de abducción-aducción más allá de los límites permitidos. 
+% Mencionar las figuras que gana referencia a los topes mecánicos en cuestión
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Tope mecánico para mecanismo de flexión-extensión.\label{fig:tope_mecanico_flexion}}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Tope mecánico para mecanismo de abducción-aducción.\label{fig:tope_mecanico_abduccion}}
+\end{figure}
+% Debo insertar imágenes sobre los topes mecánicnos implementados.
+\subsubsection{Cableado del circuito de paro de emergencia}
+Dado que el proyecto constituye un prototipo de rehabilitación, la norma operativa requiere supervisión constante, por lo que apegados a las normas ISO 13850:2015 e IEC 60204-1:2018 planteadas en el diseño se integra el botón de paro de emergencia físico para cortar el flujo de corriente de los drivers hacia los actuadores cuando quien opere el sistemas lo requiera.
+% Detallar más sobre el cableado de dicho botón de paro de emergencia.
+\subsubsection{Implementación de sujeción y ajuste}
+% Detallar información sobre los velcros
+
+

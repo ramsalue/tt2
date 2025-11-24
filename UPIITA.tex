@@ -1,0 +1,137 @@
+%\ProvidesPackage{UPIITA}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\PassOptionsToPackage{table,svgnames,xcdraw}{xcolor}
+\usepackage{color}
+%\usepackage{subfigure}
+\usepackage{capt-of}
+\usepackage{sidecap}
+\sidecaptionvpos{figure}{c}
+\usepackage{caption}
+\usepackage{commath}
+\usepackage{cancel}
+\usepackage{anysize}
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+\usepackage{answers}
+\usepackage{nccmath}
+\usepackage[shortlabels]{enumitem}
+\usepackage[acronym,toc]{glossaries}
+\captionsetup[table]{position=top}
+\usepackage{filecontents}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\usepackage{mathtools, amsfonts, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{float,graphicx}
+\usepackage{lmodern}
+\usepackage{gensymb}
+\usepackage{nccmath}
+\usepackage{tikz}
+%\usepackage{newclude}
+
+%=============Packages agregados por LERS==============
+\usepackage {ulem} 		% Paquete ulem para subrayado y tachado de texto
+\usepackage{rotating} 
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{xurl}         		% Permite añadir enlaces
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{graphicx} 
+\usepackage{tabularx}
+\usepackage{multicol}   		% Múltiples columnas
+\usepackage{multirow}      % Agrega nuevas opciones a las tablas
+\usepackage{tabto}
+\usepackage{pdfpages}
+\usepackage{subcaption}
+% Segmento de código que permite redefinir \paragraph{title} para agregarlo como subtítulo
+{\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+	{-2.5ex\@plus -1ex \@minus -.25ex}%
+	{1.25ex \@plus .25ex}%
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}}    % how many sectioning levels to show in ToC
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+\usepackage{tocloft}
+\setlength{\cftfignumwidth}{3.5em} % o 4em si aún se desbordan
+
+
+%==================== Márgenes ==================
+\marginsize{2cm}{2cm}{2cm}{2cm} % Izquierda, derecha, arriba, abajo
+%=================== Insertar PDFs ==============
+\usepackage{pdfpages} 
+%================== Apéndices ==================
+\usepackage[toc,page]{appendix}
+\usepackage{chngcntr} % Para controlar numeración de figuras/tablas
+% Cambiar "Appendices" por "Anexos"
+\renewcommand{\appendixname}{Anexos}
+\renewcommand{\appendixtocname}{Anexos}
+\renewcommand{\appendixpagename}{Anexos}
+%%%%%%%%%%%%%%%%%% Hipervínculos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[colorlinks=true,plainpages=true,citecolor=black,linkcolor=black]{hyperref}
+%\usepackage{hyperref} 
+
+% Encabezado y pie de página
+\usepackage{fancyhdr} 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize UPIITA}
+\fancyhead[R]{\footnotesize IPN}
+\fancyfoot[R]{\footnotesize Trabajo Terminal II}
+\fancyfoot[C]{\thepage}
+%\fancyfoot[C]{\ifnum\value{page}>2 \thepage\fi}
+\fancyfoot[L]{\footnotesize Ing. Mecatrónica}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%============= Para introducir código MATLAB ========
+% configuración para el lenguaje que queramos utilizar
+\usepackage{listings}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5} 
+\lstset{language=Matlab,
+	keywords={break,case,catch,continue,else,elseif,end,for,function,
+		global,if,otherwise,persistent,return,switch,try,while},
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	commentstyle=\color{red},
+	stringstyle=\color{dkgreen},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=10pt,
+	backgroundcolor=\color{white},
+	tabsize=4,
+	showspaces=false,
+	showstringspaces=false}
+%======================= Del Inglés al Español =======================
+\newcommand{\sen}{\operatorname{\sen}}	% Definimos el comando \sen para el seno
+%en español
+\newcommand{\asignatura}[1]{
+	\def\@asignatura{#1}
+}
+\newcommand{\carrera}[1]{
+	\def\@carrera{#1}
+}
+\newcommand{\titulo}[1]{
+	\def\@titulo{#1}
+}
+\newcommand{\grupo}[1]{
+	\def\@grupo{#1}
+}
+\newcommand{\asesores}[1]{
+	\def\@asesores{#1}
+}
+\newcommand{\alumno}[1]{
+	\def\@alumno{#1}
+}
