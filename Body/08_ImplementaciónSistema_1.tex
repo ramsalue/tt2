@@ -92,10 +92,54 @@ Se verificaron las fuentes de alimentación conmutadas (Fig. \ref{fig:comp_fuent
 
 
 \subsection{Manufactura y ensamble del sistema estructural (S1)}\label{Implementacion S1}
-La construcción del sistema estructural fue dividido en secciones comenzando por base de la cama que soportaría a los mecanismos de flexión-extensión, abducción-aducción, así como el montaje de componentes electrónicos y actuadores requeridos para los sistemas de control, seguridad eléctrica y comunicación humano-máquina.
+La construcción del sistema estructural fue dividido en secciones comenzando por la base de la cama que soportaría a los mecanismos de flexión-extensión, abducción-aducción, así como el montaje de componentes electrónicos y actuadores requeridos para los sistemas de control, seguridad eléctrica y comunicación humano-máquina.
 \subsubsection{Construcción de la cama de soporte}
+El soporte principal se construyó utilizando perfiles PTR soldados con la finalidad de obtener una base rígida ante la carga vertical del paciente y los mecanismos que soportará la estructura.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Perfil PTR para construcción de la cama soporte.\label{fig:perfil_ptr}}
+\end{figure} 
+
+Se integró una colchoneta de espuma de alta densidad que se utiliza como superficie de acojinamiento para comodidad del paciente con un espesor de XX mm, dicha elevación permite alinear el eje de rotación de la articulación coxofemoral del paciente con el eje mecánico del actuador de abducción. Sin este ajuste de altura la discrepancia de alturas generaría un par de fuerzas no deseado en la cadera del usuario durante la sesión. 
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Modelo CAD de la estructura base.}
+	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}} 
+	\subcaptionbox{Implementación física con colchoneta de ajuste.}
+	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\caption{Comparativa de la estructura de soporte: diseño vs. implementación física.\label{fig:cama_estructura}}
+\end{figure}
 \subsubsection{Construcción del mecanismo de flexión-extensión}
+El mecanismo se manufacturó utilizando perfiles de aluminio 6061-T6 para reducir la dificultad del movimiento relacionada con la inercia del mecanismo. Las uniones se realizaron mediante tornillería de acero inoxidable.
+\paragraph{Diseño de la placa base, manejo de tolerancias y deformaciones térmicas}
+Durante el proceso de manufactura, las placas de acero fueron cortadas mediante láser. Se observó que el calor térmico generado al momento del corte provocó una curvatura, lo que dificultó el alineamiento de las placas con los rieles de la guía. Para corregir el ensamble se realizó una alineación activa, es decir, se montaron el eje, las chumaceras y las placas simultáneamente, y se ajustó la posición con esfuerzo manual antes de aplicar los puntos de soldadura y fijación final. Esto permitió que el eje del movimiento permaneciera paralelo a las guías lineales evitando atascamientos.\\
+
+El mecanismo de flexión-extensión se colocó sobre una placa de acero de 1/4". La longitud de la placa fue acotada al área de transmisión de esfuerzos del actuador lineal en lugar de cubrir toda la base con la finalidad de reducir la deflexión del eje debido al peso de la pierna. Además, se implementaron múltiples puntos de apoyo (chumaceras) que fueron distribuidos a lo largo del eje de transmisión, reduciendo así el momento flector en los extremos.
+
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Diseño detallado del mecanismo de flexión.}
+	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\subcaptionbox{Ensamble físico con placas de acero y perfil de aluminio.}
+	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
+	\caption{Implementación del mecanismo de flexión-extensión.\label{fig:mecanismo_flexion_extension}}
+\end{figure}
+
 \subsubsection{Construcción del mecanismo de abducción-aducción}
+El mecanismo de abducción-aducción se encarga de soportar la carga del subsistema de flexión y la pierna del paciente, y produce la rotación de un eje vertical. Para este mecanismo se utilizó el motor Nema 34 acoplado un eje de acero maquinado. Sobre el eje se tienen los puntos de apoyo distribuidos que reducen el momento flector en los extremos.
+\paragraph{Selección de elementos de rotación}
+Durante la validación del diseño, se analizó la selección de los elementos rodantes para las articulaciones superior e inferior.
+\begin{enumerate}
+	\item \textbf{Eje inferior (carga principal):} Se implementaron chumaceras de bolas y un rodamiento axial en la base. Esto para soportar la carga axial combinada (aprox. 25 kg) con mínima fricción.
+	\item \textbf{Uniones superiores (nivel coxofemoral):} Para las articulaciones superiores del mecanismo de flexión-extensión, se utilizaron XXX XXX, sin rodamientos de bolas, esto se debe a que la velocidad angular de operación es muy baja ($< 0.5$ rad/s) y el ciclo de trabajo no es continuo, lo que implica que la fricción generada por el contacto metal-metal lubricado es despreciable en comparación con el par disponible de los actuadores. Además, esta configuración reduce el volumen del mecanismo en la zona de la cadera. Esto reduce el volumen ocupado por el mecanismo en la articulación coxofemoral. 
+\end{enumerate}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}
+	\caption{Eje principal de abducción maquinado con cuñero para acople directo al motor Nema 34.\label{fig:mecanismo_abduccion_aduccion}}
+\end{figure}
 \subsubsection{Integración de mecanismos y montaje final}
 Durante las fases finales del ensamble, se realizaron los barrenos para la fijación de los interruptores de límite directamente sobre la estructura, ajustando su posición para permitir el movimiento de los mecanismos de flexión-extensión y abducción-aducción. Durante este proceso se encontró fricción excesiva con partes de la estructura por lo que se recurrió al desbaste de zonas de la estructura con el fin de permitir un desplazamiento suave y evitar atascamientos. 
 % Debo mencionar más sobre esta subsubsección que aún está incompleta. Agregar la referencia a la imagen donde describa como se están montando los interruptores de límite
@@ -104,6 +148,9 @@ Durante las fases finales del ensamble, se realizaron los barrenos para la fijac
 	\includegraphics[width=0.7\textwidth]{figure/img_componentes/Untitled.png}
 	\caption{Ajuste dimensional a estructura para montaje de interruptores de límite.\label{fig:limit_switch_montaje}}
 \end{figure}
+
+%La integración final consistió en el acoplamiento del sub-ensamble de flexión sobre el eje de abducción. Se verificó la perpendicularidad de los ejes mediante escuadras magnéticas antes del apriete final de la tornillería.
+%Se realizaron ajustes en sitio (barrenado manual) para la colocación de los sensores de límite de carrera, asegurando que se activen antes de que el mecanismo alcance sus topes mecánicos físicos.
 
 
 
