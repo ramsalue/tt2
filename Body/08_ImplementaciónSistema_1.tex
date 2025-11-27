@@ -115,11 +115,11 @@ El mecanismo se manufacturó utilizando perfiles de aluminio 6061-T6 para reduci
 \paragraph{Diseño de la placa base, manejo de tolerancias y deformaciones térmicas}
 Durante el proceso de manufactura, las placas de acero fueron cortadas mediante láser. Se observó que el calor térmico generado al momento del corte provocó una curvatura, lo que dificultó el alineamiento de las placas con los rieles de la guía. Para corregir el ensamble se realizó una alineación activa, es decir, se montaron el eje, las chumaceras y las placas simultáneamente, y se ajustó la posición con esfuerzo manual antes de aplicar los puntos de soldadura y fijación final. Esto permitió que el eje del movimiento permaneciera paralelo a las guías lineales evitando atascamientos.\\
 
-El mecanismo de flexión-extensión se colocó sobre una placa de acero de 1/4". La longitud de la placa fue acotada al área de transmisión de esfuerzos del actuador lineal en lugar de cubrir toda la base con la finalidad de reducir la deflexión del eje debido al peso de la pierna. Además, se implementaron múltiples puntos de apoyo (chumaceras) que fueron distribuidos a lo largo del eje de transmisión, reduciendo así el momento flector en los extremos.
+El mecanismo de flexión-extensión se colocó sobre una placa de acero al carbón de 1/2". La longitud de la placa fue acotada al área de transmisión de esfuerzos del actuador lineal en lugar de cubrir toda la base con la finalidad de reducir la deflexión del eje debido al peso de la pierna. Además, se implementaron múltiples puntos de apoyo (chumaceras) que fueron distribuidos a lo largo del eje de transmisión, reduciendo así el momento flector en los extremos.
 
 \paragraph{Discrepancias entre diseño e implementación del mecanismo de flexión-extensión}
-\subparagraph{Soporte distal (pie)}
-Durante el ensamble del soporte distal (pie), se encontró una interferencia dimensional en la unión de la impresión 3D plegada que actúa como soporte del pie con la estructura de aluminio, por lo que se aplicó un proceso de ajuste mecánico (desbaste de 3 mm) en las caras laterales de la impresión para lograr un acople deslizante.
+\subparagraph{Soporte distal (pie).}
+Durante el ensamble del soporte distal (pie)\footnote{Se proporciona mayor información de la manufactura de los soportes en la subsección \nameref{Implementacion S2 y S3}.}, se encontró una interferencia dimensional en la unión de la impresión 3D plegada que actúa como soporte del pie con la estructura de aluminio, por lo que se aplicó un proceso de ajuste mecánico (desbaste de 3 mm) en las caras laterales para lograr un acople deslizante.
 \subparagraph{Barreno invertido en clévis (fémur).}
 En uno de los tubos telescópicos del fémur, un barreno para unión clévis fue soldado en sentido invertido al planteado en el diseño CAD, sin embargo, no afecta al funcionamiento ni el movimiento por lo que se decidió conservar dicho cambio debido a que el funcionamiento es aceptable.
 
@@ -132,13 +132,13 @@ En uno de los tubos telescópicos del fémur, un barreno para unión clévis fue
 	\caption{Implementación del mecanismo de flexión-extensión.\label{fig:mecanismo_flexion_extension}}
 \end{figure}
 
-\subsubsection{Construcción del mecanismo de abducción-aducción}
+\subsubsection{Construcción del mecanismo de abducción-aducción.}
 El mecanismo de abducción-aducción se encarga de soportar la carga del subsistema de flexión y la pierna del paciente, y produce la rotación de un eje vertical. Para este mecanismo se utilizó el motor Nema 34 acoplado un eje de acero maquinado. Sobre el eje se tienen los puntos de apoyo distribuidos que reducen el momento flector en los extremos.
 \paragraph{Selección de elementos de rotación}
 Durante la validación del diseño, se analizó la selección de los elementos rodantes para las articulaciones superior e inferior.
 \begin{enumerate}
 	\item \textbf{Eje inferior (carga principal):} Se implementaron chumaceras de bolas y un rodamiento axial en la base. Esto para soportar la carga axial combinada (aprox. 25 kg) con mínima fricción.
-	\item \textbf{Uniones superiores (nivel coxofemoral):} Para las articulaciones superiores del mecanismo de flexión-extensión, se utilizaron XXX XXX, sin rodamientos de bolas, esto se debe a que la velocidad angular de operación es muy baja ($< 0.5$ rad/s) y el ciclo de trabajo no es continuo, lo que implica que la fricción generada por el contacto metal-metal lubricado es despreciable en comparación con el par disponible de los actuadores. Además, esta configuración reduce el volumen del mecanismo en la zona de la cadera. Esto reduce el volumen ocupado por el mecanismo en la articulación coxofemoral. 
+	\item \textbf{Uniones superiores (nivel coxofemoral):} Para las articulaciones superiores del mecanismo de flexión-extensión, se emplearon las juntas Clevis seleccionadas mediante tablas de decisión, la cuales no tienen rodamientos de bolas, esto se debe a que la velocidad angular de operación es muy baja ($< 0.5$ rad/s) y el ciclo de trabajo no es continuo, lo que implica que la fricción generada por el contacto metal-metal lubricado es despreciable en comparación con el par disponible de los actuadores. Además, esta configuración reduce el volumen del mecanismo en la zona de la cadera. Esto reduce el volumen ocupado por el mecanismo en la articulación coxofemoral. 
 \end{enumerate}
 
 \begin{figure}[h!]

@@ -1,5 +1,5 @@
 \subsection{Implementación de sistemas de seguridad (S2 y S3)}\label{Implementacion S2 y S3}
-Debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo, existía un riesgo de daño mecánico en caso de colisión por fallo de control. Para atender este riesgo es que se implementan los sistemas se seguridad eléctrico y mecánico diseñados para el proyecto que se integran como una protección de tres capas, las cuales se describen a continuación.
+La implementación física de los sistemas de seguridad se realizó siguiendo una estrategia de "capas de protección", integrando barreras mecánicas y eléctricas. Debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo, existía un riesgo de daño mecánico en caso de colisión por fallo de control. Para atender este riesgo es que se implementan los sistemas se seguridad eléctrico y mecánico diseñados para el proyecto que se integran como una protección de tres capas, las cuales se describen a continuación.
 \subsubsection{Límites electrónicos (software y sensores)}
 Los interruptores se posicionaron en los finales de carrera hasta los cuales los mecanismos de flexión-extensión y abducción-aducción deben llegar, detectando así el final del recorrido seguro e interrumpiendo la generación de pulsos por software. 
 \begin{figure}[h!]
@@ -8,7 +8,7 @@ Los interruptores se posicionaron en los finales de carrera hasta los cuales los
 	\caption{Interruptores de límite posicionados en estructura.\label{fig:limit_switch}}
 \end{figure}
 \subsubsection{Ensamble de topes mecánicos}
-Se integraron al sistema estructural los topes mecánicos que impiden el descarrilamiento del mecanismo de flexión-extensión, o la apertura excesiva del ángulo de abducción-aducción más allá de los límites permitidos. 
+Se integraron al sistema estructural los topes mecánicos que impiden el descarrilamiento del mecanismo de flexión-extensión, o la apertura excesiva del ángulo de abducción-aducción más allá de los límites permitidos. Los topes fueron realizados con el material PTR, mismo que comparte con la estructura de la cama soporte.
 % Mencionar las figuras que gana referencia a los topes mecánicos en cuestión
 \begin{figure}[h!]
 	\centering
@@ -23,8 +23,13 @@ Se integraron al sistema estructural los topes mecánicos que impiden el descarr
 % Debo insertar imágenes sobre los topes mecánicnos implementados.
 \subsubsection{Cableado del circuito de paro de emergencia}
 Dado que el proyecto constituye un prototipo de rehabilitación, la norma operativa requiere supervisión constante, por lo que apegados a las normas ISO 13850:2015 e IEC 60204-1:2018 planteadas en el diseño se integra el botón de paro de emergencia físico para cortar el flujo de corriente de los drivers hacia los actuadores cuando quien opere el sistemas lo requiera.
+% PENDIENTE
 % Detallar más sobre el cableado de dicho botón de paro de emergencia.
 \subsubsection{Implementación de sujeción y ajuste}
-% Detallar información sobre los velcros
+Para garantizar la adaptabilidad a los diferentes percentiles antropométricos (P5 a P95), se implementó el sistema de ajuste telescópico en los eslabones correspondientes al fémur y la tibia.
+
+\paragraph{Manufactura de componentes de contacto.}
+Los soportes directos para la pierna y pie se fabricaron mediante impresión 3D (manufactura aditiva) utilizando PLA para permitir geometrías ergonómicas complejas que no serían viables por métodos sustractivos. Estos soportes se acoplaron a los tubos telescópicos de aluminio que forman parte del mecanismo de flexión-extensión, permitiendo el ajuste longitudinal.\\
+Aunque el diseño contempla el uso de cintas de velcro para la sujeción final, durante la fase de pruebas funcionales se priorizó la validación del mecanismo de ajuste telescópico y la rigidez de los soportes impresos.
 
 
