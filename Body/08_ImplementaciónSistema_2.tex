@@ -1,7 +1,7 @@
 \subsection{Implementación de sistemas de seguridad (S2 y S3)}\label{Implementacion S2 y S3}
 La implementación física de los sistemas de seguridad se realizó siguiendo una estrategia de "capas de protección", integrando barreras mecánicas y eléctricas. Debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo, existía un riesgo de daño mecánico en caso de colisión por fallo de control. Para atender este riesgo es que se implementan los sistemas se seguridad eléctrico y mecánico diseñados para el proyecto que se integran como una protección de tres capas, las cuales se describen a continuación.
 \subsubsection{Límites electrónicos (software y sensores)}
-Los interruptores se posicionaron en los finales de carrera hasta los cuales los mecanismos de flexión-extensión y abducción-aducción deben llegar, detectando así el final del recorrido seguro e interrumpiendo la generación de pulsos por software. 
+Se realizaron los barrenos de fijación directamente sobre la estructura final, ajustando la posición de los interruptores para alcanzar un rango de movimiento donde los mecanismos de flexión-extensión y abducción-aducción logren llegar a su final de carrera, detectando así el final del recorrido seguro e interrumpiendo la generación de pulsos por software. 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}
