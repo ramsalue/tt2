@@ -1,49 +1,36 @@
-# Archivos auxiliares de LaTeX (Ignorar todo esto)
+# --- Archivos generados por LaTeX (BASURA) ---
 *.aux
-*.glo
-*.idx
 *.log
 *.toc
-*.ist
-*.acn
-*.acr
-*.alg
+*.lof
+*.lot
+*.out
 *.bbl
 *.blg
 *.dvi
-*.glg
-*.gls
-*.ilg
-*.ind
-*.lof
-*.lot
-*.maf
-*.mtc
-*.mtc0
-*.nav
-*.nlo
-*.out
-*.pdfsync
-*.ps
-*.snm
-*.synctex.gz
-*.vrb
-*.xdy
-*.tdo
-
-# Archivos de editores (TexStudio, VSCode, etc.)
 *.fls
 *.fdb_latexmk
+*.synctex.gz
+*.nlo
+*.nls
+*.eix
+*.idx
+*.ind
+*.ilg
+*.gls
+*.glo
+*.ist
+
+# --- Archivos de configuración de editores (IDE) ---
+mecatexis.prj
 .vscode/
+
+# --- Archivos comprimidos o temporales ---
+*.zip
 *.bak
 *.sav
-*.md
-original texts/
-OrtesisTT2/
-Costos TT2.xlsx
-TT0_Protocol.pdf
-TT1_FinalReport.pdf
+*~
 
-# Excepción: ¡QUEREMOS SUBIR EL PDF!
-# Por defecto git ignora pdfs generados, pero aquí forzamos a NO ignorar tu tesis
-!tt2_[draft].pdf
+# --- EXCEPCIÓN IMPORTANTE ---
+# Normalmente ignoraríamos todos los PDFs generados, pero
+!*.pdf

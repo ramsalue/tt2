@@ -1,0 +1,378 @@
+\subsection{ S5. Sistema de movimiento}\label{S5_Sistema de movimiento}
+Dentro del sistema de movimiento se contemplan motores como los principales actuadores encargados de mover a las estructuras, y en este caso específico, a la estructura que soporta a la región inferior derecha. Se tienen dos módulos, el primero correspondiente a un movimiento lineal y el segundo a un movimiento rotativo.
+
+Y para la implementación de estos motores, se ha optado por utilizar motores paso a paso controlados por drivers. Esta elección se fundamenta en las características de este tipo de actuadores que se ajustan de manera óptima a requisitos de precisión, control y fiabilidad del sistema de movimiento donde sus ventajas son claras para esta aplicación específica. Los motores paso a paso, por su principio de funcionamiento basado en pasos discretos, ofrecen una precisión inherente en el control de posición, y al enviar un número determinado de pulsos al driver, se logra un desplazamiento angular aún más preciso del eje del motor. Esta característica es fundamental para ejecutar las rutinas de rehabilitación con exactitud, pero sobre todo seguridad.
+
+Además de la precisión, los motores paso a paso permiten un control directo y sencillo de la velocidad al variar la frecuencia de los pulsos. Esto facilita la implementación de una velocidad controlada para el seguimiento de trayectoria, asegurando que los movimientos terapéuticos se realicen a un ritmo adecuado y seguro para el paciente. En comparación con otros tipos de actuadores como los servomotores tradicionales o los motores DC, la combinación de motores paso a paso con drivers ofrece un balance adecuado de precisión, control de posición fiable y parámetros de control explícitos, lo que facilita su integración en el sistema de control general.
+
+Por estas razones, la elección de motores paso a paso con drivers híbridos servo se considera la solución más apropiada para cumplir con los requisitos del sistema de movimiento de la ortesis robótica.
+La elección específica de los motores y los drivers se detallaran en su módulo.
+
+\subsubsection{M8. Módulo de actuador lineal} 
+
+Este actuador será el encargado de realizar el movimiento de flexión y extensión de la pierna.
+
+Para seleccionar el tipo de motor adecuado se evaluaron dos alternativas: motor con tornillo sin fin y motor de vástago. En la tabla \ref{ms_motores} se presenta la matriz de selección subjetiva, donde se analizaron criterios como carga, estabilidad, durabilidad, adaptabilidad, montaje y otros factores técnicos y prácticos.
+\begin{table}[h!]
+	\centering
+	\caption{Matriz de selección subjetiva para los motores. \label{ms_motores}}
+	\scalebox{0.85}{\begin{tabular}{|
+			>{\columncolor[HTML]{FFFFFF}}c 
+			>{\columncolor[HTML]{FFFFFF}}l |ll|}
+		\hline
+		\multicolumn{2}{|c|}{\cellcolor[HTML]{FFFFFF}}                                     & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Conceptos}}                                                                        \\ \cline{3-4} 
+		\multicolumn{2}{|c|}{\multirow{-2}{*}{\cellcolor[HTML]{FFFFFF}\textbf{Criterios}}} & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}\textbf{Tornillo sin fin}} & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}\textbf{Vástago}} \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{A}}   & Carga                 & \multicolumn{1}{l|}{Excelente}                                         & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{B}}   & Estabilidad           & \multicolumn{1}{l|}{Excelente}                                         & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{C}}   & Longitud de Carrera   & \multicolumn{1}{l|}{Bueno}                                             & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{D}}   & Durabilidad           & \multicolumn{1}{l|}{Excelente}                                         & Excelente                                                     \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{E}}   & Espacio               & \multicolumn{1}{l|}{Bueno}                                             & Malo                                                          \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{F}}   & Costo                 & \multicolumn{1}{l|}{Regular}                                           & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{G}}   & Nivel de Ruido        & \multicolumn{1}{l|}{Bueno}                                             & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{H}}   & Mantenimiento         & \multicolumn{1}{l|}{Regular}                                           & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{I}}   & Montaje               & \multicolumn{1}{l|}{Bueno}                                             & Malo                                                          \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{J}}   & Estetica              & \multicolumn{1}{l|}{Bueno}                                             & Bueno                                                         \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{K}}   & Adaptabilidad         & \multicolumn{1}{l|}{Bueno}                                             & Malo                                                          \\ \hline
+	\end{tabular}}
+\end{table}
+
+La tabla \ref{mb_motores} muestra la matriz binaria, con la que se jerarquizaron los criterios anteriores, destacando la carga, el espacio y la adaptabilidad como los más relevantes para la elección.
+\begin{table}[h!]
+	\centering
+	\caption{Matriz binaria para los motores. \label{mb_motores}}
+	\scalebox{0.85}{\begin{tabular}{|
+			>{\columncolor[HTML]{FFFFFF}}c 
+			>{\columncolor[HTML]{FFFFFF}}l |c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{Criterios}}                                                          & \cellcolor[HTML]{FFFFFF}\textbf{A} & \cellcolor[HTML]{FFFFFF}\textbf{B} & \cellcolor[HTML]{FFFFFF}\textbf{C} & \cellcolor[HTML]{FFFFFF}\textbf{D} & \cellcolor[HTML]{FFFFFF}\textbf{E} & \cellcolor[HTML]{FFFFFF}\textbf{F} & \cellcolor[HTML]{FFFFFF}\textbf{G} & \cellcolor[HTML]{FFFFFF}\textbf{H} & \cellcolor[HTML]{FFFFFF}\textbf{I} & \cellcolor[HTML]{FFFFFF}\textbf{J} & \cellcolor[HTML]{FFFFFF}\textbf{K} & \cellcolor[HTML]{FFFFFF}\textbf{Total} & \cellcolor[HTML]{FFFFFF}\textbf{Rango} \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{A}} & Carga                                                          & \cellcolor[HTML]{C0C0C0}           & 1                                  & 0                                  & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & 9                                      & 1                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{B}} & Estabilidad                                                    & 0                                  & \cellcolor[HTML]{C0C0C0}           & 0                                  & 1                                  & 0                                  & 1                                  & 1                                  & 1                                  & 0                                  & 1                                  & 0                                  & 5                                      & 6                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{C}} & \begin{tabular}[c]{@{}l@{}}Longitud de \\ Carrera\end{tabular} & 1                                  & 1                                  & \cellcolor[HTML]{C0C0C0}           & 1                                  & 0                                  & 0                                  & 1                                  & 1                                  & 1                                  & 1                                  & 0                                  & 7                                      & 4                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{D}} & Durabilidad                                                    & 0                                  & 0                                  & 0                                  & \cellcolor[HTML]{C0C0C0}           & 0                                  & 1                                  & 0                                  & 1                                  & 0                                  & 1                                  & 0                                  & 3                                      & 7                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{E}} & Espacio                                                        & 0                                  & 1                                  & 1                                  & 1                                  & \cellcolor[HTML]{C0C0C0}           & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & 9                                      & 1                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{F}} & Costo                                                          & 0                                  & 0                                  & 1                                  & 0                                  & 0                                  & \cellcolor[HTML]{C0C0C0}           & 1                                  & 1                                  & 0                                  & 0                                  & 0                                  & 3                                      & 7                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{G}} & Nivel de Ruido                                                 & 0                                  & 0                                  & 0                                  & 1                                  & 0                                  & 0                                  & \cellcolor[HTML]{C0C0C0}           & 1                                  & 0                                  & 1                                  & 0                                  & 3                                      & 7                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{H}} & Mantenimiento                                                  & 0                                  & 0                                  & 0                                  & 0                                  & 0                                  & 0                                  & 0                                  & \cellcolor[HTML]{C0C0C0}           & 0                                  & 1                                  & 0                                  & 1                                      & 10                                     \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{I}} & Montaje                                                        & 0                                  & 1                                  & 0                                  & 1                                  & 0                                  & 1                                  & 1                                  & 1                                  & \cellcolor[HTML]{C0C0C0}           & 1                                  & 0                                  & 6                                      & 5                                      \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{J}} & Estetica                                                       & 0                                  & 0                                  & 0                                  & 0                                  & 0                                  & 1                                  & 0                                  & 0                                  & 0                                  & \cellcolor[HTML]{C0C0C0}           & 0                                  & 1                                      & 10                                     \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{K}} & Adaptabilidad                                                  & 0                                  & 1                                  & 1                                  & 1                                  & 0                                  & 1                                  & 1                                  & 1                                  & 1                                  & 1                                  & \cellcolor[HTML]{C0C0C0}           & 8                                      & 3                                      \\ \hline
+	\end{tabular}}
+\end{table}
+
+Finalmente, en la tabla \ref{mp_motores} se observa que el motor con tornillo sin fin obtuvo la mayor puntuación ponderada, por lo que fue seleccionado como la opción más conveniente para el sistema.
+
+\begin{table}[h!]
+	\centering
+	\caption{Matriz de ponderación para los motores. \label{mp_motores}}
+	\scalebox{1}{\begin{tabular}{clcc|c|c|}
+		\hline
+		\rowcolor[HTML]{FFFFFF} 
+		\multicolumn{2}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{Criterios}}                                                            & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}Total} & Ponderación                   & \textbf{Tornillo sin fin}    & \textbf{Vástago} \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{A}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Carga}               & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}9}     & \cellcolor[HTML]{FFFFFF}0.164 & 5                            & 4                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{E}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Espacio}             & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}9}     & \cellcolor[HTML]{FFFFFF}0.164 & 4                            & 2                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{K}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Adaptabilidad}       & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}8}     & \cellcolor[HTML]{FFFFFF}0.145 & 4                            & 2                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{C}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Longitud de Carrera} & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}7}     & \cellcolor[HTML]{FFFFFF}0.127 & 4                            & 4                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{I}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Montaje}             & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}6}     & \cellcolor[HTML]{FFFFFF}0.109 & 4                            & 2                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{B}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Estabilidad}         & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}5}     & \cellcolor[HTML]{FFFFFF}0.091 & 5                            & 4                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{D}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Durabilidad}         & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}3}     & \cellcolor[HTML]{FFFFFF}0.055 & 5                            & 5                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{F}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Costo}               & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}3}     & \cellcolor[HTML]{FFFFFF}0.055 & 3                            & 4                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{G}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Nivel de Ruido}      & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}3}     & \cellcolor[HTML]{FFFFFF}0.055 & 4                            & 4                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{H}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Mantenimiento}       & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}1}     & \cellcolor[HTML]{FFFFFF}0.018 & 3                            & 4                \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}\textbf{J}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFFFFF}Estetica}            & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}1}     & \cellcolor[HTML]{FFFFFF}0.018 & 4                            & 4                \\ \hline
+		\multicolumn{1}{l}{}                                     &                                                                  & \multicolumn{1}{l}{}                               & \multicolumn{1}{l|}{}         & \cellcolor[HTML]{FFFFFF}4.24 & 3.22             \\ \cline{5-6} 
+	\end{tabular}}
+\end{table}
+
+
+Para el actuador lineal se escogió el concepto de tornillo sin fin, a este actuador se busca acoplar un par de rieles que disminuyan la fricción y la torsión necesaria para el movimiento.
+Por lo que se eligió el uso de un motor a pasos Nema 23, y a partir de esto podemos seleccionar el modelo específico del driver a utilizar.
+
+Específicamente, para un modelo Nema 23, el driver a utilizar será el servocontrolador paso a paso híbrido bifásico \textbf{HSS57}, como se muestra en la Fig. \ref{fig:HSS57}.
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.4\textwidth]{figure/S7_control/HSS57.png}}
+	
+	\caption[Driver HSS57. La información del driver se encuentra en el anexo \ref{fig:Data_HSS57}]{Driver HSS57. La información del driver se encuentra en el anexo \ref{fig:Data_HSS57}}
+	\label{fig:HSS57}
+\end{figure}
+
+El uso de drivers \textit{Hybrid Stepper Servo} (HSS) potencia aún más las ventajas de los motores paso a paso, estos incorporan un encoder en el motor, lo que les permite operar en un modo de lazo cerrado.
+
+A diferencia de los drivers de lazo abierto, los drivers HSS verifican continuamente la posición real del motor y corrigen cualquier desviación, eliminando la posibilidad de pérdida de pasos y asegurando que el motor alcance la posición comandada incluso bajo cargas variables o perturbaciones.
+
+Esta funcionalidad de lazo cerrado proporcionada por el driver incrementa significativamente la fiabilidad y robustez del sistema de movimiento, importante porque la seguridad del paciente es primordial.
+
+Para el driver HSS57, podemos encontrar sus especificaciones en la tabla \ref{tab:HSS57}
+
+\begin{table}[h!]
+	\centering
+	\caption{Especificaciones del driver HSS57\label{tab:HSS57}}
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Característica} & \textbf{Especificación} \\
+		\hline
+		Voltaje de Operación & DC 24 - 50 V \\
+		\hline
+		Corriente máxima & Pico de 6 A \\
+		\hline
+		Motor compatible & 57HSE \\
+		\hline
+		Corriende de entrada lógica & 7 - 20 mA \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Y las medidas del driver se muestran en la Fig.\ref{fig:HSS57_med}.
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.55\textwidth]{figure/S7_control/HSS57_Med.jpg}}
+	
+	\caption[Medidas de driver HSS57 (Cotas en mm).]{Medidas de driver HSS57 (Cotas en mm).}
+	\label{fig:HSS57_med}
+\end{figure}
+
+Este driver cuenta con un puerto de control de señales digitales que permite su control. Este puerto es fundamental para recibir los comandos necesarios que dictan el movimiento del motor. Los pines de entrada principales de este puerto son:
+
+\begin{itemize}[label=$\bullet$] % Utiliza viñetas con puntos
+
+\item \textbf{PUL+ / PUL- (Pulse Input):} Pines de entrada para la señal de pulsos. Cada pulso recibido por el driver hace avanzar al motor un micropaso. La frecuencia de estos pulsos determina la velocidad de rotación del motor y, consecuentemente, la velocidad del movimiento lineal o angular de los actuadores.
+\item \textbf{DIR+ / DIR- (Direction Input):} Pines de entrada para la señal de dirección. El estado lógico de esta señal define el sentido de rotación del motor (horario o anti-horario).
+
+\item \textbf{ENA+ / ENA- (Enable Input):} Pines de entrada para la señal de habilitación. Esta señal permite activar o desactivar el driver y el motor. Cuando el driver está deshabilitado, el motor queda sin una torsión de retención.
+
+\end{itemize}
+
+El puerto de control también incluye pines de salida PEND y ALM que proporcionan retroalimentación de estado al microcontrolador, como la finalización de una posición (PEND) o la detección de una alarma o error en el driver (ALM).
+
+Adicionalmente, los drivers HSS incorporan interruptores DIP-Switch que permiten configurar los parámetros con los que trabajará el driver directamente en el hardware. Entre las configuraciones que se ajustan mediante estos switches se encuentra la opción de seleccionar el número de pulsos por revolución (PPR) que el driver interpreta como una revolución completa del motor. La tabla \ref{tab:PPR_HSS57} ilustra las diferentes combinaciones de estos switches que corresponden a distintos valores de PPR. Otros interruptores DIP permiten configurar el sentido de rotación por defecto y seleccionar el tipo de motor, aunque en este caso específico el driver solo es compatible con el modelo 57HSE, adaptando el driver a las características específicas del motor paso a paso al que está conectado.
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.35\textwidth]{figure/S7_control/57HSE.png}}
+	
+	\caption[Motor modelo 57HSE.]{Motor modelo 57HSE.}
+	\label{fig:57HSE}
+\end{figure}
+
+\begin{table}[h!]
+    \centering
+    \caption{Configuración de pulsos por revolución del driver mediante DIP Switch}
+    \label{tab:PPR_HSS57}
+    \begin{tabular}{|c|c|c|c|c|} 
+        \hline
+        \textbf{Pulsos por revolución} & \textbf{SW3} & \textbf{SW4} & \textbf{SW5} & \textbf{SW6} \\ % Fila de encabezados
+        \hline % Línea horizontal bajo los encabezados
+        Default (400) & ON & ON & ON & ON \\ \hline
+        800 & OFF & ON & ON & ON \\ \hline
+        1600 & ON & OFF & ON & ON \\ \hline
+        3200 & OFF & OFF & ON & ON \\ \hline
+        6400 & ON & ON & OFF & ON \\ \hline
+        12800 & OFF & ON & OFF & ON \\ \hline
+        25600 & ON & OFF & OFF & ON \\ \hline
+        51200 & OFF & OFF & OFF & ON \\ \hline
+        1000 & ON & ON & ON & OFF \\ \hline
+        2000 & OFF & ON & ON & OFF \\ \hline
+        4000 & ON & OFF & ON & OFF \\ \hline
+        5000 & OFF & OFF & ON & OFF \\  \hline% Parece haber un error en tu imagen, 5000 tiene la misma config que 4000 y 2000
+        8000 & ON & ON & OFF & OFF \\ \hline
+        10000 & OFF & ON & OFF & OFF \\ \hline
+        20000 & ON & OFF & OFF & OFF \\ \hline
+        40000 & OFF & OFF & OFF & OFF \\ 
+        \hline % Línea horizontal inferior
+    \end{tabular}
+\end{table}
+
+Finalmente, a partir de la tabla de especificaciones del driver, podemos elegir el modelo especifico del motor con el cual tendremos una óptima respuesta en la combinación entre driver y motor a pasos. Por lo que el modelo de motor a utilizar será el \textbf{57HSE}, como se muestra en la Fig. \ref{fig:57HSE}. Para este motor, podemos encontrar sus especificaciones en la tabla \ref{tab:57HSE}. De igual manera, tenemos las medidas del motor, como se muestra en la Fig. \ref{fig:Nema23}.
+
+\begin{table}[h!]
+    \centering
+    \caption{Especificaciones del motor paso a paso modelo 57HSE}
+    \label{tab:57HSE} 
+    \begin{tabular}{|l|c|} 
+        \hline % Línea horizontal superior
+        \textbf{Característica} & \textbf{Especificación} \\ % Fila de encabezados
+        \hline % Línea horizontal bajo los encabezados
+        Modelo & 57HSE2N-D25 \\
+        \hline
+        No. de Fases & 2 \\
+        \hline
+        Ángulo de Paso & 1.8$^\circ$ \\ % Uso de $^\circ$ para el símbolo de grados en modo matemático
+        \hline
+        Corriente & 4.2 A \\
+        \hline
+        Torque de Retención & 2.0 N.m \\
+        \hline
+        Resolución del Encoder & 1000 PPR \\
+        \hline
+        Peso & 1.15 kg \\
+
+        \hline % Línea horizontal inferior
+    \end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=1\textwidth]{figure/S7_control/Nema_23.jpg}}
+	
+	\caption[Medidas de motor 57HSE. (Cotas en mm)]{Medidas de motor 57HSE (Cotas en mm).}
+	\label{fig:Nema23}
+\end{figure}
+\clearpage
+\subsubsection{M9. Módulo de actuador rotativo}
+Este actuador será el encargado de realizar el movimiento de abducción y aducción de la pierna.
+
+Por su parte, el actuador rotativo no fue llevado a matrices de selección debido a que, por las características del proyecto, se requiere que esté conectado a un eje para que realice la rotación necesaria del mecanismo. (tabla \ref{ms_actuadorrotativo})
+\begin{table}[h!]
+	\centering
+	\caption{Selección de actuador rotativo.\label{ms_actuadorrotativo}}
+	\begin{tabular}{|c|cll|}
+		\hline
+		\textbf{Movimiento rotativo} & \multicolumn{3}{c|}{Por las características del proyecto} \\ \hline
+	\end{tabular}
+\end{table}
+
+La selección de motor y driver se hizo de manera análoga al actuador lineal. Ya que se escogió el concepto de movimiento axial, será el encargado de mover toda la estructura, por lo que se eligió el uso de un motor a pasos Nema 34, ya que es un modelo más robusto que el Nema 23, siendo capaz de soportar más peso y tiene un torque de retención más alto, y a partir de esto podemos seleccionar el modelo específico del driver a utilizar.
+
+Específicamente, para un modelo Nema 34, el driver a utilizar será el servocontrolador paso a paso híbrido bifásico \textbf{HSS86}, como se muestra en la Fig. \ref{fig:HSS86}.
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.4\textwidth]{figure/S7_control/HSS86.jpg}}
+	
+	\caption[Driver HSS86. La información del driver se encuentra en el anexo \ref{fig:Data_HSS86}]{Driver HSS86. La información del driver se encuentra en el anexo \ref{fig:Data_HSS86}}
+	\label{fig:HSS86}
+\end{figure}
+
+Cuyo comportamiento es casi idéntico al driver HSS57, los cambios más relevantes se encuentran en sus especificaciones, como se muestra en la tabla \ref{tab:HSS86}.
+
+\begin{table}[h!]
+	\centering
+	\caption{Especificaciones del driver HSS86\label{tab:HSS86}}
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Característica} & \textbf{Especificación} \\
+		\hline
+		Voltaje de Operación & DC 30 - 110 V / AC 20 - 80 V\\
+		\hline
+		Corriente máxima & Pico de 8 A \\
+		\hline
+		Motor compatible & 86HSE12N, 86HSE8N, 86HSE4N \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Este driver cuenta con un puerto de control de señales digitales que permite su control y se comporta exactamente igual al driver HSS57 mencionado previamente. Asimismo, el interruptor DIP-Switch que permite configurar los parámetros de pulsos por revolución con los que trabajará el driver sigue la misma lógica marcada en la tabla \ref{tab:PPR_HSS57}. Y las medidas del driver se muestran en la Fig.\ref{fig:HSS86_med}.
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.45\textwidth]{figure/S7_control/HSS86_Med.jpg}}
+	\caption[Medidas de driver HSS86 (Cotas en mm).]{Medidas de driver HSS86 (Cotas en mm).}
+	\label{fig:HSS86_med}
+\end{figure}
+
+De igual manera, a partir de la tabla de especificaciones del driver, podemos elegir el modelo específico del motor para una óptima respuesta en la combinación entre driver y motor a pasos. Por lo que el modelo de motor a utilizar será el 86HSE, como se muestra en la Fig. \ref{fig:86HSE}.
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=0.5\textwidth]{figure/S7_control/86HSE.jpg}}
+	\caption[Motor modelo 86HSE (Cotas en mm).]{Motor modelo 86HSE (Cotas en mm).}
+	\label{fig:86HSE}
+\end{figure}
+
+Para este caso, el driver nos permite hacer la selección entre tres distintos tipos de motor: 86HSE12N, 86HSE8N, 86HSE4N. La principal diferencia entre estos motores es su torque de retención, lo que hace variar sus especificaciones como se muestra en la tabla \ref{tab:86HSE}:
+
+\begin{table}[h!]
+    \centering
+    \caption{Parámetros de motores paso a paso serie 86HSE}
+    \label{tab:86HSE} % Puedes usar este label para referenciar la tabla
+    \scalebox{0.95}{\begin{tabular}{|l|c|c|c|} % Define 4 columnas: 1 izquierda (l) y 3 centradas (c), separadas por líneas verticales (|)
+        \hline % Línea horizontal superior
+        \textbf{Característica} & \textbf{86HSE4N-BC38} & \textbf{86HSE8N-BC38} & \textbf{86HSE12N-BC38} \\ % Fila de encabezados con los modelos como columnas
+        \hline % Línea horizontal bajo los encabezados
+        No. de Fase & 2 & 2 & 2 \\
+        \hline
+        Ángulo de Paso ($^\circ$) & 1.8 & 1.8 & 1.8 \\
+        \hline
+        Corriente (A) & 6.0 & 6.0 & 6.0 \\
+        \hline
+        Torque de Retención (N.m) & 4.5 & 8.0 & 12.0 \\
+        \hline
+        Longitud [L] del Motor (mm) & 82 & 118 & 156 \\
+        \hline
+        Resolución del Encoder (PPR) & 1000 & 1000 & 1000 \\
+        \hline
+        Peso (kg) & 2.65 & 4.0 & 5.65 \\
+        \hline % Línea horizontal inferior
+    \end{tabular}}
+\end{table}
+
+De igual manera, tenemos las medidas del motor, como se muestra en la Fig. \ref{fig:Nema34}.
+
+
+\begin{figure}[h!]
+	\centering
+	{\includegraphics[width=1\textwidth]{figure/S7_control/Nema_34.jpg}}
+	
+	\caption[Medidas de motor 86HSE. (Cotas en mm)]{Medidas de motor 86HSE (Cotas en mm).}
+	\label{fig:Nema34}
+\end{figure}
+
+
+Para determinar el motor paso a paso adecuado para el actuador rotativo, fue necesario estimar el torque máximo requerido durante la operación. El torque (T) necesario para acelerar una masa rotacional está dado por:
+$$
+T = I \times \alpha
+$$
+
+Donde I es el momento de inercia de la masa rotacional y $\alpha$ es la aceleración angular.
+
+El momento de inercia ($I_{xx}$) del conjunto móvil (pierna del paciente + estructura de la ortesis) alrededor del eje de rotación del actuador fue estimado en $3.01044  \text{ kg/m}^2$ (según análisis en SolidWorks).
+
+La aceleración angular ($\alpha$) se calcula a partir del cambio en la velocidad angular ($\omega$) a lo largo del tiempo:
+
+$$
+\alpha = \frac{\omega_f - \omega_i}{t_f - t_i}
+$$
+
+La velocidad angular ($\omega$) se relaciona con la velocidad lineal (v) y la distancia al centro de masa (r) mediante la fórmula $\omega = v/r$. 
+Considerando una velocidad lineal baja, aproximadamente de $2 \text{ cm/s}$ ($0.02 \, \text{m/s}$) y una distancia al centro de masa estimada de $0.53022 \text{ m}$ (según SolidWorks), la velocidad angular correspondiente es:
+
+$$
+\omega = \frac{0.02 \, \text{m/s}}{0.53022 \, \text{m}} \approx 0.03772 \, \text{rad/s}
+$$
+
+Asumiendo que esta velocidad se alcanza desde el reposo ($\omega_i = 0$) en un tiempo de 1 segundo ($t_f - t_i = 1 \, \text{s}$), la aceleración angular es:
+
+$$
+\alpha = \frac{0.03772 \, \text{rad/s} - 0}{1 \, \text{s}} \approx 0.03772 \, \text{rad/s}^2
+$$
+
+Sustituyendo estos valores en la ecuación de torque:
+
+$$
+T = (3.01044 \, \text{kg/m}^2) \times (0.03772 \, \text{rad/s}^2) \approx 0.11355 \, \text{N.m}
+$$
+
+El cálculo estimado indica que el torque mínimo requerido para acelerar el conjunto móvil a la velocidad deseada es aproximadamente $0.11355 \text{ N.m}$.
+
+Basándonos en este requerimiento calculado y considerando la tabla \ref{tab:86HSE}, se seleccionará un modelo de motor paso a paso NEMA 34 que sea capaz de proporcionar un torque de retención significativamente mayor que el torque calculado.
+El modelo con menor torque, el 86HSE4N-BC38, es capaz de otorgar hasta 4.5 N.m, lo cual es más que suficiente para nuestra aplicación, proporcionando un amplio margen de seguridad para manejar cargas dinámicas, fricción en la transmisión mecánica y cualquier variación en el momento de inercia del sistema. Por lo tanto, se seleccionará el modelo \textbf{86HSE4N-BC38} para el actuador rotativo.
+
+
+%En la Fig. \ref{fig:motores} se muestra la estructura correspondiente a la ortesis en la que se posicionan los motores junto con la estructura para soporte de la región inferior derecha.
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics [trim = 0 0cm 0 0, clip, width=10cm]{figure/Imagenes conceptos/3.png}
+%	\caption[Motores.]{Motores.\label{fig:motores}}
+%\end{figure}
+%\begin{table}[h!]
+%	\centering
+%	\caption{Partes de la estructura con motores.\label{tab07:motores_partes}}
+%	\begin{tabular}{|l|l|}
+%		\hline
+%		1 & Actuador lineal               \\ \hline
+%		2 & Soporte de región inferior \\ \hline
+%		3 & Actuador rotativo           \\ \hline
+%		4 & Rieles para guía lineal    \\ \hline
+%	\end{tabular}
+%\end{table}
+

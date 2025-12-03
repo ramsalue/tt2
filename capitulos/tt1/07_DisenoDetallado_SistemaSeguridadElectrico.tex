@@ -1,0 +1,78 @@
+\subsection{S2. Sistema de seguridad eléctrico}\label{S2. Sistema de seguridad eléctrico}
+El Sistema de Seguridad Eléctrico (S2) está compuesto por dos módulos principales: el módulo de protección contra sobrecorriente (M1) y el módulo de protección contra sobretensión (M2). Su objetivo es preservar la integridad de los componentes electrónicos y el correcto funcionamiento del sistema de energía (S4), actuando de forma pasiva y constante para detectar fallos eléctricos.
+\subsubsection{ M1. Módulo de protección por sobrecorriente}
+Este módulo se encarga de prevenir el paso de una corriente eléctrica que exceda el límite soportado por la fuente de alimentación y los componentes conectados a ella. Para ello, se emplea un fusible de acción rápida que se instala a la salida directa de la red eléctrica, justo antes de ingresar a la fuente conmutada principal \footnote{La fuente fue seleccionada en la sección \nameref{S4. Sistema de energía}.}.
+\begin{itemize}
+	\item \textbf{Ubicación:} Entrada del sistema, antes de la fuente de alimentación.
+	\item \textbf{Selección del componente:} Se propone el uso de un fusible de 10 A, considerando que la corriente pico de los motores alcanza los 8 A \footnote{Los motores y drivers son seleccionados en la sección \nameref{S5_Sistema de movimiento}.}. En la Fig. \ref{fig:fusible10a} se muestra el fusible propuesto con su respectivo portafusibles.
+	\begin{figure}[h!]
+		\centering
+		\subcaptionbox{Fusible Americano de 10 A 250 Vca.}
+		{\includegraphics[width=0.37\textwidth]{figure/s4_energía/fusible.png}}
+		\subcaptionbox{Porta fusible de cartucho, tipo Americano.}
+		{\includegraphics[width=0.4\textwidth]{figure/s4_energía/portafusible.png}}
+		\caption[Componentes del módulo de protección por sobrecorriente.]{Componentes del módulo de protección por sobrecorriente.\label{fig:fusible10a}}
+	\end{figure}
+	%https://www.steren.com.mx/fusible-americano-de-10-a-250-vca.html?srsltid=AfmBOor_HHSRlGAsGDnhMlRgT8XX-pmGv5OtnsJoJz5e3-ZBtWn_R7YH
+	\item \textbf{Función:} Interrumpir el flujo de corriente en caso de cortocircuito o sobrecarga prolongada.
+	\item \textbf{Relación con el sistema de energía:} Este componente evita que fallas de corriente dañen la fuente conmutada que alimenta a los motores y drivers (HSS86 y HSS57).
+\end{itemize}
+\subsubsection{ M2. Módulo de protección por sobrevoltaje}
+El módulo M2 tiene como función evitar que una sobretensión dañe los dispositivos de control, sensores y actuadores de baja potencia \footnote{Los componentes a los que se hace referencia corresponden a la selección que se realiza en la secciones \nameref{S6_HMI} y \nameref{S7_Sistema de control}.}. Para ello, se puede emplear un varistor (MOV) o un TVS (Transient Voltage Suppressor) en paralelo a la salida de la fuente secundaria de 5 V.
+\begin{itemize}
+	\item \textbf{Ubicación:} A la salida de la fuente secundaria de 5 V, antes de la Raspberry Pi, el sensor VL5310X, la pantalla táctil y el módulo relevador.
+	\item \textbf{Selección del componente:} Se propone el uso de un TVS de 5 V unidireccional. Comercialmente se encuentra disponible el diodo TVS unidireccional SMAJ5.0A. En la Fig. \ref{fig:TVS_5V} se presentan las dimensiones de dicho componente.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{figure/s4_energía/Dimensiones diodo TVS.png}
+		\caption[Diodo TVS unidireccional SMAJ5.0A.]{Dimensiones del diodo TVS unidireccional SMAJ5.0A. Recuperado de \cite{38}.\label{fig:TVS_5V}}
+	\end{figure}
+	%https://www.mouser.mx/ProductDetail/Littelfuse/SMAJ5.0A?qs=2VFNtWizgicfetZVA4gWHA%3D%3D&srsltid=AfmBOooNoKVv76AxfBXJtxjtqjffz6_bR53BEF3rgTTMiUjsYEK3I1Md	
+	
+	Para proteger las líneas de alimentación de 5\,V frente a picos de voltaje debidos a ruidos inductivos, conmutación de cargas o descargas electrostáticas, se utilizaría un diodo TVS. El modelo seleccionado es el SMAJ5.0A, un componente unidireccional comúnmente utilizada en sistemas de alimentación de 5\,V.
+	
+	Este componente se eligió considerando los siguientes parámetros eléctricos:
+	
+	\begin{itemize}
+		\item \textbf{Voltaje máximo de operación continua (V\textsubscript{RWM}):} 5.0\,V. Representa la tensión máxima que puede aplicarse continuamente al TVS sin que se active su conducción.
+		\item \textbf{Voltaje de ruptura (V\textsubscript{BR}):} mínimo de 6.4\,V. A partir de esta tensión, el dispositivo comienza a conducir de forma significativa.
+		\item \textbf{Voltaje de sujeción (V\textsubscript{C}):} típico de 9.2\,V bajo un pulso de 43 A (estándar 0.4$\mu$s). Este es el valor máximo que alcanzará la línea protegida durante un evento transitorio, antes de que el TVS absorba la energía excedente.
+	\end{itemize}
+	
+	El objetivo de este componente no es regular la tensión de forma continua, sino limitar eventos transitorios de corta duración que podrían dañar equipos sensibles como la Raspberry Pi 4, sensores, pantallas o módulos de comunicación.
+	
+	Aunque el voltaje de sujeción puede parecer elevado (9.2\,V), este sólo se manifiesta durante picos muy breves de alta energía. El dispositivo permanece en estado no conductor durante la operación normal (siempre que la tensión se mantenga por debajo de V\textsubscript{BR}), evitando interferencias o pérdidas innecesarias.
+	
+	Se descartan modelos con voltajes de clamping demasiado bajos (por ejemplo, de 5.5 o 6\,V) ya que podrían activarse indebidamente durante variaciones normales de carga o ruido, generando fallas prematuras por disipación térmica continua. 
+	\item \textbf{Relación con el sistema de energía:} Protege la fuente conmutada secundaria de 5 V y 5 A, y los dispositivos del sistema de control y comunicación (módulo M6 y M7).
+\end{itemize}
+
+\subsubsection*{Protecciones internas de las fuentes de alimentación MEAN WELL}
+Un punto importante del diseño del sistema de seguridad eléctrico (S2) es la complementariedad con las protecciones integradas en las fuentes de alimentación conmutadas seleccionadas (MEAN WELL LRS-600-48 para los motores y LRS-50-5 para la electrónica de control). Estas fuentes no solo cumplen con los requisitos de tensión y corriente, sino que también incorporan mecanismos de seguridad internos que complementan la robustez general del sistema.
+
+Las fuentes de la serie LRS de MEAN WELL están equipadas con las siguientes proteccionesz:
+\begin{itemize}
+	\item \textbf{Protección contra Cortocircuito (SCP):} En caso de un cortocircuito en la salida, la fuente limita automáticamente la corriente o se apaga, previniendo daños a la propia fuente y a los dispositivos conectados.
+	\item \textbf{Protección contra Sobrecarga (OLP):} Si la carga conectada excede la capacidad máxima de la fuente, esta reduce su potencia de salida o se apaga para evitar un sobreesfuerzo, protegiéndola de daños por exceso de consumo prolongado.
+	\item \textbf{Protección contra Sobretensión (OVP):} Si por alguna razón la tensión de salida de la fuente excede un límite seguro, la fuente se desactiva para proteger los componentes sensibles aguas abajo de posibles daños por sobretensión.
+	\item \textbf{Protección contra Sobretemperatura (OTP):} Si la temperatura interna de la fuente excede los límites operativos seguros, se desactiva para prevenir daños térmicos, prolongando su vida útil y manteniendo la seguridad.
+\end{itemize}
+Estas protecciones integradas en las fuentes MEAN WELL actúan como un respaldo a los módulos de protección externa M1 y M2. Por ejemplo, mientras el M1 (fusible) protege la entrada general de la red contra sobrecorrientes severas, la OLP de la fuente protege su propia salida y la carga conectada de sobrecargas específicas. De manera similar, la OVP de la fuente complementa la protección del M2 (TVS) contra sobretensiones transitorias y prolongadas. Esta redundancia y complementariedad son fundamentales para un diseño de seguridad eléctrico robusto y confiable.
+
+\subsubsection*{Flujo de energía y seguridad}
+\begin{enumerate}
+	\item La energía eléctrica proveniente de la red pasa por el fusible.
+	\item La salida protegida alimenta la fuente conmutada que energiza los drivers de los motores (NEMA 23 y 34).
+	\item En paralelo, una segunda fuente de 5 V es utilizada para alimentar a la Raspberry Pi 4, pantalla táctil, sensor VL5310X, relevador y botón de paro de emergencia (M5).
+	\item Antes de ingresar a los dispositivos de control, la salida de 5 V pasa por el diodo TVS (M2).
+\end{enumerate}
+
+%\subsubsection*{Normativa y buenas prácticas}
+%El diseño del sistema de seguridad eléctrico considera buenas prácticas de ingeniería y referencias normativas aplicables, tales como:
+%\begin{itemize}
+%	\item \textbf{IEC 60204-1:} Seguridad de máquinas - Equipamiento eléctrico de las máquinas.
+%	\item \textbf{NFPA 79:} Norma eléctrica para maquinaria industrial.
+%	\item \textbf{UL 508:} Normas para equipos de control industrial.
+%\end{itemize}
+%Estos lineamientos recomiendan el uso de protecciones contra sobrecorriente y sobretensión, especialmente cuando se utilizan fuentes conmutadas, dispositivos de control digitales y elementos de potencia en un mismo sistema.
+

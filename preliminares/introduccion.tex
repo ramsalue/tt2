@@ -1,0 +1,285 @@
+
+\chapter{Introducción}
+La hemiplejia es una parálisis que afecta un lado del cuerpo, generalmente causada por un accidente cerebrovascular (ACV), también llamado ICTUS , lo que impacta significativamente la función motora y puede provocar déficits sensoriales, cognitivos y de coordinación, dependiendo de la gravedad y localización del daño cerebral \cite{01}. Según datos del Instituto Nacional de Estadística y Geografía (INEGI) del año 2022, las enfermedades cerebrovasculares ocuparon el sexto lugar entre las principales causas de muerte en México, con un total de 18,632 personas fallecidas por esta causa \cite{02}.
+
+En casos de hemiplejia por accidente cerebrovascular, la fisioterapia es esencial para evitar la atrofia muscular de la movilidad en la zona afectada, así como para evitar complicaciones adicionales, como contracturas o desvíos posturales. Uno de los principales riesgos asociados con la inmovilidad prolongada es el desarrollo del síndrome de inmovilidad, que deteriora la capacidad del paciente para interactuar con su entorno, generando dependencia de otras personas u objetos para realizar actividades cotidianas \cite{03}. La fisioterapia, por lo tanto, juega un papel crucial en la reducción de las secuelas, como caídas y complicaciones musculoesqueléticas, cardiovasculares y, especialmente, neurológicas.
+
+Durante el proceso de rehabilitación intervienen dos actores principales: el paciente, quien padece las consecuencias de la hemiplejia, y el fisioterapeuta, encargado de llevar a cabo el tratamiento. Aunque se espera que el fisioterapeuta realice su labor con la máxima eficiencia, siendo humano, puede enfrentar limitaciones físicas y fatiga al asistir continuamente a los pacientes. Por ello, surge la necesidad de herramientas complementarias que puedan optimizar este proceso.
+
+Este enfoque no solo mejorará la calidad de vida de los pacientes al apoyarlos en su proceso de rehabilitación, sino que también beneficiará a los profesionales de la salud, permitiéndoles ofrecer una atención más efectiva. En particular, este proyecto se enfoca en la optimización del proceso de rehabilitación de la extremidad inferior derecha.
+
+La importancia de la robótica en la rehabilitación es el aumento de intensidad y frecuencia de la terapia, de este modo se fomenta la neuroplasticidad, donde la capacidad del cerebro se adapta a nuevos ambientes por medio de estimulaciones sensoriales \cite{03_01}. Realizando movimientos repetitivos continuos, los sistemas robóticos ayudan a mejorar la fuerza, resistencia y equilibrio de los pacientes, aumentando la motivación y esperanza de recuperación. Una de las ventajas de la robótica en la fisioterapia es apoyar el tratamiento convencional con un tratamiento asistido, haciendo mejoría de las condiciones osteoarticulares.
+
+La terapia robótica aporta beneficios a las secuelas de la enfermedad cerebrovascular, los que la han recibido se muestran más alegres, optimistas, realizan un mejor análisis de la actividad y su secuencia, mostrando mayor rapidez en actividades cognitivas y motoras \cite{03_02}.
+
+\section{Enfoque mecatrónico}
+El presente proyecto se contempla desde un enfoque mecatrónico debido a que integra conocimientos de múltiples dominios, los cuales van desde la mecánica (sujeción del paciente, transmisión de movimiento, estructura), electrónica (etapa de potencia para distribución de energía, adquisición de señales, activación de actuadores) y el uso de software para programación y comunicación del sistema con el usuario (interfaz humano-máquina, lógica de control) con el fin de lograr el diseño de la ortesis robótica integrada en una cama que permita de forma controlada realizar ejercicios de rehabilitación para la extremidad inferior derecha mediante flexión, extensión, abducción y aducción, con monitoreo, control programado, y protección ante posibles fallos.
+
+La sinergia de estos dominios permite que las instrucciones que un usuario declare a través de la interfaz humano-máquina y la lógica de control sean llevadas a la estructura mecánica a través de los elementos y componentes que conformen al dominio electrónico.
+
+Para realizar esta tarea se cuenta con los siguientes sistemas:
+
+\begin{enumerate}
+	\item Sistema estructural, cuya función general es soportar y ajustar posición del paciente.
+	\item Sistema de seguridad eléctrico, empleado para proteger al sistema contra sobrecorrientes y sobrevoltajes.
+	\item	Sistema de seguridad mecánico que limita físicamente el movimiento de la ortesis más allá de rangos establecidos.
+	\item	Sistema de energía que controla los flujos de energía a los diversos sistemas, así como paro de emergencia.
+	\item Sistema de movimiento encargado de ejecutar los movimientos articulares mediante actuadores controlados.
+	\item Sistema de comunicación humano-máquina que permite la interacción directa con el usuario, en este caso, el fisioterapeuta. El intercambio de información es bidireccional. 
+	\item Sistema de control en el cual se encuentra la ley de control que gobierna al sistema, sensado, y procesamiento de datos de control para poder realizar los movimientos que el usuario declare desde la interfaz humano-máquina.
+\end{enumerate}
+
+El enfoque mecatrónico adoptado para el desarrollo de esta ortesis robótica se justifica en la necesidad de integrar los distintos dominios del sistema: mecánico, electrónico y de software. Se optó por una arquitectura modular, en la que cada sistema (estructura, energía, control, movimiento, seguridad y comunicación) responde a funciones específicas definidas, buscando de esta forma un diseño escalable, mantenible y que permita su validación por etapas. Además, la integración entre sensores, microcontroladores y actuadores posibilita una operación sincronizada y precisa, importante para lograr movimientos terapéuticos controlados. Se incorporaron mecanismos de seguridad tanto eléctricos como mecánicos, y a esto se suma la capacidad de personalizar rutinas y parámetros de sesión de acuerdo con las condiciones del paciente. Esta combinación de robustez, adaptabilidad y control hace que el enfoque mecatrónico sea apropiado para cumplir con los objetivos del proyecto.
+
+
+
+\section{Definición del problema}
+Con base en una entrevista realizada al Licenciado en Terapia Física Mario Sánchez Aguilar, de la Unidad de Medicina Física y Rehabilitación del Norte – IMSS, ubicado en la alcaldía Gustavo A. Madero de la Ciudad de México, una de las fases cruciales en el proceso de rehabilitación de un paciente de hemiplejia es la fase de flacidez, en la cual el paciente no puede mover el hemicuerpo afectado, ya que los músculos se encuentran caídos y sin fuerza. En esta fase deben realizarse sesiones de rehabilitación que implican movimientos de flexión, extensión, abducción y aducción en las articulaciones de coxofemoral y rodilla. Estos movimientos se tienen que realizar de acuerdo con la sesión de rehabilitación y las necesidades de cada paciente, por esta razón surge la problemática de implementar un sistema mecatrónico que ayude al fisioterapeuta a realizar adecuadamente los movimientos mencionados, debido a que son esenciales para prevenir complicaciones en el paciente como la atrofia muscular, desvíos posturales y contracturas.
+
+Para atender esta problemática se implementará una ortesis\footnote{Una ortesis es un dispositivo mecánico para sostener, corregir o asistir el movimiento de una parte del cuerpo, mejorando su funcionalidad \cite{20}.} robótica que asista al fisioterapeuta en las sesiones de rehabilitación, en la cual se ingresen los parámetros por el fisioterapeuta en cada inicio de sesión a través de una interfaz humano-máquina, además, se propone un diseño modular que permita adaptar la ortesis a diferentes pacientes, esto representa un gran desafío, ya que, las ortesis tienen que personalizarse según las necesidades individuales de cada paciente, lo que puede generar una gran variedad de configuraciones y diseños. Existen diversos retos que se involucran en el desarrollo de la ortesis, entre los cuales destacan:
+
+\begin{itemize}
+	\item	Implementar una ortesis robótica modular que se adapte a distintas estaturas promedio de personas adultas en México, que se encuentran en un rango de 150 cm a 170 cm.
+	\item	Diseñar y fabricar una estructura estable, que sea capaz de soportar un peso máximo de 80 kg de una persona adulta.
+	\item	Implementar sensores de retroalimentación, para ajustar los rangos de movimiento, la fuerza aplicada y la velocidad inducida durante las sesiones de rehabilitación.
+	\item	Diseñar un sistema de sujeción para retirar y montar la región inferior derecha sin complicaciones durante el proceso.
+	\item	Implementar un diseño ergonómico que sea cómodo para el paciente, protegiendo sus articulaciones y evitando lesiones por uso prolongado.
+	\item	Desarrollar una interfaz humano-máquina que permita ingresar y visualizar los diferentes parámetros de movimiento.
+\end{itemize}
+
+\section{Justificación}
+
+En la fase flácida de la hemiplejia, donde la extremidad afectada carece de tono muscular y se encuentra sin movimiento activo, la intervención del fisioterapeuta se centra en evitar estas complicaciones mediante movilizaciones pasivas controladas. En este contexto, la fisioterapia tradicional implementada con estos pacientes es altamente demandante desde el punto de vista físico para el fisioterapeuta. Las sesiones de rehabilitación requieren una atención exhaustiva y un gran esfuerzo físico dado que la terapia se da con el paciente recostado, lo que genera molestias para el fisioterapeuta como dolor de cintura por estar inclinado, y la necesidad de supervisión para garantizar una adecuada ejecución. Esta demanda, sumada a la falta de recursos en las clínicas, subraya la necesidad de soluciones alternativas que permitan una rehabilitación más eficiente, con mejores resultados y un uso optimizado de los recursos\cite{04}.
+
+Por ello, la ortesis robótica para pacientes hemipléjicos se presenta como una solución innovadora, que integra la mecánica, programación, electrónica, sistemas de control y medicina física, además de permitir al fisioterapeuta realizar las sesiones de rehabilitación con facilidad. Para lograr esta propuesta de solución se requiere un mecanismo que realice los movimientos de flexión y extensión en la rodilla y coxofemoral, un mecanismo para controlar la abducción y aducción en la coxofemoral, una interfaz humano-máquina para ingresar y visualizar los parámetros, sistemas de seguridad para el paciente y una estructura mecánica donde se puedan integrar los mecanismos y componentes de la ortesis robótica.
+
+Finalmente, la combinación de estos mecanismos y componentes otorga una ventaja considerable sobre otros dispositivos meramente mecánicos, ya que, permite ajustar los parámetros de las sesiones de rehabilitación en términos de fuerza, duración y rangos de movimiento, lo que posibilita un enfoque personalizado para cada paciente. Al automatizar el proceso de rehabilitación, se alivia la carga física del fisioterapeuta y se asegura una terapia consistente, continua y apegada a los objetivos terapéuticos definidos por los especialistas.
+
+\section{Objetivos}
+\subsection{Objetivo general}
+Desarrollar una ortesis robótica que asista en la rehabilitación de personas con hemiplejia derecha, realizando movimientos articulares de coxofemoral y rodilla para reducir la atrofia muscular.
+\clearpage
+\subsection{Objetivos particulares TT1}
+\begin{itemize}
+	\item Diseñar y validar la estructura mecánica para realizar movimientos de flexión y extensión de coxofemoral y rodilla.
+	\item	Diseñar y validar la estructura mecánica para realizar movimientos de abducción y aducción de coxofemoral. 
+	\item	Diseñar y validar la estructura mecánica de la cama para proporcionar reposo y estabilidad al paciente durante la rehabilitación.
+	\item	Diseñar y validar el sistema de seguridad mecánico para proteger al paciente de posibles fallas en el control del sistema.
+	\item	Diseñar y validar la etapa de potencia de energía del sistema.
+	\item	Diseñar y validar la etapa de acondicionamiento de energía para el sistema.
+	\item	Diseñar y validar la etapa de acondicionamiento de señales para obtener los parámetros de los sensores. 
+	\item	Diseñar y validar el sistema de seguridad eléctrico para posibles fallas.
+	\item	Diseñar y validar el sistema de comunicación humano-máquina.
+	\item	Integrar computacionalmente los sistemas de la ortesis.
+\end{itemize}
+
+\subsection{Objetivos particulares TT2}
+
+\begin{itemize}
+	\item	Implementar y verificar la estructura mecánica para realizar movimientos de flexión y extensión de coxofemoral y rodilla.
+	\item	Implementar y verificar la estructura mecánica para realizar movimientos de abducción y aducción de coxofemoral. 
+	\item	Implementar y verificar la estructura mecánica de la cama para proporcionar reposo y estabilidad al paciente durante la rehabilitación.
+	\item	Implementar y verificar el sistema de seguridad mecánico para proteger al paciente de posibles fallas en el control del sistema.
+	\item	Implementar y verificar la etapa de potencia de energía del sistema.
+	\item	Implementar y verificar la etapa de acondicionamiento de energía para el sistema.
+	\item	Implementar y verificar la etapa de acondicionamiento de señales para obtener los parámetros de los sensores. 
+	\item	Implementar y verificar el sistema de seguridad eléctrico para posibles fallas.
+	\item	Implementar y verificar el sistema de comunicación humano-máquina.
+	\item	Ensamblar los sistemas de la ortesis.
+\end{itemize}
+
+\section{Antecedentes}
+En el campo de la rehabilitación asistida por tecnología, se han desarrollado diversas soluciones robóticas y de ortesis para mejorar la calidad de vida de los pacientes que presentan limitaciones en el movimiento.
+Estos proyectos se han enfocado para asistir, corregir o potenciar el proceso de rehabilitación, utilizando desde sistemas mecánicos básicos hasta dispositivos mecatrónicos que integran sensores, actuadores y control inteligente.
+
+A continuación, se presenta una revisión de algunos de los proyectos más relevantes que han servido como base y referencia para el desarrollo de la ortesis robótica que se propone en este trabajo.
+\begin{table}[h!]
+	\centering
+	\caption{Antecedentes.\label{tab:01}}
+	\rotatebox{90}{\scalebox{0.75}{\begin{tabular}{|m{0.8cm}|m{2.5cm}|m{5cm}|m{7cm}|m{1.4cm}|m{4cm}|m{2cm}|m{0.5cm}|}
+				\hline
+				Ítem               & Nombre                                                                                                                               & Descripción                                                                                                                                                                                                                                                          & Características                                                                                                                                                  & País                             & Instituto                                                                                                                                                                    & Tipo                                        & Ref                \\ \hline
+				{1} & {Lokomat en la re-educación de la marcha en personas   hemipléjicas post accidente cerebro vascular.}                 & {Sistema robótico   diseñado para la rehabilitación funcional de la marcha en personas que sufren   secuelas producidas por un daño neurológico tanto a nivel cerebral como en la   médula espinal.}                                                  & {\begin{itemize}
+						\item Módulo que mejora   la terapia al permitir movimientos laterales y rotacionales de la pelvis.
+						\item	Motores sincronizados a una computadora.
+						\item	Ajuste en parámetros de entrenamiento.
+						\item	Interfaz de fácil operación para el terapeuta.
+						
+				\end{itemize}}                                                   & {Ecuador}         & {Universidad   Técnica de Ambato.}                                                                                                                            & {Informe de   investigación} & {\cite{05}}  \\ \hline
+				{2} & {Diseño de   exoesqueleto de apoyo a la motricidad para la articulación de cadera.}                                   & {Prototipo exoesqueletico para apoyo en la   articulación de la cadera, para guiar el movimiento en partes inferiores   durante el ciclo de marcha y posición del usuario.}                                                                           & {\begin{itemize}
+						\item Actuadores   lineales eléctricos.
+						\item Diseño biomecanico.
+						\item Piezas realizadas en nylamid.
+						\item Sistema de sujección por arneses y correas.
+						\item Piezas fabricadas en máquinas CNC.
+						
+				\end{itemize}}                                                                                                               & {México}          & {Instituto   Politécnico Nacional}                                                                                                                            & {Tesis}                      & {\cite{06}}  \\ \hline
+				{3} & {HipBot}                                                                                                              & {Robot terapéutico   diseñado para la rehabilitación de la articulación de la cadera, siendo capaz   de realizar movimientos combinados de abducción/aducción y flexión/extensión   de la cadera, replicando movimientos necesarios en fisioterapia.} & {\begin{itemize}
+						\item Posee 5 grados de libertad.
+						\item Realiza movimientos combinados laterales y frontales.
+						\item Emplea controlador PID para seguimiento de trayectorias.
+						\item Cuenta con botones de emergencia y sensores de fuerza para detener el sistema en caso de anomalía.
+						
+				\end{itemize}}                                                                                                                   & {México}          &{Departamento de   Ingeniería Mecatrónica de la Universidad Politécnica de Zacatecas; Centro   Nacional de Investigación y Desarrollo Tecnológico (CENIDET).} &{Artículo   científico}      & {\cite{07}}  \\ \hline
+	\end{tabular}}}
+\end{table}
+\clearpage
+\begin{table}[h!]
+	\centering
+	\rotatebox{90}{\scalebox{0.75}{\begin{tabular}{|m{0.8cm}|m{2.5cm}|m{5cm}|m{7cm}|m{1.4cm}|m{4cm}|m{2cm}|m{0.5cm}|}
+				\hline
+				Ítem               & Nombre                                                                                                                               & Descripción                                                                                                                                                                                                                                                          & Características                                                                                                                                                  & País                             & Instituto                                                                                                                                                                    & Tipo                                        & Ref                \\ \hline
+				
+				{4} & {Ortesis activa de   rodilla con una relación de transmisión variable a través de un embrague   doble motorizado.}    & {Ortesis activa de   rodilla (AKO) destinada a asistir a personas con movilidad reducida.}                                                                                                                                                            & {\begin{itemize}
+						\item Cuenta con un actuador que permite seleccionar entre dos modos: alta torsión y baja velocidad; y baja torsión y alta velocidad.
+						\item El diseño es simétrico y puede ser utilizado en ambas piernas (izquierda o derecha).
+						\item Incluye un resorte torsional como actuador elástico en serie diseñado para soportar una torsión de 50Nm, y rigidez de 150 Nm/rad.
+						\item Tiene una masa de 3.8 kg incluyendo unidad de control.
+						\item Posee un controlador adaptativo que ajusta el momento aplicado.
+						
+				\end{itemize}}             & {Italia}          & {Instituto de Bio   Robótica y Departamento de Excelencia en Robótica e Inteligencia Artificial   de la Escuela Superior Santa Ana}                           & {Artículo   científico}      & {\cite{08}}  \\ \hline
+				{5} & {Modelado y Control   de un Exoesqueleto para la Rehabilitación de Extremidad Inferior con dos   grados de libertad.} & {Exoesqueleto de dos grados de libertad diseñado para   realizar ejercicios de rehabilitación de tobillo y rodilla, para las personas   que, a causa de algún accidente, o enfermedad tienen movilidad reducida o   nula.}                            & {\begin{itemize}
+						\item Cuenta con actuadores tipo SEA (Series Elastic Actuator) que son utilizados para amplificar la fuerza humana con ayuda de algunos sensores.
+						\item Utiliza sensores para medir la posición y velocidad angular de las articulaciones, que se utilizan para controlar el movimiento de la pierna.				
+				\end{itemize}} & {México, Francia} &{Centro de Investigación y de Estudios Avanzados del   Instituto Politécnico Nacional, Université de Technologie de Compiegne}                                & {Artículo   científico}      & {\cite{09}} \\ \hline
+	\end{tabular}}}
+\end{table}
+\clearpage
+\begin{table}[h!]
+	\centering
+	\rotatebox{90}{\scalebox{0.75}{\begin{tabular}{|m{0.8cm}|m{2.5cm}|m{5cm}|m{7cm}|m{1.4cm}|m{4cm}|m{2cm}|m{0.5cm}|}
+				\hline
+				Ítem               & Nombre                                                                                                                               & Descripción                                                                                                                                                                                                                                                          & Características                                                                                                                                                  & País                             & Instituto                                                                                                                                                                    & Tipo                                        & Ref                \\ \hline
+				{6} & {Ortesis robótica para rehabilitación bilateral para   la mano izquierda para pacientes con hemiplejia.}              & {Sistema para   realizar rehabilitación bilateral en pacientes sobrevivientes a un accidente   cerebro vascular o con dificultad de movimiento en la mano izquierda, basado   en terapia espejo.}                                                     & {\begin{itemize}
+						\item Entrega retroalimentación neuronal al imitar el movimiento de flexión-extensión de los dedos de la mano sana en la afectada.
+						\item Identifica el rango de movimiento de cada dedo de la mano derecha, midiendo la resistencia de sensores flex ubicados en todos ellos.
+						\item Replica el movimiento de cada dedo en la mano afectada guiados por servomotores acoplados a un sistema mecánico
+						
+				\end{itemize}}                & {Ecuador}         & {Universidad de   Cuenca}                                                                                                                                     & {Artículo   científico}      &{\cite{10}}  \\ \hline
+	\end{tabular}}}
+\end{table}
+\clearpage
+
+En conclusión, los proyectos revisados en este apartado han sido fundamentales para el avance en la creación de ortesis y sistemas robóticos orientados a la rehabilitación, sin embargo, siempre existirá la necesidad de desarrollar soluciones más adaptables, personalizadas y eficientes para abordar de manera integral las diversas patologías que afectan la movilidad de los pacientes.
+
+La ortesis robótica propuesta en este proyecto busca aprovechar los aprendizajes y avances de los trabajos previos para buscar un enfoque más preciso y eficaz en la rehabilitación del coxofemoral y rodilla. A través de la implementación de un diseño modular, motores, y un sistema de control. Este dispositivo pretende superar los retos existentes y ofrecer un apoyo para mejorar la calidad de vida de los pacientes.
+
+\section{Organización del documento}
+El presente documento para Trabajo Terminal I está estructurado en secciones y subsecciones en las cuales se desglosa el desarrollo conceptual del proyecto de una ortesis robótica para asistencia del movimiento de coxofemoral y rodilla en adultos con hemiplejia derecha. La primera sección que comienza con la introducción establece el contexto del proyecto, también se aborda el enfoque mecatrónico desde el cual se concibe la ortesis, se delimita el planteamiento del problema a resolver, se justifica la relevancia del trabajo a través de la justificación, y se definen los objetivos específicos que guiarán el desarrollo. Además, se presenta una la revisión de los antecedentes que sustentan el proyecto, analizando soluciones previas y tecnologías relacionadas.
+
+Posteriormente, en la sección \nameref{Marco de referencia} desarrollan las bases teóricas y conceptuales fundamentales. Dentro de esta, la subsección del marco teórico profundiza en los principios científicos y de ingeniería esenciales para el diseño de la ortesis, incluyendo una revisión de los planos anatómicos y las articulaciones relevantes para la movilidad de la extremidad inferior afectada.
+
+En la sección \nameref{Diseño del sistema} se presenta en primera instancia el diseño conceptual en el cual se declaran las necesidades, y con base en ellas se establecen los requerimientos del proyecto. Apoyados en dichos requerimientos se define la arquitectura funcional, se crea la estructura FBS del proyecto en torno a la función global de mover la extremidad inferior derecha. Seguido de esto, se presenta el IDEF-0 con sus diagramas del nodo A0 compacto y extendido para establecer la arquitectura física del proyecto. Posteriormente se presentan las propuestas solución para cada sistema, los diseño conceptuales basados en dichas propuestas para generar así conceptos solución de los cuales, a través de matrices de selección subjetiva, binaria y ponderación elegir el concepto más apropiado.
+
+En la subsección \nameref{Diseño detallado} se detalla el proceso completo de diseño de cada sistema aplicando la metodología mecatrónica de forma modular. Con el propósito de organizar la documentación se estructuró de forma secuencial siguiendo la numeración de cada sistema y módulo en la arquitectura física, sin embargo, el diseño se realizó de forma simultánea de uno o más sistemas al mismo tiempo, es por ello que la redacción de la documentación presenta referencias cruzadas para comprender la mención de componentes, cálculos, factores que hayan sido necesarios para un módulo y el contexto y validación de su selección sean parte de otro módulo o sistema. En esta misma subsección se encuentra la integración de los sistemas de la ortesis así como el plan de pruebas y validación que dan pie al desarrollo de Trabajo Terminal II.
+
+Después del diseño del sistema se presenta lo relacionado a la implementación del sistema como parte de Trabajo Terminal II. Se describen las especificaciones del usuario para los cuales el sistema está diseñado y se procede con la implementación de cada uno de los sistemas y sus respectivos módulos. 
+
+Llegando al final del documento se tiene el análisis de resultados donde se presentan aspectos relacionados con la administración del proyecto, desde los costos realizados para el desarrollo del proyecto hasta el cronograma planteado para Trabajo Terminal II. Finalmente, se describen las conclusiones en función de los avances obtenidos y en relación con los objetivos propuestos, además se incluyen en anexos hojas de especificaciones de componentes utilizados, así como planos de manufactura del sistema estructural.
+
+\section{Marco de referencia}\label{Marco de referencia}
+\subsection{Marco teórico}
+El desarrollo del proyecto abarca disciplinas más allá de los alcances de la ingeniería mecatrónica, de los cuales resulta importante tener una noción para poder ser aplicados en el desarrollo de la ortesis robótica.
+\subsubsection{Planos anatómicos}
+Al cuerpo humano se le realizan tres cortes imaginarios para poder ubicar las estructuras y órganos que los componen \cite{11}. Dichos cortes son conocidos como planos anatómicos y se observan en la Figura \ref{img:P01_PlanosA}. Estos planos son:
+\begin{enumerate}
+	\item Sagital o medio sagital, el cual divide al cuerpo humano en mitad derecha e izquierda.
+	\item Frontal o coronal, que divide en mitad anterior y posterior.
+	\item Transversal u horizontal, que divide al cuerpo en mitad superior e inferior.
+\end{enumerate}
+\begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=0.75\textwidth]{figure/P01_PlanosA.png}
+	\caption[Planos anatómicos del cuerpo humano.]{Planos anatómicos del cuerpo humano. Recuperado de \cite{11}.\label{img:P01_PlanosA}}
+\end{figure}
+
+\subsubsection{Articulaciones}
+Las articulaciones conectan los huesos del esqueleto y permiten el soporte y la ejecución de movimientos. Existen dos formas principales de clasificarlas. La primera es de acuerdo con su función, es decir, el rango de movimiento que permiten. La segunda clasificación se basa en el material que une los huesos \cite{12}.
+
+Una de las articulaciones de interés para el proyecto es la articulación de la coxofemoral, también conocida como cadera, la cual es una articulación multiaxial sinovial que permite una gran variedad de movimientos, entre ellos la flexión, extensión, abducción, aducción, rotación interna y externa, así como la circunducción, lo que le otorga una amplia movilidad en diferentes direcciones \cite{13}.
+
+Otra de las articulaciones con la cual se trabajará en el proyecto es la articulación de la rodilla, también conocida como la articulación femoro-tibio patelar, es una articulación de gran rango de movilidad, clasificada como sinovial o diartrodial, permitiendo principalmente los movimientos de flexión y extensión \cite{14}.
+
+\subsubsection{Movimientos del cuerpo humano}
+En anatomía, el concepto de movimiento involucra el desplazamiento de huesos o partes del cuerpo alrededor de articulaciones fijas, en relación con los principales ejes anatómicos (sagital, coronal, transversal) o planos paralelos a estos \cite{15}. 
+Así, el esquema de los movimientos anatómicos se compone de lo siguiente:
+\begin{enumerate}
+	\item Estructuras anatómicas que participan en el movimiento.
+	\item Ejes de referencia alrededor de los cuales ocurre el movimiento.
+	\item Dirección del movimiento, que en anatomía suele vincularse con un plano estándar, como el mediano, medial, sagital, o frontal.
+\end{enumerate}
+\clearpage
+Entre los movimientos del cuerpo humano se encuentra la flexión/extensión, los cuales son movimientos opuestos que tienen lugar en direcciones sagitales alrededor de un eje frontal/coronal. La flexión se refiere a la acción de reducir el ángulo entre dos estructuras que intervienen en el movimiento, como huesos o partes del cuerpo. En contraste, la extensión o el acto de enderezar implica aumentar el ángulo entre dichas estructuras. Este tipo de movimiento se presenta en la rodilla, donde la tibia de la pierna se mueve con relación al fémur del muslo, y ocurre en el plano sagital. En el movimiento de flexión, la pierna se mueve hacia atrás, y durante la extensión, se mueve hacia adelante \cite{15}. En la Fig. \ref{fig:M01} se representan los movimientos de flexión y extensión de la articulación de la rodilla.
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Flexión.\label{fig:F01_01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/F02_01.jpg}}
+	\subcaptionbox{Extensión.\label{fig:F01_02}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/F04_01.jpg}}
+	\caption{Movimientos de flexión/extensión de rodilla.}\label{fig:M01}
+\end{figure}
+
+En la Fig. \ref{fig:M02} se representan los movimientos de flexión y extensión que involucran únicamente la articulación del coxofemoral.
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Flexión.\label{fig:F05_01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/F05_01.jpg}}
+	\subcaptionbox{Extensión.\label{fig:F04_01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/F04_01.jpg}}
+	\caption{Movimientos de flexión/extensión de articulación de coxofemoral.}\label{fig:M02}
+\end{figure}
+
+Por su parte, los movimientos de abducción/aducción, los cuales están estrechamente relacionados con el plano medial del cuerpo. Ambos movimientos se desarrollan alrededor de un eje anteroposterior, lo que significa que se desplazan hacia adelante y hacia atrás. En términos anatómicos, estos movimientos son más fáciles de entender al observar las piernas y los brazos, ya que su dinámica es bastante similar. El brazo se mueve con respecto al tronco y al hombro, mientras que la pierna lo hace en relación con la articulación coxofemoral. El movimiento ocurre en el plano frontal \cite{15}. Los movimientos de abducción y aducción se representan en la Fig. \ref{fig:M03}.\\
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Abducción.\label{fig:F07_01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/F07_01.jpg}}
+	\subcaptionbox{Aducción.\label{fig:F06_01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/F06_01.jpg}}
+	\caption{Movimientos de abducción/aducción de articulación de coxofemoral.}\label{fig:M03}
+\end{figure}
+
+Los movimientos del cuerpo se ven afectados por condiciones neurológicas como la hemiplejia, la cual se define continuación.
+
+\subsubsection{Hemiplejia}
+La hemiplejia es un término general que se le otorga a una condición crónica que afecta al sistema nervioso central, provocando alteraciones principalmente en la sensibilidad y el control de la acción motora de un lado del cuerpo. Aunque esta afección impacta mayormente un hemicuerpo, también causa otros problemas en diferentes áreas del cuerpo que van más allá del lado afectado \cite{16}. 
+
+La hemiplejia consta de cuatro fases genéricas:
+\begin{enumerate}
+	\item Etapa inicial o de ictus: Tras el evento, el paciente puede estar en coma o semicoma. La duración de esta fase es variable, ya que, se identifica el hemisferio cerebral afectado, pero no su alcance funcional.
+	\item Fase flácida: El hemisferio cerebral está inhibido, lo que provoca flacidez en el hemicuerpo afectado. El hombro cae, la cabeza se inclina, y el pie se arrastra. Los trastornos sensitivos como la hipoestesia y la hiperestesia también están presentes. Esta fase finaliza con el inicio de la hipertonía.
+	\item	Etapa espástica: Aparece la hipertonía, lo que conduce a posturas fijas debido a la rigidez de los músculos. En el miembro inferior afecta la articulación del coxofemoral y el pie. También pueden presentarse alteraciones vegetativas y afasia.
+	\item	Fase de secuelas: En torno a los dos años de la primera fase se ha producido toda la recuperación espontánea posible. En esta fase el paciente debe adaptarse a las secuelas buscando mejorar su funcionalidad a pesar de que no se esperan más avances significativos. Esta fase es sometida a tratamientos con el propósito de mitigar las secuelas y maximizar la autonomía del paciente.
+\end{enumerate}
+\subsubsection{Diferencias entre hemiplejia y hemiparesia}
+La hemiplejia se caracteriza por una parálisis total de uno de los lados del cuerpo a causa de una lesión o alteración en el cerebro o sistema nervioso. Mientras que la hemiparesia se refiere a una debilidad o disminución del control muscular en la mitad del cuerpo, pero sin llegar a una parálisis completa. Una persona con hemiparesia aún conserva cierto grado de movilidad en la parte afectada \cite{18}. 
+\subsubsection{Atrofia y distrofia muscular }
+La atrofia muscular se refiere a una disminución en la masa del músculo, lo que puede llevar a una pérdida parcial o total del tejido muscular. Esta condición puede ser provocada por diversas enfermedades comunes como el cáncer, la diabetes y la insuficiencia renal, así como por quemaduras graves, desnutrición o la falta de uso de los músculos. También puede ser causada por lesiones en la médula espinal, como la paraplejia, que afecta la función motora o sensorial de las extremidades inferiores \cite{19}. Por su parte, la distrofia muscular es un conjunto de enfermedades que provocan una debilidad progresiva y pérdida de masa muscular. En esta condición, los genes anormales (mutaciones) afectan la producción de proteínas necesarias para la formación y el mantenimiento de músculos sanos \cite{19}. Las condiciones médicas descritas son atendidas por tecnologías de rehabilitación y asistencia, entre los cuales se encuentra las ortesis y fisioterapias. 
+\subsubsection{Fisioterapia}
+La fisioterapia, también conocida como terapia física, se enfoca en aliviar el dolor, mejorar la movilidad y fortalecer los músculos debilitados a través de ejercicios, masajes y tratamientos con estímulos físicos como calor, frío, corrientes eléctricas y ultrasonido. Además de su aplicación en la clínica, uno de sus objetivos clave es enseñar a los pacientes a mejorar su salud de manera independiente, fomentando la práctica de ejercicios en casa \cite{24}. Esta terapia incluye tanto movimientos activos realizados por el paciente, como movimientos pasivos guiados por el terapeuta, y utiliza diversas técnicas para tratar síntomas y prevenir problemas futuros.
+\subsubsection{Seguimiento de trayectoria}
+Es el proceso de diseñar un sistema de control que guíe a un objeto, máquinas o robot para que siga una trayectoria dada \cite{25}. Es comúnmente utilizado en aplicaciones de robótica, sistemas de control de vehículos, brazos mecánicos, y particularmente para este proyecto, busca ser aplicado en la ortesis robótica. A través del seguimiento de trayectoria el sistema alcanza una serie de puntos, o trayectoria cartesiana, minimizando el error entre la posición deseada y la posición real. Para lograr esto, se utilizan controladores como el control PID (Proporcional Integral Derivativo) \cite{26}. 
+
+\subsection{Marco procedimental}
+\subsubsection{Metodología mecatrónica}
+La metodología seleccionada para el desarrollo del proyecto es la metodología VDI 2206, la cual es una guía flexible diseñada específicamente para el desarrollo de sistemas mecatrónicos, que integra disciplinas como la mecánica, electrónica, control y tecnologías de la información, ayudando a gestionar la complejidad y heterogeneidad de diseños mecatrónicos a través de un modelo adaptable a las necesidades del proyecto \cite{30}. 
+La metodología consta de un diseño en dos niveles:
+\begin{itemize}
+	\item Micro nivel: Centrado en el proceso de resolución de problemas a nivel individual, apoyando en tareas específicas del diseño.
+	\item Macro nivel: Utiliza un modelo en “V”, que combina un enfoque de arriba hacia abajo para el diseño del sistema (descomponiendo en funciones), y de abajo hacia arriba para la integración del sistema, lo que permite la validación y verificación continua.
+\end{itemize}
+
+\subsubsection{Implementación de metodología VDI-2206}
+En la Fig. \ref{fig:P02_DiagramaVDI2206} se muestra el diagrama de modelo VDI-2206 con etapas enfocadas en el desarrollo de la ortesis robótica.
+\begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=15cm]{figure/P01_VDI.png}
+	\caption[Diagrama de modelo del VDI-2206.]{Diagrama de modelo del VDI-2206 con etapas para el desarrollo de la ortesis robótica.\label{fig:P02_DiagramaVDI2206}}
+\end{figure}
+
+\subsubsection{Esquema FBS}
+El esquema FBS (Functional Breakdown Structure) es un enfoque de descomposición funcional que organiza todas las actividades necesarias para cumplir una función global, separándolas de una estructura basada en productos, como la Work Breakdown Structure (WBS). A diferencia de la WBS, la FBS se centra en los procesos y funciones requeridas para alcanzar los objetivos de una arquitectura sin estar ligada a una implementación específica. Este enfoque permite evaluar que tan completos son los diseños y optimizar la integración de disciplinas desde una perspectiva holística, evitando la segmentación en niveles individuales de componentes. Además, la FBS ayuda a establecer comparaciones más precisas entre opciones arquitectónicas al identificar funciones redundantes o faltantes \cite{27}.
+
+\subsubsection{IDEF0}
+IDEF0 (Integration Definition for Function Modeling) es una metodología de modelado de procesos utilizada para representar gráficamente funciones dentro de un sistema, facilitando su análisis y optimización. En el contexto de la mecatrónica, IDEF0 permite estructurar la interacción entre componentes mecánicos, electrónicos y de control, en la búsqueda de una integración eficiente de los subsistemas. Su enfoque jerárquico y modular ayuda a definir entradas, controles, mecanismos y salidas de cada función \cite{28}.
+\endinput 
