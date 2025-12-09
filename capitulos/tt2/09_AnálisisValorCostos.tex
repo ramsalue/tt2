@@ -1,0 +1,94 @@
+\section{Análisis de valor y costos}
+\label{sec:costos}
+
+Para la determinación del costo total del prototipo, se realizó un desglose de los recursos materiales y componentes adquiridos durante la fase de implementación. Los costos se clasifican en tres categorías principales: dispositivos electrónicos, componentes mecánicos e insumos de manufactura.
+
+\subsection{Costos de dispositivos electrónicos y control}
+
+La Tabla \ref{tab:costos_electronicos} enlista los elementos activos encargados del procesamiento, control de movimiento e interfaz con el usuario. Se destaca la inversión en la interfaz HMI y los sistemas de actuación de lazo cerrado.
+
+\begin{table}[h!]
+	\centering
+	\caption{Costos de dispositivos electrónicos y de control.}
+	\label{tab:costos_electronicos}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l|c|r|}
+		\hline
+		\rowcolor[HTML]{C5D9F1} 
+		\textbf{Componente} & \textbf{Cantidad} & \textbf{Costo Total (MXN)} \\ \hline
+		Pantalla HMI Táctil 7" (Industrial) & 1 & \$ 5,000.00 \\ \hline
+		Microcontrolador Raspberry Pi 4 & 1 & \$ 1,920.00 \\ \hline
+		Kit Motor Nema 23 + Driver HSS57 & 1 & \$ 3,238.00 \\ \hline
+		Fuente de Poder 48V (LRS-600-48) & 1 & \$ 1,039.00 \\ \hline
+		Fuente de Poder 5V (LRS-50-5) & 1 & \$ 409.00 \\ \hline
+		Sensores y Finales de Carrera & 1 & \$ 675.00 \\ \hline
+		Componentes de Seguridad (Paro/Relé) & 1 & \$ 200.00 \\ \hline
+		\textbf{Subtotal Electrónica} & & \textbf{\$ 12,481.00} \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Costos de componentes mecánicos y estructurales}
+
+En la Tabla \ref{tab:costos_mecanicos} se detallan los costos asociados a la estructura de soporte, mecanismos de transmisión y el actuador principal de abducción.
+
+\begin{table}[h!]
+	\centering
+	\caption{Costos de componentes mecánicos.}
+	\label{tab:costos_mecanicos}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l|c|r|}
+		\hline
+		\rowcolor[HTML]{F2DCDB} 
+		\textbf{Componente} & \textbf{Cantidad} & \textbf{Costo Total (MXN)} \\ \hline
+		Kit Motor Nema 34 + Driver HSS86 & 1 & \$ 6,000.00 \\ \hline
+		Actuador Lineal (Mecánica) & 1 & \$ 6,098.00 \\ \hline
+		Perfiles Estructurales (PTR y Aluminio) & Lote & \$ 5,800.00 \\ \hline
+		Placas de Acero y Maquinados & Lote & \$ 3,800.00 \\ \hline
+		Rodamientos y Chumaceras & 4 & \$ 1,140.00 \\ \hline
+		Elementos de Transmisión (Coples/Ejes) & Lote & \$ 2,200.00 \\ \hline
+		\textbf{Subtotal Mecánica} & & \textbf{\$ 25,038.00} \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Costos de insumos y manufactura}
+
+Finalmente, la Tabla \ref{tab:costos_insumos} contempla los materiales consumibles utilizados para el ensamble, cableado y acabados estéticos, así como los elementos de sujeción (tornillería).
+
+\begin{table}[h!]
+	\centering
+	\caption{Costos de insumos, herramientas y manufactura.}
+	\label{tab:costos_insumos}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l|c|r|}
+		\hline
+		\rowcolor[HTML]{EBF1DE} 
+		\textbf{Concepto} & \textbf{Descripción} & \textbf{Costo (MXN)} \\ \hline
+		Tornillería Diversa & M3, M4, M5, M8 & \$ 1,200.00 \\ \hline
+		Cableado y Conectores & Calibre 16/18, UTP, Terminales & \$ 800.00 \\ \hline
+		Insumos de Soldadura y Pintura & Electrodos, Lijas, Aerosol & \$ 600.00 \\ \hline
+		Material de Impresión 3D & Filamento PLA/PETG & \$ 800.00 \\ \hline
+		Servicios Externos (Estimado) & Costura, Cortes especiales & \$ 1,500.00 \\ \hline
+		\textbf{Subtotal Insumos} & & \textbf{\$ 4,900.00} \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Costo total del proyecto}
+
+El costo total de implementación del prototipo funcional asciende a:
+
+\begin{table}[h!]
+	\centering
+	\caption{Resumen del costo total del prototipo.}
+	\label{tab:resumen_total}
+	\begin{tabular}{|l|r|}
+		\hline
+		\rowcolor[HTML]{DAEEF3} 
+		\textbf{Categoría} & \textbf{Monto (MXN)} \\ \hline
+		Sistemas Electrónicos y Control & \$ 12,481.00 \\ \hline
+		Sistemas Mecánicos y Actuación & \$ 25,038.00 \\ \hline
+		Insumos y Manufactura & \$ 4,900.00 \\ \hline
+		\textbf{COSTO TOTAL} & \textbf{\$ 42,419.00} \\ \hline
+	\end{tabular}
+\end{table}
+
+Este monto representa el costo de materiales y servicios directos para la fabricación de una unidad prototipo, excluyendo los costos de ingeniería y diseño (horas-hombre).

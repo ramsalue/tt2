@@ -50,54 +50,115 @@ El diseño mecánico y los mecanismos de sujeción (véase Anexo \ref{sec:planos
 Parte importante para la construcción del proyecto recayó en la adquisición de los componentes a utilizar, tomando en cuenta su capacidad para desempeñar su función esperada, así como los tiempos de envío y entrega una vez realizados los pedidos.
 %% DESCRIBIR LO QUE SE COMPRÓ CON BASE EN LA LISTA DE MATERIALES EN LA TABLA DE COSTOS
 \subsubsection{Gestión de proveedores y materiales}\label{subsubsec:gestion_proveedores}
-La fase de implementación dio inicio con la adquisición de los componentes y materiales estructurales definidos en el diseño detallado desarrollado en Trabajo Terminal I. La selección de los componentes se basó en el cumplimiento de las especificaciones técnicas, mientras que para la selección de proveedores  se tomó en cuenta la disponibilidad en el mercado nacional, costos y tiempos de entrega.\\
-Se gestionó la compra de todos los elementos, desde los perfiles estructurales PTR y de aluminio, hasta los componentes necesarios como los drivers \texttt{HSS57} y \texttt{HSS86}, los motores a pasos Nema 23 y Nema 34, y la unidad de procesamiento (Raspberry Pi 4).
-\subsection{Inspección de componentes críticos}\label{subsec:inspeccion_componentes}
-Una vez recibidos los materiales, se realizó una inspección visual y técnica para verificar que correspondieran a las especificaciones requeridas para el proyecto.
-
-Se verificó que la unidad de procesamiento [Fig. \ref{fig:comp_rpi}] corresponde al modelo Raspberry Pi 4 Model B con 4GB de RAM. Para la HMI, se recibió la pantalla táctil Waveshare de 7 pulgadas [Fig. \ref{fig:comp_waveshare}], confirmando su compatibilidad de conexión HDMI y USB. Los sensores y los interruptores de límite fueron inspeccionados visualmente. 
+La fase de implementación dio inicio con la adquisición de los componentes y materiales estructurales definidos en el diseño detallado desarrollado en Trabajo Terminal I. La selección de los componentes se basó en el cumplimiento de las especificaciones técnicas, mientras que para la selección de proveedores  se tomó en cuenta la disponibilidad en el mercado nacional, costos y tiempos de entrega.
 \begin{figure}[h!]
 	\centering
-	\subcaptionbox{Unidad de procesamiento Raspberry Pi 4.\label{fig:comp_rpi}}
-	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
-	\subcaptionbox{Pantalla HMI Waveshare de 7 pulgadas.\label{fig:comp_waveshare}}
-	{\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}}
-	\caption{Componentes principales del sistema de control y comunicación.}
+	\includegraphics[width=0.7\textwidth]{figure/S7_control/Raspberry_pi4_pines.png}
+	\caption{Distribución de pines en la unidad de procesamiento Raspberry Pi 4.\label{fig:comp_waveshare}}
 \end{figure}
-\clearpage
+
+Se gestionó la compra de todos los elementos, desde los perfiles estructurales PTR y de aluminio, hasta los componentes necesarios como los drivers \texttt{HSS57} y \texttt{HSS86}, los motores a pasos Nema 23 y Nema 34, y la unidad de procesamiento (Raspberry Pi 4) como componente crítico para el sistema de control a través del cual se coordinan los sistemas de comunicación y sistemas de movimiento. En la Fig. \ref{fig:comp_waveshare} se muestra la distribución de los pines en la unidad de procesamiento Raspberry Pi4.
+%\subsection{Inspección de componentes críticos}\label{subsec:inspeccion_componentes}
+%Una vez recibidos los materiales, se realizó una inspección visual y técnica para verificar que correspondieran a las especificaciones requeridas para el proyecto.
+%
+%Se verificó que la unidad de procesamiento [Fig. \ref{fig:comp_rpi}] corresponde al modelo Raspberry Pi 4 Model B con 4GB de RAM. Para la HMI, se recibió la pantalla táctil Waveshare de 7 pulgadas [Fig. \ref{fig:comp_waveshare}], confirmando su compatibilidad de conexión HDMI y USB. Los sensores y los interruptores de límite fueron inspeccionados visualmente. 
+ 
+%\begin{figure}[h!]
+%	\centering
+%	\subcaptionbox{Distribución de pines en la unidad de procesamiento Raspberry Pi 4.\label{fig:comp_rpi}}
+%	{\includegraphics[width=0.6\textwidth]{figure/S7_control/Raspberry_pi4_pines.png}}
+%	\subcaptionbox{Pantalla HMI Waveshare de 7 pulgadas.\label{fig:comp_waveshare}}
+%	{\includegraphics[width=0.48\textwidth]{figure/s6_hmi/Waveshare.png}}
+%	\caption{Componentes principales del sistema de control y comunicación.}
+%\end{figure}
+
 \section{Sistema estructural (S1)}\label{Implementacion S1}
 La construcción del sistema estructural fue dividido en secciones comenzando por la base de la cama que soportaría a los mecanismos de flexión-extensión, abducción-aducción, así como el montaje de componentes electrónicos y actuadores requeridos para los sistemas de control, seguridad eléctrica y comunicación humano-máquina.
 \subsection{Construcción de la cama de soporte}
 El soporte principal se construyó utilizando perfiles PTR soldados con la finalidad de obtener una base rígida ante la carga vertical del paciente y los mecanismos que soportará la estructura. En la Fig. \ref{fig:perfil_ptr} se muestra el perfil del PTR con dimensiones 2x2 pulgadas y grosor de calibre 12. 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.4\textwidth]{figure/img_estructura/PTR_perfil_.png}
-	\caption{Perfil PTR de dimensión 2x2 pulgadas y calibre 12, para construcción de la cama soporte.\label{fig:perfil_ptr}}
-\end{figure} 
 
-Se integró una colchoneta de espuma de alta densidad que se utiliza como superficie de acojinamiento para comodidad del paciente con un espesor de XX mm. Dicha elevación permite alinear el eje de rotación de la articulación coxofemoral del paciente con el eje mecánico del actuador de abducción. Sin este ajuste de altura la discrepancia de alturas generaría un par de fuerzas no deseado en la cadera del paciente durante la sesión. 
+ \begin{figure}[h!]
+ 	\centering
+ 	\includegraphics[width=0.4\textwidth]{figure/img_estructura/PTR_perfil_.png}
+ 	\caption{Perfil PTR de dimensión 2x2 pulgadas y calibre 12, para construcción de la cama soporte.\label{fig:perfil_ptr}}
+ \end{figure}
+Se colocó una placa de triplay con un espesor de 15 mm sobre la base del soporte principal acorde a su forma y dimensiones, y sobre esta placa se integró una colchoneta de espuma de alta densidad que se utiliza como superficie de acojinamiento para comodidad del paciente con un espesor de 45 mm [Fig. \ref{fig:cama_estructura}]. %La elevación de la placa de triplay y la colchoneta permiten alinear el eje de rotación de la articulación coxofemoral del paciente con el eje mecánico del actuador de abducción. Sin este ajuste de altura la discrepancia de alturas generaría un par de fuerzas no deseado en la cadera del paciente durante la sesión. 36.3 110 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}
-	\caption{Implementación física con colchoneta de ajuste.\label{fig:cama_estructura}}
+	\includegraphics[width=0.48\textwidth]{figure/img_estructura/Colchoneta_triplay.png}
+	\caption{Implementación física con colchoneta y placa de triplay sobre la base del sistema estructural.\label{fig:cama_estructura}}
 \end{figure}
 \subsection{Construcción del mecanismo de flexión-extensión}
-El mecanismo se manufacturó utilizando perfiles de aluminio 6061-T6 para reducir la dificultad del movimiento relacionada con la inercia del mecanismo. Las uniones se realizaron con tornillería de acero galvanizado.
-\subsubsection*{Diseño de la placa base, manejo de tolerancias y deformaciones térmicas}
-Durante el proceso de manufactura, las placas de acero fueron cortadas mediante láser. Se observó que el calor térmico generado al momento del corte provocó una curvatura, lo que dificultó el alineamiento de las placas con los rieles de la guía. Para corregir el ensamble se realizó una alineación activa, es decir, se montaron el eje, las chumaceras y las placas simultáneamente, y se ajustó la posición con esfuerzo manual antes de aplicar los puntos de soldadura y fijación final. Esto permitió que el eje del movimiento permaneciera paralelo a las guías lineales evitando atascamientos.
+El mecanismo se manufacturó utilizando perfiles de aluminio 6061-T6 para reducir la dificultad del movimiento relacionada con la inercia del mecanismo. El mecanismo se conforma de una parte ajustable para poder acoplar la pierna del paciente y realizar el movimiento de flexión-extensión; y una segunda parte estática de dimensiones fijas que actúan como soporte para la parte móvil ajustable. En la Fig. \ref{fig:mecanismo_flexion_extension_raw} se observan las partes del mecanismo, así como las dimensiones fijas de la parte estática.
 
-El mecanismo de flexión-extensión se colocó sobre una placa de acero al carbón de 1/2". La longitud de la placa fue acotada al área de transmisión de esfuerzos del actuador lineal en lugar de cubrir toda la base con la finalidad de reducir la deflexión del eje debido al peso de la pierna. Además, se implementaron múltiples puntos de apoyo (chumaceras) que fueron distribuidos a lo largo del eje de transmisión, reduciendo así el momento flector en los extremos.
+Las uniones que integran la parte ajustable del mecanismo son las uniones Clevis, las cuales fueron seleccionadas por medio de matrices de decisión en la fase de diseño. Se utilizó tornillería de acero galvanizado para dichas uniones. En la Fig. \ref{fig:union_coxofemoral} y en la Fig. \ref{fig:union_rodilla} se muestran las uniones en la articulación del coxofemoral y rodilla respectivamente. 
+\clearpage
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.48\textwidth]{figure/img_componentes/Untitled.png}
-	\caption{Implementación del mecanismo de flexión-extensión realizando el ensamble físico con placas de acero y perfil de aluminio.\label{fig:mecanismo_flexion_extension}}
+	\includegraphics[width=0.48\textwidth]{figure/img_estructura/Mecanismo_flexion_extension.png}
+	\caption{Partes del mecanismo de flexión-extensión.\label{fig:mecanismo_flexion_extension_raw}}
+\end{figure} 
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Vista lateral frontal.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/Union_coxo2.jpg}}
+	\subcaptionbox{Vista lateral trasera.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/Union_coxo1.jpg}}
+	\caption{Uniones Clevis en articulación de coxofemoral en mecanismo ajustable.\label{fig:union_coxofemoral}}
 \end{figure}
 
-\subsubsection*{Discrepancias entre diseño e implementación del mecanismo de flexión-extensión}
-\paragraph{Soporte distal (pie).}
-Durante el ensamble del soporte distal (pie)\footnote{Se proporciona mayor información de la manufactura de los soportes en la subsección \nameref{Implementacion S2 y S3}.}, se encontró una interferencia dimensional en la unión de la impresión 3D plegada que actúa como soporte del pie con la estructura de aluminio, por lo que se aplicó un proceso de ajuste mecánico (desbaste de 3 mm) en las caras laterales para lograr un acople deslizante.
+Ambos pares de uniones Clevis fueron maquinados con aluminio 6061-T6 y soldados a los perfiles del mecanismo ajustable y estático. 
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Vista lateral trasera.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/Union_rod2.jpg}}
+	\subcaptionbox{Vista superior.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/Union_rod3.jpg}}
+	\caption{Uniones Clevis en articulación de rodilla en mecanismo ajustable.\label{fig:union_rodilla}}
+\end{figure}
+.
+\subsubsection{Diseño de la placa base, eje de transmisión, manejo de tolerancias y deformaciones térmicas}
+El mecanismo de flexión-extensión se colocó sobre una placa de acero al carbón de 1/2". La longitud de la placa fue acotada al área de transmisión de esfuerzos del actuador lineal en lugar de cubrir toda la base con la finalidad de reducir la deflexión del eje debido al peso de la pierna. Además, se implementaron múltiples puntos de apoyo (chumaceras) que fueron distribuidos a lo largo del eje de transmisión, reduciendo así el momento flector en los extremos. Sin embargo, durante el proceso de manufactura, las placas de acero fueron cortadas mediante láser. Se observó que el calor térmico generado al momento del corte provocó una curvatura, lo que dificultó el alineamiento de las placas con los rieles de la guía. Para corregir el ensamble se realizó una alineación activa, es decir, se montaron el eje, las chumaceras y la placa simultáneamente, y se ajustó la posición con esfuerzo manual antes de aplicar los puntos de soldadura y fijación final. En la Fig. \ref{fig:eje_transmision} se muestra la forma y dimensiones de la placa sobre la cual se montó la estructura de aluminio, así como sus dimensiones, así como la distribución de los componentes sobre el eje de transmisión.
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Forma y dimensiones de placa de acero al carbón de 1/2".}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/img_estructura/placa_soporte.png}}
+	\subcaptionbox{Eje de transmisión con mecanismo de flexión-extensión montado.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/img_estructura/eje_transmision.png}}
+	\caption{Eje de transmisión y placa para montaje del mecanismo de flexión-extensión.\label{fig:eje_transmision}}
+\end{figure}
+
+\subsubsection{Implementación de sujeción y ajuste}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.4\textwidth]{figure/img_estructura/desplazamientos_mecanismo.png}
+	\caption{Vista lateral del mecanismo de flexión-extensión.\label{fig:desplazamientos_flexion-extextension}}
+\end{figure}
+Para lograr la adaptabilidad a los diferentes percentiles antropométricos (P5 a P95), se implementó el sistema de ajuste telescópico en los eslabones correspondientes al fémur y la tibia, de modo que al inicio de la sesión se realice el ajuste de los tubos telescópicos a la longitud de la pierna del paciente. En la Fig. \ref{fig:desplazamientos_flexion-extextension} se muestra el mecanismo de flexión-extensión cuyos rangos de extensión son:
+\begin{itemize}
+	\item Extensión de tibia:
+	\item Extensión de fémur:
+\end{itemize} 
+
+Para ajustar y fijar la longitud de los tubos telescópicos se emplearon tornillos tipo estrella. En la Fig. \ref{fig:tornillos_estrella} cada un tornillo por lado, sin embargo, estos fueron colocados en pares (uno en el extremo derecho y uno en el extremo izquierdo).
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Tornillo para tubo telescópico de fémur.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=5cm]{figure/img_estructura/tubos_teles1.jpg}}
+	\subcaptionbox{Tornillo para tubo telescópico de tibia.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=5cm]{figure/img_estructura/tubos_teles2.jpg}}
+	\subcaptionbox{Tornillo para ajuste de rotación del tobillo.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=5cm]{figure/img_estructura/union_tobillo.jpg}}
+	\caption{Tornillos tipo estrella para sujeción y ajuste de longitud del mecanismo de flexión-extensión.\label{fig:tornillos_estrella}}
+\end{figure}
+
+
+\subsubsection{Discrepancias entre diseño e implementación del mecanismo de flexión-extensión}
+\paragraph*{Soporte distal (pie).}
+Durante el ensamble del soporte distal (pie)\footnote{Se proporciona mayor información de la manufactura de los soportes en la subsección \nameref{Implementacion S3}.}, se encontró una interferencia dimensional en la unión de la impresión 3D plegada que actúa como soporte del pie con la estructura de aluminio, por lo que se aplicó un proceso de ajuste mecánico (desbaste de 3 mm) en las caras laterales para lograr un acople deslizante.
 \paragraph*{Barreno invertido en clévis (fémur).}
-En uno de los tubos telescópicos del fémur, un barreno para unión clévis fue soldado en sentido invertido al planteado en el diseño CAD, sin embargo, no afecta al funcionamiento ni el movimiento por lo que se decidió conservar dicho cambio debido a que el funcionamiento es aceptable.
+En uno de los tubos telescópicos del fémur, un barreno para ajustar la posición del tubo telescópico fue soldado en sentido invertido al planteado en el diseño CAD, sin embargo, no afecta al funcionamiento ni el movimiento por lo que se decidió conservar dicho cambio debido a que el funcionamiento es aceptable.
+
 \subsection{Construcción del mecanismo de abducción-aducción.}
 El mecanismo de abducción-aducción se encarga de soportar la carga del subsistema de flexión y la pierna del paciente, y produce la rotación de un eje vertical. Para este mecanismo se utilizó el motor Nema 34 acoplado un eje de acero maquinado. Sobre el eje se tienen los puntos de apoyo distribuidos que reducen el momento flector en los extremos.
 \subsubsection*{Selección de elementos de rotación}
@@ -121,11 +182,11 @@ Durante las fases finales del ensamble se realizó el acoplamiento del subensamb
 	\caption{Ajuste dimensional a estructura para montaje de interruptores de límite.\label{fig:limit_switch_montaje}}
 \end{figure}
 
-\section{Verificación del sistema estructural}
+\subsection{Verificación del sistema estructural}
 
-Una vez ensamblado el sistema S1, se procedió a su validación estática antes de integrar la electrónica sensible.
+Una vez ensamblado el sistema S1, se procedió a su validación estática antes de integrar los componentes de los sistemas de seguridad mecánica, eléctrica, controlo y comunicación.
 
-\subsection{Prueba S1-01: Integridad estructural bajo carga}
+\subsubsection{Prueba S1-01: Integridad estructural bajo carga}
 \textbf{Objetivo:} Verificar que la estructura soporta la carga de diseño sin deformaciones plásticas ni fallos en las soldaduras.
 \\
 \textbf{Procedimiento:} Se aplicó una carga estática distribuida de 90 kg sobre la cama de soporte y una carga puntual de 20 kg sobre el mecanismo de pierna extendida, simulando el peso de un paciente en el percentil P95.
