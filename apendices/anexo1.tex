@@ -1,18 +1,38 @@
-\chapter{Anexo 1. Hoja de datos}\label{anexo1}
-\stepcounter{chapter} %instrucción necesaria para cambiar numeración
+% ==============================================================================
+% ANEXO A (o 1, según configuración)
+% ==============================================================================
 
-Una ficha técnica, hoja técnica u hoja de datos (datasheet en inglés), también ficha de características u hoja de características, es un documento que resume el funcionamiento y otras características de un componente (por ejemplo, un componente electroóico) o subsistema (por ejemplo, una fuente de alimentación) con el suficiente detalle para ser utilizado por un ingeniero de diseño y diseñar el componente en un sistema.
+\chapter{Hoja de datos}
+% Este será "Anexo A" o "Anexo 1" automáticamente
 
-Comienza típicamente con una página introductoria que describe el resto del documento, seguido por los listados de componentes específicos, con la información adicional sobre la conectividad de los dispositivos. En caso de que haya código fuente relevante a incluir, se une cerca del extremo del documento o se separa generalmente en otro archivo.
+Una ficha técnica, hoja técnica u hoja de datos (datasheet en inglés), también 
+ficha de características u hoja de características, es un documento que resume 
+el funcionamiento y otras características de un componente (por ejemplo, un 
+componente electrónico) o subsistema (por ejemplo, una fuente de alimentación) 
+con el suficiente detalle para ser utilizado por un ingeniero de diseño y 
+diseñar el componente en un sistema.
 
-Las fichas técnicas no se limitan solo a componentes electrónicos, si no que también se dan en otros campos de la ciencia, como por ejemplo compuestos químicos o alimentos.
+Comienza típicamente con una página introductoria que describe el resto del 
+documento, seguido por los listados de componentes específicos, con la 
+información adicional sobre la conectividad de los dispositivos. En caso de 
+que haya código fuente relevante a incluir, se une cerca del extremo del 
+documento o se separa generalmente en otro archivo.
 
-\bigskip
+Las fichas técnicas no se limitan solo a componentes electrónicos, sino que 
+también se dan en otros campos de la ciencia, como por ejemplo compuestos 
+químicos o alimentos.
 
-
-
-
-
-
-%%%%%%fin del archivo
-\endinput 
+% Ejemplo de tabla en anexo
+\begin{table}[H]
+	\centering
+	\caption{Especificaciones del componente}
+	\label{tab:anexo-especificaciones}
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Parámetro} & \textbf{Valor} \\
+		\hline
+		Voltaje & 12V \\
+		Corriente & 2A \\
+		\hline
+	\end{tabular}
+\end{table}

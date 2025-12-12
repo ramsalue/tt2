@@ -1,10 +1,8 @@
 \section{Diseño conceptual}
-\subsection{Necesidades y requerimientos}
-En la tabla \ref{tab01:tabla_necesidades} se clasifican las necesidades en funcionales y no funcionales para el sistema que se plantea en el presente proyecto.
 \begin{table}[h!]
 	\centering
 	\caption{Necesidades funcionales y no funcionales para el proyecto de la ortesis robótica.\label{tab01:tabla_necesidades}}
-	\scalebox{0.75}{\begin{tabular}{|m{10.5cm}|m{8.5cm}|}
+	\scalebox{0.7}{\begin{tabular}{|m{10.5cm}|m{8.5cm}|}
 		\hline
 		\multicolumn{1}{|c|}{\textbf{Necesidades   funcionales}}                                                                                       & \multicolumn{1}{c|}{\textbf{Necesidades no funcionales}}                                                         \\ \hline
 		{Realizar movimientos de las   articulaciones de coxofemoral y rodilla para rehabilitar la región inferior   derecha.} & {Contar con modularidad en estructura mecánica   para adaptarla a diferentes pacientes.} \\
@@ -18,39 +16,40 @@ En la tabla \ref{tab01:tabla_necesidades} se clasifican las necesidades en funci
 		Mantener   una postura rígida en el tobillo.                                                                                          &                                                                                                         \\ \hline
 	\end{tabular}}
 \end{table}
-\clearpage
+\subsection{Necesidades y requerimientos}
+En la tabla \ref{tab01:tabla_necesidades} se clasifican las necesidades en funcionales y no funcionales para el sistema que se plantea en el presente proyecto.
+
 La información descrita en la tabla \ref{tab01:tabla_necesidades} fue identificada con base en la entrevista realizada al Licenciado en Terapia Física Mario Sánchez Aguilar, de
 la Unidad de Medicina Física y Rehabilitación del Norte–IMSS en la alcaldía Gustavo
 A. Madero de la Ciudad de México.
-
-A partir de las necesidades descritas, se plantean bajo un enfoque funcional los requerimientos del proyecto, los cuales se presentan en la tabla \ref{tab02:requerimientos}.
 \begin{table}[h!]
 	\centering
 	\caption{Requerimientos para el proyecto de la ortesis robótica. \label{tab02:requerimientos}}
 	\scalebox{0.9}{\begin{tabular}{|m{5.5cm}|m{5.5cm}|m{4.5cm}|}
-		\hline
-		\textbf{Requerimiento}                                       & \textbf{Variable}                                    & \textbf{Valor(es)}                                       \\ \hline
-		\multirow{4}{*}{Cama}                      & Largo (X)                                            & 180 cm - 250 cm                                             \\ \cline{2-3} 
-		& Ancho   (Y)                                          & 80 cm - 100 cm                                               \\ \cline{2-3} 
-		& Alto (Z)                                             & 60 cm – 100 cm                                            \\ \cline{2-3} 
-		& Carga   máxima                                       & 100 kg                                                   \\ \hline
-		\multirow{11}{*}{Mecanismo flexión/extensión} & Dimensión fémur (D1)                                 & 34 cm – 56 cm                                            \\ \cline{2-3} 
-		& Dimensión   tibia (D2)                               & 31 cm – 48 cm                                            \\ \cline{2-3} 
-		& Largo   total (X1)                                   & 100 cm - 120 cm                                                   \\ \cline{2-3} 
-		& Ancho   total (Y1)                                   & 25 cm – 50 cm                                            \\ \cline{2-3} 
-		& Soporte   vertical de pie                            & 20cm - 35 cm                                             \\ \cline{2-3} 
-		& Soporte   Horizontal de pie                          & 25 cm – 50 cm                                            \\ \cline{2-3} 
-		& Angulo   de dorsiflexión                             & 0° -  20°                                                \\ \cline{2-3} 
-		& Angulo   de plantiflexión                            & 0° -  30°                                                \\ \cline{2-3} 
-		& Angulo   de flexión de cadera con rodilla flexionada & 0° - 50°                                                 \\ \cline{2-3} 
-		& Carga   máxima                                       & 20 kg                                                    \\ \hline
-		\multirow{2}{*}{Mecanismo abducción/aducción} & Ángulo máximo ($\theta$)                                    & 0° - 50°                                                 \\ \cline{2-3} 
-		& Carga   máxima                                       & 30 kg - 50 kg                                            \\ \hline
-		\multirow{2}{*}{Interfaz de usuario}                         & Tipo                                                 & Adecuado para el usuario                                 \\ \cline{2-3} 
-		& Información   visible                                & {[}Definir{]}                                            \\ \hline
-		Suministro eléctrico                                         & Voltaje                                              & 127 V                                                                                       \\ \hline
-			\end{tabular}}
-	\end{table}
+			\hline
+			\textbf{Requerimiento}                                       & \textbf{Variable}                                    & \textbf{Valor(es)}                                       \\ \hline
+			\multirow{4}{*}{Cama}                      & Largo (X)                                            & 180 cm - 250 cm                                             \\ \cline{2-3} 
+			& Ancho   (Y)                                          & 80 cm - 100 cm                                               \\ \cline{2-3} 
+			& Alto (Z)                                             & 60 cm – 100 cm                                            \\ \cline{2-3} 
+			& Carga   máxima                                       & 100 kg                                                   \\ \hline
+			\multirow{11}{*}{Mecanismo flexión/extensión} & Dimensión fémur (D1)                                 & 34 cm – 56 cm                                            \\ \cline{2-3} 
+			& Dimensión   tibia (D2)                               & 31 cm – 48 cm                                            \\ \cline{2-3} 
+			& Largo   total (X1)                                   & 100 cm - 120 cm                                                   \\ \cline{2-3} 
+			& Ancho   total (Y1)                                   & 25 cm – 50 cm                                            \\ \cline{2-3} 
+			& Soporte   vertical de pie                            & 20cm - 35 cm                                             \\ \cline{2-3} 
+			& Soporte   Horizontal de pie                          & 25 cm – 50 cm                                            \\ \cline{2-3} 
+			& Angulo   de dorsiflexión                             & 0° -  20°                                                \\ \cline{2-3} 
+			& Angulo   de plantiflexión                            & 0° -  30°                                                \\ \cline{2-3} 
+			& Angulo   de flexión de cadera con rodilla flexionada & 0° - 50°                                                 \\ \cline{2-3} 
+			& Carga   máxima                                       & 20 kg                                                    \\ \hline
+			\multirow{2}{*}{Mecanismo abducción/aducción} & Ángulo máximo ($\theta$)                                    & 0° - 50°                                                 \\ \cline{2-3} 
+			& Carga   máxima                                       & 30 kg - 50 kg                                            \\ \hline
+			\multirow{2}{*}{Interfaz de usuario}                         & Tipo                                                 & Adecuado para el usuario                                 \\ \cline{2-3} 
+			& Información   visible                                & {[}Definir{]}                                            \\ \hline
+			Suministro eléctrico                                         & Voltaje                                              & 127 V                                                                                       \\ \hline
+	\end{tabular}}
+\end{table}
+
 \begin{table}[h!]
 	\centering
 	\scalebox{0.9}{\begin{tabular}{|m{5.5cm}|m{5.5cm}|m{4.5cm}|}
@@ -72,6 +71,8 @@ A partir de las necesidades descritas, se plantean bajo un enfoque funcional los
 		& Materiales   de contacto con el pie                  & Algodón plisado, foami o colchón                          \\ \hline
 	\end{tabular}}
 \end{table}
+
+A partir de las necesidades descritas, se plantean bajo un enfoque funcional los requerimientos del proyecto, los cuales se presentan en la tabla \ref{tab02:requerimientos}.
 
 \subsection{Arquitectura funcional}
 Con base en los requerimientos descritos se muestra a continuación la descomposición de funciones con las cuales se plantea la propuesta de solución, siendo la función global \textbf{mover la extremidad inferior derecha}.

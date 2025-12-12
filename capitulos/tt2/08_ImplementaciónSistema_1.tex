@@ -1,79 +1,90 @@
-En esta sección se describe la construcción física de cada uno de los sistemas que conforman el proyecto. Así mismo, se detallan los cambios realizados al diseño planteado en Trabajo Terminal I con el objetivo de obtener un funcionamiento adecuado al integrar los distintos sistemas del proyecto. Además, se realizan pruebas para verificar el funcionamiento de cada uno y de forma integral. 
-\section{Hoja de especificaciones del usuario}
-\label{sec:hoja_usuario}
-El sistema de ortesis robótica está diseñado para un rango de usuarios que cumpla con las siguientes características antropométricas, obtenidas de estudios de población mexicana \cite{TT2_01}, \cite{TT2_02}:
-
-\begin{table}[h!]
-	\centering
-	\caption{Hoja de especificaciones antropométricas (resumen).}
-	\begin{tabular}{|l|c|c|c|c|c|}
-		\hline
-		\textbf{Parámetro} &\textbf{Unidad} & \textbf{ID} & \textbf{P5} & \textbf{P95} & \textbf{Mín / Máx (diseño)} \\
-		\hline
-		Longitud total de pierna	 & cm &1&81 & 94 & 81-94 $\pm$ 10mm \\ \hline
-		Longitud a altura rodilla	 & cm &2& 43.4 & 52.6 & 43.4-52.6 $\pm$ 10mm \\ \hline
-		Perímetro pantorrilla 		 & cm &3& 31.5 & 42 & 31.5-42 $\pm$ 10mm \\ \hline
-		Altura sentado 				 & cm &4& 82.5 & 95 & 82.5-95 $\pm$ 10mm \\ \hline
-		Longitud nalga-poplíteo 	 & cm &5& 43.2 & 52.6 & 43.2-52.6 $\pm$ 10mm \\ \hline
-		Longitud nalga-rodilla 		 & cm &6& 53.7 & 64 & 53.7-64 $\pm$ 10mm \\ \hline
-		Altura poplítea				 & cm &7& 37.4 & 45.3&37.4-45.3 $\pm$ 10mm\\ \hline
-		Altura rodilla sentado		 & cm &8&47.3&55.6&47.3-55.6 $\pm$ 10mm\\ \hline
-		Anchura codos				 & cm &9& 44.3 & 62 & 44.3-62 $\pm$ 10mm \\ \hline
-		Anchura cadera (sentado) 	 & cm &10& 32.8 & 42.3 & 32.8-42.3 $\pm$ 10mm \\ \hline
-		Peso corporal (P95) 		 & kg && 55 & 97.3 & \textbf{Carga diseño = 92} \\
-		\hline
-	\end{tabular}
-\end{table}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.2\textwidth]{figure/P06.png}
-	\caption[Dimensión antropométrica de longitud de pierna.]{Dimensión antropométrica de longitud de pierna.\label{fig:P06}}
-\end{figure}
-\begin{figure}[h!]
-	\centering
-	\subcaptionbox{Longitud a altura de rodilla y perímetro de pantorrilla.\label{fig:P07}}
-	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/P07.png}}\\
-	\subcaptionbox{Longitudes y alturas en posición sentado.\label{fig:P08}}
-	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/P08.png}}
-	\caption[Dimensiones antropométricas contempladas para diseño del sistema.]{Dimensiones antropométricas contempladas para diseño del sistema.\label{fig:P07P08}}
-\end{figure}
-Estas dimensiones determinan:
-\begin{itemize}
-	\item La distancia y ajuste de los puntos de sujeción mecánica.
-	\item La fuerza nominal requerida de los actuadores lineales y rotativos.
-	\item La configuración de las rutinas de movimiento, para mantener seguridad y comodidad.
-\end{itemize}
-
-El diseño mecánico y los mecanismos de sujeción (véase Anexo \ref{sec:planos de manufactura}, \nameref{sec:planos de manufactura}) se dimensionaron considerando el percentil 95 para garantizar compatibilidad con la mayoría de los usuarios.
-\clearpage
-\subsection{Adquisición y verificación de componentes}\label{subsec:adquisicion}
-Parte importante para la construcción del proyecto recayó en la adquisición de los componentes a utilizar, tomando en cuenta su capacidad para desempeñar su función esperada, así como los tiempos de envío y entrega una vez realizados los pedidos.
-%% DESCRIBIR LO QUE SE COMPRÓ CON BASE EN LA LISTA DE MATERIALES EN LA TABLA DE COSTOS
-\subsubsection{Gestión de proveedores y materiales}\label{subsubsec:gestion_proveedores}
-La fase de implementación dio inicio con la adquisición de los componentes y materiales estructurales definidos en el diseño detallado desarrollado en Trabajo Terminal I. La selección de los componentes se basó en el cumplimiento de las especificaciones técnicas, mientras que para la selección de proveedores  se tomó en cuenta la disponibilidad en el mercado nacional, costos y tiempos de entrega.
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figure/S7_control/Raspberry_pi4_pines.png}
-	\caption{Distribución de pines en la unidad de procesamiento Raspberry Pi 4.\label{fig:comp_waveshare}}
-\end{figure}
-
-Se gestionó la compra de todos los elementos, desde los perfiles estructurales PTR y de aluminio, hasta los componentes necesarios como los drivers \texttt{HSS57} y \texttt{HSS86}, los motores a pasos Nema 23 y Nema 34, y la unidad de procesamiento (Raspberry Pi 4) como componente crítico para el sistema de control a través del cual se coordinan los sistemas de comunicación y sistemas de movimiento. En la Fig. \ref{fig:comp_waveshare} se muestra la distribución de los pines en la unidad de procesamiento Raspberry Pi4.
-%\subsection{Inspección de componentes críticos}\label{subsec:inspeccion_componentes}
-%Una vez recibidos los materiales, se realizó una inspección visual y técnica para verificar que correspondieran a las especificaciones requeridas para el proyecto.
+En esta sección se describe la construcción física de cada uno de los sistemas que conforman el proyecto. Así mismo, se describen los cambios realizados al diseño planteado en Trabajo Terminal I, ya que, al trabajar la construcción de la estructura fue necesario realizar modificaciones al diseño planteado originalmente debido a limitaciones en cuanto a disponibilidad de recursos materiales, herramientas y limitaciones de tiempo, así como a factores no previstos en el diseño mecánico. A continuación se describen dichas modificaciones y se realizan pruebas para verificar el funcionamiento de cada sistema. 
+%\section{Hoja de especificaciones del usuario}
+%\label{sec:hoja_usuario}
+%El sistema de ortesis robótica está diseñado para un rango de usuarios que cumpla con las siguientes características antropométricas, obtenidas de estudios de población mexicana \cite{TT2_01}, \cite{TT2_02}:
 %
-%Se verificó que la unidad de procesamiento [Fig. \ref{fig:comp_rpi}] corresponde al modelo Raspberry Pi 4 Model B con 4GB de RAM. Para la HMI, se recibió la pantalla táctil Waveshare de 7 pulgadas [Fig. \ref{fig:comp_waveshare}], confirmando su compatibilidad de conexión HDMI y USB. Los sensores y los interruptores de límite fueron inspeccionados visualmente. 
- 
+%\begin{table}[h!]
+%	\centering
+%	\caption{Hoja de especificaciones antropométricas (resumen).}
+%	\begin{tabular}{|l|c|c|c|c|c|}
+%		\hline
+%		\textbf{Parámetro} &\textbf{Unidad} & \textbf{ID} & \textbf{P5} & \textbf{P95} & \textbf{Mín / Máx (diseño)} \\
+%		\hline
+%		Longitud total de pierna	 & cm &1&81 & 94 & 81-94 $\pm$ 10mm \\ \hline
+%		Longitud a altura rodilla	 & cm &2& 43.4 & 52.6 & 43.4-52.6 $\pm$ 10mm \\ \hline
+%		Perímetro pantorrilla 		 & cm &3& 31.5 & 42 & 31.5-42 $\pm$ 10mm \\ \hline
+%		Altura sentado 				 & cm &4& 82.5 & 95 & 82.5-95 $\pm$ 10mm \\ \hline
+%		Longitud nalga-poplíteo 	 & cm &5& 43.2 & 52.6 & 43.2-52.6 $\pm$ 10mm \\ \hline
+%		Longitud nalga-rodilla 		 & cm &6& 53.7 & 64 & 53.7-64 $\pm$ 10mm \\ \hline
+%		Altura poplítea				 & cm &7& 37.4 & 45.3&37.4-45.3 $\pm$ 10mm\\ \hline
+%		Altura rodilla sentado		 & cm &8&47.3&55.6&47.3-55.6 $\pm$ 10mm\\ \hline
+%		Anchura codos				 & cm &9& 44.3 & 62 & 44.3-62 $\pm$ 10mm \\ \hline
+%		Anchura cadera (sentado) 	 & cm &10& 32.8 & 42.3 & 32.8-42.3 $\pm$ 10mm \\ \hline
+%		Peso corporal (P95) 		 & kg && 55 & 97.3 & \textbf{Carga diseño = 92} \\
+%		\hline
+%	\end{tabular}
+%\end{table}
 %\begin{figure}[h!]
 %	\centering
-%	\subcaptionbox{Distribución de pines en la unidad de procesamiento Raspberry Pi 4.\label{fig:comp_rpi}}
-%	{\includegraphics[width=0.6\textwidth]{figure/S7_control/Raspberry_pi4_pines.png}}
-%	\subcaptionbox{Pantalla HMI Waveshare de 7 pulgadas.\label{fig:comp_waveshare}}
-%	{\includegraphics[width=0.48\textwidth]{figure/s6_hmi/Waveshare.png}}
-%	\caption{Componentes principales del sistema de control y comunicación.}
+%	\includegraphics[width=0.2\textwidth]{figure/P06.png}
+%	\caption[Dimensión antropométrica de longitud de pierna.]{Dimensión antropométrica de longitud de pierna.\label{fig:P06}}
 %\end{figure}
+%\begin{figure}[h!]
+%	\centering
+%	\subcaptionbox{Longitud a altura de rodilla y perímetro de pantorrilla.\label{fig:P07}}
+%	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/P07.png}}\\
+%	\subcaptionbox{Longitudes y alturas en posición sentado.\label{fig:P08}}
+%	{\includegraphics [trim = 0 0cm 0 0, clip,width=8cm]{figure/P08.png}}
+%	\caption[Dimensiones antropométricas contempladas para diseño del sistema.]{Dimensiones antropométricas contempladas para diseño del sistema.\label{fig:P07P08}}
+%\end{figure}
+%Estas dimensiones determinan:
+%\begin{itemize}
+%	\item La distancia y ajuste de los puntos de sujeción mecánica.
+%	\item La fuerza nominal requerida de los actuadores lineales y rotativos.
+%	\item La configuración de las rutinas de movimiento, para mantener seguridad y comodidad.
+%\end{itemize}
+%
+%El diseño mecánico y los mecanismos de sujeción (véase Anexo \ref{sec:planos de manufactura}, \nameref{sec:planos de manufactura}) se dimensionaron considerando el percentil 95 para garantizar compatibilidad con la mayoría de los usuarios.
+%\clearpage
+%\subsection{Adquisición y verificación de componentes}\label{subsec:adquisicion}
+%Parte importante para la construcción del proyecto recayó en la adquisición de los componentes a utilizar, tomando en cuenta su capacidad para desempeñar su función esperada, así como los tiempos de envío y entrega una vez realizados los pedidos.
+%%% DESCRIBIR LO QUE SE COMPRÓ CON BASE EN LA LISTA DE MATERIALES EN LA TABLA DE COSTOS
+%\subsubsection{Gestión de proveedores y materiales}\label{subsubsec:gestion_proveedores}
+%La fase de implementación dio inicio con la adquisición de los componentes y materiales estructurales definidos en el diseño detallado desarrollado en Trabajo Terminal I. La selección de los componentes se basó en el cumplimiento de las especificaciones técnicas, mientras que para la selección de proveedores  se tomó en cuenta la disponibilidad en el mercado nacional, costos y tiempos de entrega.
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=0.7\textwidth]{figure/S7_control/Raspberry_pi4_pines.png}
+%	\caption{Distribución de pines en la unidad de procesamiento Raspberry Pi 4.\label{fig:comp_waveshare}}
+%\end{figure}
+%
+%Se gestionó la compra de todos los elementos, desde los perfiles estructurales PTR y de aluminio, hasta los componentes necesarios como los drivers \texttt{HSS57} y \texttt{HSS86}, los motores a pasos Nema 23 y Nema 34, y la unidad de procesamiento (Raspberry Pi 4) como componente crítico para el sistema de control a través del cual se coordinan los sistemas de comunicación y sistemas de movimiento. En la Fig. \ref{fig:comp_waveshare} se muestra la distribución de los pines en la unidad de procesamiento Raspberry Pi4.
+%%\subsection{Inspección de componentes críticos}\label{subsec:inspeccion_componentes}
+%%Una vez recibidos los materiales, se realizó una inspección visual y técnica para verificar que correspondieran a las especificaciones requeridas para el proyecto.
+%%
+%%Se verificó que la unidad de procesamiento [Fig. \ref{fig:comp_rpi}] corresponde al modelo Raspberry Pi 4 Model B con 4GB de RAM. Para la HMI, se recibió la pantalla táctil Waveshare de 7 pulgadas [Fig. \ref{fig:comp_waveshare}], confirmando su compatibilidad de conexión HDMI y USB. Los sensores y los interruptores de límite fueron inspeccionados visualmente. 
+% 
+%%\begin{figure}[h!]
+%%	\centering
+%%	\subcaptionbox{Distribución de pines en la unidad de procesamiento Raspberry Pi 4.\label{fig:comp_rpi}}
+%%	{\includegraphics[width=0.6\textwidth]{figure/S7_control/Raspberry_pi4_pines.png}}
+%%	\subcaptionbox{Pantalla HMI Waveshare de 7 pulgadas.\label{fig:comp_waveshare}}
+%%	{\includegraphics[width=0.48\textwidth]{figure/s6_hmi/Waveshare.png}}
+%%	\caption{Componentes principales del sistema de control y comunicación.}
+%%\end{figure}
+
 
 \section{Sistema estructural (S1)}\label{Implementacion S1}
 La construcción del sistema estructural fue dividido en secciones comenzando por la base de la cama que soportaría a los mecanismos de flexión-extensión, abducción-aducción, así como el montaje de componentes electrónicos y actuadores requeridos para los sistemas de control, seguridad eléctrica y comunicación humano-máquina.
+\subsection{Modificaciones al diseño del sistema estructural}
+Al construir la placa de acople para el mecanismo de flexión-extensión se encontró que la placa de acero tenía una superficie de $89,420\ mm^2$ que no tenía contacto con el mecanismo, por lo que se optó por recortar la placa con la finalidad de reducir el par torsor generado sobre el eje. Además, se optó por soldar directamente la placa al eje sin aletas. En la Fig. \ref{fig:placa acople b modificacion} se muestra el antes y después de la modificación realizada en el diseño.
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Forma de la placa de acople original.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7cm]{figure/img_estructura/Placa acople B original.png}}
+	\subcaptionbox{Forma de la placa de acople modificada.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=7.3cm]{figure/img_estructura/Placa acople B modificada.png}}
+	\caption{Modificación en el diseño de la placa de acople para el mecanismo de flexión-extensión.\label{fig:placa acople b modificacion}}
+\end{figure}
 \subsection{Construcción de la cama de soporte}
 El soporte principal se construyó utilizando perfiles PTR soldados con la finalidad de obtener una base rígida ante la carga vertical del paciente y los mecanismos que soportará la estructura. En la Fig. \ref{fig:perfil_ptr} se muestra el perfil del PTR con dimensiones 2x2 pulgadas y grosor de calibre 12. 
 

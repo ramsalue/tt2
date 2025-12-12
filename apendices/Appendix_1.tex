@@ -1,16 +1,15 @@
-\begin{appendices}
-	\setcounter{page}{1}
-	\pagenumbering{Roman}
-	% Reinicia numeración de figuras/tablas y agrega prefijo de letra
-	%\counterwithin{figure}{section}
-	%\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+%\begin{appendices}
+	%\setcounter{page}{1}
+	%\pagenumbering{Roman}
+%	% Reinicia numeración de figuras/tablas y agrega prefijo de letra
+%	\counterwithin{figure}{section}
+%	\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+%	
+%	\counterwithin{table}{section}
+%	\renewcommand{\thetable}{\thechapter.\arabic{table}}
 	
-	%\counterwithin{table}{section}
-	%\renewcommand{\thetable}{\thesection.\arabic{table}}
-	
-	\section{Hojas de especificaciones de componentes}
-
-    \subsection{Sistema estructural}
+	\chapter{Hojas de especificaciones de componentes}
+    \section*{Sistema estructural}
     \begin{figure}[h!]
 	\centering
 	\includegraphics[trim={0 0cm 0 0},clip, angle =90, width=0.7\textwidth]{figure/planos_manufactura/Chumacera-3.pdf}
@@ -37,7 +36,7 @@
 
 
     \clearpage
-	\subsection{Sistema de seguridad eléctrico}
+	\section*{Sistema de seguridad eléctrico}
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.8\textwidth]{figure/Datasheets/ds_fusible10am.pdf}
@@ -53,7 +52,7 @@
 	\clearpage
 
     
-	\subsection{Sistema de energía} \label{Anexo_sistema de energia}
+	\section*{Sistema de energía} \label{Anexo_sistema de energia}
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[angle =0, width=0.7\textwidth]{figure/Datasheets/ds_LRS-600-spec.pdf}
@@ -85,7 +84,7 @@
 \clearpage
 
 
-\subsection{Sistema de movimiento}
+\section*{Sistema de movimiento}
 
 \begin{figure}[h!]
 	\centering
@@ -104,7 +103,7 @@
 \clearpage
 
 
-\subsection{Sistema de control}
+\section*{Sistema de control}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.75\textwidth]{figure/Datasheets/vl53l1x.pdf}
@@ -121,7 +120,7 @@
 
     
 	\clearpage
-	\section{Planos de manufactura}\label{sec:planos de manufactura}
+	 \chapter{Planos de manufactura}\label{sec:planos de manufactura}
 	\begin{figure}[h!]
 	\centering
 	\includegraphics[trim={0 0cm 0 0},clip, angle =90, width=0.85\textwidth]{figure/planos_manufactura/horma-2.pdf}
@@ -223,4 +222,4 @@
     
 	
 	
-\end{appendices}
+%\end{appendices}

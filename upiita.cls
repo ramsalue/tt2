@@ -491,34 +491,37 @@
      \fi
     }
 \fi
+% Redefinir \appendix correctamente
 \newcommand\appendix{\par
-  \setcounter{chapter}{0}%
-  \setcounter{section}{0}%
-  \setcounter{figure}{0}
-      \renewcommand{\thefigure}{{\thechapter}.\arabic{figure}}
-      \renewcommand{\thechapter}{\alph{chapter}}
-  \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}}
+	\setcounter{chapter}{0}%
+	\setcounter{section}{0}%
+	\setcounter{figure}{0}%
+	\setcounter{table}{0}%
+	\renewcommand{\thechapter}{\Alph{chapter}}%
+	\renewcommand{\thesection}{\thechapter.\arabic{section}}%
+	\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}%
+	\renewcommand{\thefigure}{\thechapter.\arabic{figure}}%
+	\renewcommand{\thetable}{\thechapter.\arabic{table}}%
+	\gdef\@chapapp{Apéndice}%
+	\gdef\chaptername{Apéndice}}
 %
 %\newcommand\apendices{\appendix /par
 %  \setcounter{figure}{0}
 %  \renewcommand{\thefigure}{{\thechapter}.\arabic{figure}}
 %}
+% Redefinir \anexo correctamente
 \newcommand\anexo{\par
-%\setcounter{figure}{N}
-  \setcounter{chapter}{0}%
-  \setcounter{section}{0}%
-  \gdef\@chapapp{\anexoname}%
-  \gdef\thechapter{\@Alph\c@chapter}}
-\setlength\arraycolsep{5\p@}
-\setlength\tabcolsep{6\p@}
-\setlength\arrayrulewidth{.4\p@}
-\setlength\doublerulesep{2\p@}
-\setlength\tabbingsep{\labelsep}
-\skip\@mpfootins = \skip\footins
-\setlength\fboxsep{3\p@}
-\setlength\fboxrule{.4\p@}
-\@addtoreset {equation}{chapter}
+	\setcounter{chapter}{0}%
+	\setcounter{section}{0}%
+	\setcounter{figure}{0}%
+	\setcounter{table}{0}%
+	\renewcommand{\thechapter}{\Alph{chapter}}%
+	\renewcommand{\thesection}{\thechapter.\arabic{section}}%
+	\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}%
+	\renewcommand{\thefigure}{\thechapter.\arabic{figure}}%
+	\renewcommand{\thetable}{\thechapter.\arabic{table}}%
+	\gdef\@chapapp{Anexo}%
+	\gdef\chaptername{Anexo}}
 \renewcommand\theequation
   {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@equation}
 \newcounter{figure}[chapter]

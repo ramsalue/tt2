@@ -3,8 +3,19 @@ La seguridad mecánica constituye la segunda capa de protección del proyecto, a
 
 El sistema se compone de dos módulos: M3 y M4, cuya implementación se describe a continuación.
 \subsubsection{Implementación de topes mecánicos (M3)}
-Se integraron al sistema estructural los topes mecánicos que impiden el descarrilamiento del mecanismo de flexión-extensión, o la apertura excesiva del ángulo de abducción-aducción más allá de los límites permitidos ($0^\circ$ a $110^\circ$). Los topes fueron realizados con el material PTR, mismo que comparte con la estructura de la cama soporte, cuyo perfil se mostró en la Fig. \ref{fig:perfil_ptr}.
-% Mencionar las figuras que gana referencia a los topes mecánicos en cuestión, ACTUALIZAR EL LÍMITE MÁXIMO DE ÁNGULO
+Se integraron al sistema estructural los topes mecánicos que impiden el descarrilamiento del mecanismo de flexión-extensión, o la apertura excesiva del ángulo de abducción-aducción más allá de los límites permitidos ($0^\circ$ a $40^\circ$). Los topes fueron realizados con el material PTR, mismo que comparte con la estructura de la cama soporte, cuyo perfil se mostró en la Fig. \ref{fig:perfil_ptr}.
+
+Para el movimiento de flexión-extensión se cuenta con dos topes mecánicos que limitan su rango de movimiento. 
+
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Topes para movimiento lineal.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/topes_flexion-extension.png}}
+	\subcaptionbox{Tope para movimiento angular.}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/Union_rod3.jpg}}
+	\caption{Topes para mecanismo de flexión-extensión.\label{fig:union_rodilla}}
+\end{figure}
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.6\textwidth]{figure/img_componentes/Untitled.png}

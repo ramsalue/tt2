@@ -64,10 +64,17 @@ freely copied and distributed.}
 \usepackage{siunitx}
 \usepackage{afterpage}
 %\usepackage{appendix}
+\usepackage{enumitem} 
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tabto}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{appendix}
+ \usepackage[table]{xcolor}
 %%% formato flotantes %%%
 \usepackage{colortbl}
 \usepackage{float}
-\usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{multirow} %construction for table cells that span more
 \usepackage{rotating}
@@ -76,7 +83,7 @@ freely copied and distributed.}
 %\usepackage{tcolorbox} cajas de color: bloques, tablas, etc ***
 %\usepackage{makecell}  Tablas ***
 %\usepackage{subcaption}
-%\usepackage{subfigure} % subfiguras
+%usepackage{subfigure} % subfiguras
 %\usepackage{subfig}
 %%probar
 %\usepackage{layouts}
@@ -492,14 +499,66 @@ voffset=0cm}
 
  %%%%%%%%%%%%margenes para PDF
 
-%%%Agregado por LERS%
-\usepackage{enumitem} 
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage{tabto}
-\usepackage{multirow}
-\usepackage{float}
-\usepackage{appendix}
- \usepackage[table]{xcolor}
+%  %\ifx\first\@impreso {pdf}\else {papel} \fi
+%\ifx\first\@impreso
+%{ %pdf
+%	\newcommand{\cambiamargen}{%%%%%%%%%%%%% Medidas de los margenes
+%		\newgeometry{ hmargin={3cm,2cm},tmargin=6cm, headsep=3cm, head=1.5cm,textheight=28cm, bottom=3cm}
+%		%	\setlength{\hoffset}{0mm}
+%		%	\setlength{\oddsidemargin}{0pt} % O Odd impar
+%		%	\setlength{\evensidemargin}{0pt} % E even par
+%		%	\setlength{\textwidth}{508pt}
+%		%	\setlength{\marginparwidth}{2pt}
+%		%	\setlength{\marginparsep}{1pt}
+%		%	%\setlength{\marginparpush}{0pt}
+%		%	\setlength{\voffset}{-36pt}
+%		%	\setlength{\headsep}{35pt}
+%		%	\setlength{\footskip}{35pt}
+%		%	%\setlength{\topmargin}{0pt}
+%		%	%\setlength{\headheight}{12pt}
+%		%	\setlength\textheight{612pt}%%29\baselineskip
+%		%	\oddpagelayoutfalse
+%	}
+%}
+%\else
+%{		%papel
+%	\newcommand{\cambiamargen}{%%%%%%%%%%%%% Medidas de los margenes
+%		\setlength{\hoffset}{0mm}
+%		\setlength{\voffset}{-36pt}
+%		\setlength{\headsep}{35pt}
+%		\setlength{\footskip}{35pt}
+%		\setlength{\oddsidemargin}{72pt} % O Odd impar
+%		\setlength{\evensidemargin}{0pt} % E even par
+%		%\setlength{\topmargin}{0pt}
+%		%\setlength{\headheight}{12pt}
+%		\setlength\textheight{612pt}%%29\baselineskip
+%		\setlength{\textwidth}{438pt}
+%		\setlength{\marginparwidth}{52pt}
+%		\setlength{\marginparsep}{1pt}
+%		%	\oddpagelayoutfalse
+%		%\setlength{\marginparpush}{65pt}
+%	}
+%}
+%\fi
+%\def\quad{\hskip 1em\relax}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{#1}}
+%%%%%%%%%%%%%%%%
+%% Modificación CESIÓN DE DERECHOS
+% %%%%%%%%%%%%
+%
+%\def\permisos{\par\noindent{\centering
+%  El autor cede los derechos a la  \Upiita\ para reproducir y \\*
+%  distribuir copias de esta tesis en cualquiera de sus partes o completa.}\par}
+%
+%
+%%%%%%%%%%%
 
+%%%% pagina en blanco
+%\newcommand*{\enblanco}
+%{\begingroup
+%    \newpage{\ }
+%    \thispagestyle{empty}
+%\endgroup}
+%%%Agregado por LERS%
 \endinput

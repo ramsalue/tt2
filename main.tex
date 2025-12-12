@@ -1,115 +1,116 @@
-% ==============================================================================
-% ARCHIVO MAESTRO: Principal.tex
-% Tesis: UPIITA-IPN
-% ==============================================================================
-
-\typeout{Copyright Juan Carlos Guzmán Salgado, Griselda Sánchez Otero, Diego Alonso Flores Hernández}
 \documentclass[letterpaper,11pt]{upiita}
 \usepackage{configuracion/upiitatesis}
+\makeatletter
+\renewcommand{\hline}{\noalign{\ifnum0=`}\fi\hrule \@height 0.6pt \futurelet\@tempa\@xhline}
+\setlength{\arrayrulewidth}{0.6pt}
+\makeatother
 
 % ==============================================================================
-% 1. DATOS DEL TRABAJO TERMINAL (Portada y Acta)
+% DATOS DEL TRABAJO TERMINAL
 % ==============================================================================
 
 \title{Ortesis robótica para asistencia del movimiento de coxofemoral y rodilla en adultos con hemiplejia derecha}
 \unidad{\Upiita}
 \materia{Trabajo Terminal II}
-\academia{Mecatr\'onica}
-\grado{Ingeniero en Mecatr\'onica}
+\academia{Mecatrónica}
+\grado{Ingeniero en Mecatrónica}
 \mes{Diciembre}
 \anio{2025}
-% \impreso{pdf} % Descomentar si se requiere especificar formato
 
-% --- Jurado ---
 \Presidente{M. en C. Tania Karina Hernández Heredia}
 \Titular{M. en I. Maribel Gutiérrez Espinoza}
 
-% --- Alumnos (Autores) ---
-\nalumnos{4} % Ajustar número de alumnos (1-4)
+\nalumnos{4}
 \alumnoa{Balderas Reyes Diego Esaú}
 \alumnob{Martínez Maldonado Sebastián}
 \alumnoc{Piña Hernández Alberto}
 \alumnod{Ramírez Sabino Luis Enrique}
 
-% --- Asesores ---
-\nasesores{2} % Ajustar número de asesores (1-3)
+\nasesores{2}
 \asesora{M. en C. Arodi Rafael Carvallo Domínguez}
 \asesorb{Dr. Rafael Santiago Godoy}
 \asesorc{}
 
 % ==============================================================================
-% 2. INICIO DEL DOCUMENTO
+% DOCUMENTO
 % ==============================================================================
 \begin{document}
 	
-	% Configuración de numeración romana para preliminares
-	\makeatletter \def\@roman#1{\romannumeral #1}\makeatother
-	
-	% ------------------------------------------------------------------------------
-	% SECCIÓN PRELIMINAR (Frontmatter)
-	% ------------------------------------------------------------------------------
 	\frontmatter
 	
-	\include{preliminares/portada_acta_manual.tex}    % Genera portada y acta
-	\dedicatoria                % Archivo: dedicatoria.tex
-	\agradecimientos            % Archivo: agradecimientos.tex
+	\include{preliminares/portada_acta_manual.tex}
+	\dedicatoria
+	\agradecimientos
 	
-	% Índices automáticos
 	\tabladecontenido
 	\include{preliminares/resumen}
 	\include{preliminares/abstract}
 	\listadefiguras
 	\listadetablas
 	
-	% Nomenclatura y Símbolos
 	\input{preliminares/nomenclatura}
 	
-	% Introducción (Define el problema, objetivos, justificación)
 	\Introduccion
 	
-	% ------------------------------------------------------------------------------
-	% CUERPO DEL TRABAJO (Capítulos)
-	% ------------------------------------------------------------------------------
-	% Nota: \mainmatter suele estar implícito en las plantillas UPIITA al iniciar capítulos
-		
-	% Capítulo 2: Diseño Conceptual
-	%\include{capitulos/diseconceptual}
+	% ======================================================================
+	% CAPÍTULOS NUMERADOS
+	% ======================================================================
+	\mainmatter
+	\setcounter{secnumdepth}{4}
+	\setcounter{tocdepth}{4}
 	
-	% Capítulo 4: Implementación
+	%\MarcodeReferencia
+	\include{capitulos/diseconceptual}
 	\include{capitulos/implementacion}
-	
-	% Capítulo 5: Discusión de Resultados
 	\include{capitulos/discusion}
 	
-	% ------------------------------------------------------------------------------
-	% CONCLUSIONES
-	% ------------------------------------------------------------------------------
-	% Se ajusta el contador para que Conclusiones no tenga numeración de capítulo (opcional según guía)
+	% ======================================================================
+	% CONCLUSIONES SIN NÚMERO
+	% ======================================================================
 	\setcounter{secnumdepth}{-1}
 	\include{capitulos/conclusiones}
 	
 	\newpage
 	
-	% ------------------------------------------------------------------------------
-	% REFERENCIAS BIBLIOGRÁFICAS
-	% ------------------------------------------------------------------------------
 	\input{preliminares/references.tex}
 	
-	% ------------------------------------------------------------------------------
-	% APÉNDICES Y ANEXOS (Backmatter)
-	% ------------------------------------------------------------------------------
+	% ======================================================================
+	% APÉNDICES - CON NUMERACIÓN DE PÁGINA CONTINUA
+	% ======================================================================
 	\backmatter
+	\cleardoublepage
 	
-	% Apéndices
 	\part{Apéndices}
+	
+	% Activar apéndices
 	\appendix
-%	\include{apendices/apendice1}
-%	\include{apendices/apendice2}
-%	\include{apendices/apendice3}
-	\include{apendices/Appendix_1.tex}
-	% Anexos
+	
+	% IMPORTANTE: Cambiar numeración de páginas a arábiga
+	\pagenumbering{arabic}
+	\setcounter{page}{35}  % Ajusta según tu última página de contenido
+	
+	% Activar numeración de secciones
+	\setcounter{secnumdepth}{4}
+	\setcounter{tocdepth}{4}
+	
+	% Incluir apéndices
+	\include{apendices/Appendix_1}
+	
+	% ======================================================================
+	% ANEXOS - CONTINUAR NUMERACIÓN
+	% ======================================================================
+	\cleardoublepage
 	\part{Anexos}
+	
+	% Activar anexos
 	\anexo
+	
+	% NO resetear numeración de páginas, continuar donde quedó
+	% Solo mantener numeración activada
+	\setcounter{secnumdepth}{4}
+	\setcounter{tocdepth}{4}
+	
+	% Incluir anexos
 	\include{apendices/anexo1}
 	\include{apendices/anexo2}
 	\include{apendices/anexo3}
