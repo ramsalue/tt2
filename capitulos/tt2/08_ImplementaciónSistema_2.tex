@@ -1,0 +1,84 @@
+\clearpage
+\section{Sistema de seguridad eléctrico (S2)}
+
+La implementación de la seguridad eléctrica tiene como objetivo proteger la integridad de los componentes electrónicos y prevenir riesgos operacionales. El sistema de seguridad eléctrica constituye la primera capa de protección del sistema.
+
+\subsection{Implementación del módulo de protección por sobrecorriente (M1)}
+Se mantuvo el diseño de protección principal en la entrada de línea (127 VAC) mediante un fusible, actuando como la primera barrera ante cortocircuitos generales antes de ingresar al circuito de control de encendido.
+
+\begin{itemize}
+	\item \textbf{Componente instalado:} Fusible cilíndrico de cristal (fast acting) de 10 Amperes / 250 VAC.
+	\item \textbf{Montaje:} Portafusible de panel roscado accesible desde el exterior del gabinete.
+\end{itemize}
+
+\textbf{Justificación:} La capacidad de 10 A protege la suma de las corrientes de arranque de las tres fuentes de alimentación implementadas (eliminador a 5V, fuente 48V y fuente 24V) más el consumo de la bobina del contactor.
+
+\subsubsection{Verificación del módulo de protección por sobrecorriente}
+\paragraph*{Prueba S2-01: Continuidad y corte maestro.}\mbox{}\\
+\textbf{Objetivo:} Verificar la integridad del fusible y su función como interruptor de seguridad de última instancia.
+\\
+\textbf{Resultados:} Al retirar el fusible, se interrumpe el voltaje en la entrada del contactor, impidiendo el encendido de cualquier subsistema, validando su ubicación correcta en la fase principal.
+
+\subsection{Implementación del módulo de protección por sobrevoltaje (M2)}
+
+Se realizó una revisión técnica respecto al diseño original. Dado que el sistema integra fuentes de alimentación conmutadas modernas y un adaptador certificado para la lógica, se optó por utilizar las protecciones internas (OVP - Over Voltage Protection) de estos dispositivos.
+
+\begin{itemize}
+	\item \textbf{Rama de potencia alta (48V):} La fuente Mean Well LRS-600-48 cuenta con OVP certificado (rango 55.2V - 64.8V) con apagado automático (\textit{shut down}), protegiendo al driver del Nema 34.
+	\item \textbf{Rama de potencia media (24V):} La fuente industrial genérica de 24V implementada incorpora circuitos de protección estándar contra picos de voltaje a la salida, protegiendo al driver HSS57 del Nema 23.
+	\item \textbf{Rama de control (5V):} El eliminador dedicado para la Raspberry Pi actúa como una barrera de aislamiento galvánico y regulación, protegiendo al microordenador de fluctuaciones en la red AC.
+\end{itemize}
+
+ \clearpage
+\section{Sistema de seguridad mecánico (S3)}\label{Implementacion S3}
+La seguridad mecánica constituye la segunda capa de protección del proyecto, actuando como una barrera física pasiva que protege la integridad del paciente y del mecanismo en caso de fallo del sistema de control, ya que, debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo, existía un riesgo de daño mecánico en caso de colisión por fallo de control.
+\subsection{Modificaciones al diseño del sistema de seguridad mecánico}
+Durante la integración yu verificación del sistema de seguridad mecánico se encontró que los topes mecánicos diseñados para el movimiento lineal de flexión-extensión no resultaban apropiados, debido a que el tornillo mariposa rayaba la superficie de aluminio al intentar detener el mecanismo de flexión-extensión, lo que llevó al diseño de nuevo topes que se pudieran adaptar a la estructura estática de aluminio.
+ \begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=0.48\textwidth]{figure/img_estructura/tope_flexion_lateral}
+	\caption{Vista frontal del nuevo diseño para la sujeción del tope mecánico en el movimiento lineal de flexión-extensión.\label{fig:tope_flexion_frontal}}
+\end{figure}
+
+La principal diferencia con los topes diseñados [Fig. \ref{fig:Pina_Figura17}] radica en la forma en la que el tornillo mariposa hace contacto con la estructura de aluminio. En la Fig. \ref{fig:tope_flexion_frontal} se puede observar el nuevo diseño donde el tornillo mariposa hace presión sobre la cara superior de la estructura estática de aluminio donde se interpone una placa de XX mm de grosor que evita el contacto directo del tornillo con la estructura.
+
+Se procede con la descripción de la implementación de los módulos del sistema de seguridad mecánico. El sistema se compone de dos módulos: M3 y M4.
+\subsection{Implementación de topes mecánicos (M3)}
+Se integraron al sistema estructural los topes mecánicos que impiden la extensión o flexión excesiva del mecanismo de flexión-extensión. Estos topes se colocaron de forma perpendicular al eje de desplazamiento lineal del mecanismo, sirviendo como referencia para los puntos de inicio y fin de la trayectoria al momento de calibrar el sistema cuando se inicia una rutina. En la Fig. \ref{fig:topes_flexion_extension01} se muestra la disposición de los topes que limitan el movimiento lineal. El mecanismo de flexión-extensión también cuenta con un tope que limita el movimiento angular al momento de flexionar el mecanismo [Fig. \ref{fig:topes_flexion_extension02}].
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Topes para movimiento lineal.\label{fig:topes_flexion_extension01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/topes_flexion-extension.png}}
+	\subcaptionbox{Tope para movimiento angular.\label{fig:topes_flexion_extension02}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/tope_flexion.png}}
+	\caption{Topes para mecanismo de flexión-extensión.\label{fig:topes_flexion_extension}}
+\end{figure}
+
+Para el movimiento de abducción-aducción se colocaron topes para limitar la apertura del ángulo más allá de los límites permitidos ($0^\circ$ a $40^\circ$). Los topes fueron realizados con el material PTR, mismo que comparte con la estructura de la cama soporte, y soldados a la misma estructura.
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Tope para máximo ángulo de apertura.\label{fig:topes_abducción_aducción01}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/tope_abducción.png}}
+	\subcaptionbox{Tope para mínimo ángulo de apertura.\label{fig:topes_abducción_aducción02}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_estructura/tope_aduccion.png}}
+	\caption{Topes para mecanismo de abducción-aducción.\label{fig:topes_abducción_aducción}}
+\end{figure}
+\subsubsection{Verificación del módulo de topes mecánicos}
+\paragraph*{Prueba S3-01: Resistencia al impacto controlado}\mbox{}\\
+\textbf{Objetivo:} Verificar que la estructura y los topes soportan el par del motor sin sufrir daño permanente en caso de que el software no detenga el movimiento.
+\\
+\textbf{Justificación de seguridad:} Debido al alto par del actuador Nema 23 seleccionado, existe el riesgo de que el motor venza la estructura si no se limita su avance.
+\\
+\textbf{Procedimiento:} Se deshabilitaron intencionalmente los límites de software y se comandó el motor hacia el extremo del riel a baja velocidad, provocando una colisión controlada contra el tope mecánico.
+\\
+\textbf{Resultados:} El tope mecánico detuvo el avance del mecanismo sin deformar la estructura ni descarrilarlo, validando la robustez de la barrera física como segunda capa de protección.
+
+\subsection{Implementación del módulo de sujeción (M4)}
+% DESCRIBIR MÁS INFORMACION SOBRE ESTE MÓDULO Y PRUEBAS
+Los soportes directos para la pierna y pie se fabricaron mediante impresión 3D (manufactura aditiva) utilizando PLA para permitir geometrías ergonómicas complejas que no serían viables por métodos sustractivos. Estos soportes se acoplaron a los tubos telescópicos de aluminio que forman parte del mecanismo de flexión-extensión, permitiendo el ajuste longitudinal.\\
+Aunque el diseño contempla el uso de cintas de velcro para la sujeción final, durante la fase de pruebas funcionales se priorizó la validación del mecanismo de ajuste telescópico y la rigidez de los soportes impresos.
+
+\subsubsection{Verificación del módulo de sujeción (M4)}
+%Se validó el funcionamiento de los topes mecánicos como medida de última instancia ante una falla de control.
+\paragraph*{Prueba S3-02:}
+

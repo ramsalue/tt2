@@ -1,0 +1,119 @@
+\documentclass[letterpaper,11pt]{upiita}
+\usepackage{configuracion/upiitatesis}
+\makeatletter
+\renewcommand{\hline}{\noalign{\ifnum0=`}\fi\hrule \@height 0.6pt \futurelet\@tempa\@xhline}
+\setlength{\arrayrulewidth}{0.6pt}
+\makeatother
+
+% ==============================================================================
+% DATOS DEL TRABAJO TERMINAL
+% ==============================================================================
+
+\title{Ortesis robótica para asistencia del movimiento de coxofemoral y rodilla en adultos con hemiplejia derecha}
+\unidad{\Upiita}
+\materia{Trabajo Terminal II}
+\academia{Mecatrónica}
+\grado{Ingeniero en Mecatrónica}
+\mes{Diciembre}
+\anio{2025}
+
+\Presidente{M. en C. Tania Karina Hernández Heredia}
+\Titular{M. en I. Maribel Gutiérrez Espinoza}
+
+\nalumnos{4}
+\alumnoa{Balderas Reyes Diego Esaú}
+\alumnob{Martínez Maldonado Sebastián}
+\alumnoc{Piña Hernández Alberto}
+\alumnod{Ramírez Sabino Luis Enrique}
+
+\nasesores{2}
+\asesora{M. en C. Arodi Rafael Carvallo Domínguez}
+\asesorb{Dr. Rafael Santiago Godoy}
+\asesorc{}
+
+% ==============================================================================
+% DOCUMENTO
+% ==============================================================================
+\begin{document}
+	
+	\frontmatter
+	
+	\include{preliminares/portada_acta_manual.tex}
+	\dedicatoria
+	\agradecimientos
+	
+	\tabladecontenido
+	\include{preliminares/resumen}
+	\include{preliminares/abstract}
+	\listadefiguras
+	\listadetablas
+	
+	\input{preliminares/nomenclatura}
+	
+	\Introduccion
+	
+	% ======================================================================
+	% CAPÍTULOS NUMERADOS
+	% ======================================================================
+	\mainmatter
+	\setcounter{secnumdepth}{4}
+	\setcounter{tocdepth}{4}
+	
+	%\MarcodeReferencia
+	\include{preliminares/marco_referencia.tex}
+	\include{capitulos/diseconceptual}
+	\include{capitulos/implementacion}
+	\include{capitulos/discusion}
+	
+	% ======================================================================
+	% CONCLUSIONES SIN NÚMERO
+	% ======================================================================
+	\setcounter{secnumdepth}{-1}
+	\include{capitulos/conclusiones}
+	
+	\newpage
+	
+	\input{preliminares/references.tex}
+	
+	% ======================================================================
+	% APÉNDICES - CON NUMERACIÓN DE PÁGINA CONTINUA
+	% ======================================================================
+	\backmatter
+	\cleardoublepage
+	
+	\part{Apéndices}
+	
+	% Activar apéndices
+	\appendix
+	
+	% IMPORTANTE: Cambiar numeración de páginas a arábiga
+	\pagenumbering{arabic}
+	\setcounter{page}{35}  % Ajustar según la última página de contenido
+	
+	% Activar numeración de secciones
+	\setcounter{secnumdepth}{4}
+	\setcounter{tocdepth}{4}
+	
+	% Incluir apéndices
+	\include{apendices/Appendix_1}
+	
+	% ======================================================================
+	% ANEXOS - CONTINUAR NUMERACIÓN
+	% ======================================================================
+	\cleardoublepage
+	\part{Anexos}
+	
+	% Activar anexos
+	\anexo
+	
+	% NO resetear numeración de páginas, continuar donde quedó
+	% Solo mantener numeración activada
+	\setcounter{secnumdepth}{4}
+	\setcounter{tocdepth}{4}
+	
+	% Incluir anexos
+	\include{apendices/anexo1}
+	\include{apendices/anexo2}
+	\include{apendices/anexo3}
+	
+\end{document}

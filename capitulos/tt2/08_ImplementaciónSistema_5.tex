@@ -1,0 +1,90 @@
+\clearpage
+\section{Sistema de Control (S7)}
+El sistema de control actúa integra la lectura del estado físico del mecanismo (sensores) y la ejecución de los algoritmos de movimiento (procesamiento) para enviar señales a los actuadores y estos puedan realizar los movimientos de flexión-extensión.
+
+\subsection{Implementación del módulo de sensores (M12)}
+\subsubsection{Modificación al diseño del módulo de sensores}
+Originalmente, el diseño planteaba el uso de sensores ópticos. Sin embargo, durante la fase de implementación se realizó una modificación técnica sustituyéndolos por interruptores de límite mecánicos (\textit{limit switches}). 
+
+\textbf{Justificación del cambio:}
+Los sensores ópticos mostraron sensibilidad a las condiciones de iluminación ambiental, la superficie reflectante del aluminio, y requerían una alineación milimétrica difícil de mantener con las vibraciones del movimiento. Los interruptores mecánicos una conmutación entre 0 y 1 detectable para la detección de seguridad.
+
+\textbf{Configuración implementada:}
+Se instalaron un total de 4 sensores, alimentados con una tensión lógica de 3.3V proveniente de la Raspberry Pi:
+\begin{itemize}
+	\item \textbf{Eje lineal (flexión-extensión):}
+	\begin{itemize}
+		\item \textit{Sensor L1 (home/extensión):} Detecta el tope mecánico de extensión máxima ($0^\circ$).
+		\item \textit{Sensor L2 (límite flexión):} Detecta el tope de flexión máxima ($50^\circ$).
+	\end{itemize}
+	\item \textbf{Eje rotacional (abducción-aducción):}
+	\begin{itemize}
+		\item \textit{Sensor R1 (home/aducción):} Detecta el cierre completo de la pierna (línea media).
+		\item \textit{Sensor R2 (límite abducción):} Limita la apertura máxima permitida.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Verificación del módulo de sensores}
+\paragraph*{Prueba S7-01: Detección de estado lógico.}\mbox{}\\
+\textbf{Objetivo:} Verificar que la activación física de cada interruptor genera un cambio de estado detectable por el microcontrolador.
+\\
+\textbf{Procedimiento:} Se utilizó un script de diagnóstico en Python (`monitor\_limits.py`) que imprime el estado de los pines GPIO. Se procedió a presionar manualmente cada interruptor.
+\\
+\textbf{Resultados:} Todos los sensores conmutaron correctamente de estado lógico ALTO (1) a BAJO (0) al ser presionados, confirmando la integridad del cableado.
+
+\subsection{Implementación del módulo de acondicionamiento de señales (M13)}
+
+Para realizar la lectura de las señales digitales provenientes de los interruptores mecánicos y evitar lecturas flotantes o ruido electromagnético, se implementó una etapa de acondicionamiento de señal basada en resistencias de elevación (pull-up).
+
+\subsubsection{Diseño y fabricación de PCB de interfaz}
+Se diseñó y manufacturó una placa de circuito impreso (PCB) de propósito específico para la Raspberry Pi. Esta placa cumple dos funciones:
+\begin{enumerate}
+	\item \textbf{Concentrador de conexiones:} Recibe el cableado de los 4 sensores distribuidos en la estructura y centraliza las tierras (GND).
+	\item \textbf{Arreglo pull-up:} Integra resistencias de $10\text{k}\Omega$ conectadas a 3.3V en cada línea de señal. Esto asegura que, cuando el interruptor está abierto, el pin de la Raspberry lea un 1 estable, y solo cambie a 0 cuando el interruptor cierre el circuito a tierra.
+\end{enumerate}
+
+\subsubsection{Verificación del módulo de acondicionamiento}
+\paragraph*{Prueba S7-02: Estabilidad de voltaje y filtrado de ruido.}\mbox{}\\
+\textbf{Objetivo:} Confirmar que los niveles de tensión en los pines de entrada son compatibles con la lógica de 3.3V de la Raspberry Pi.
+\\
+\textbf{Procedimiento:} Con el sistema energizado, se midió con un multímetro el voltaje entre el pin de señal y GND en la PCB.
+\\
+\textbf{Resultados:}
+\begin{itemize}
+	\item Estado reposo: $3.28 \text{V}$ (Lógica 1).
+	\item Estado activo: $0.02 \text{V}$ (Lógica 0).
+\end{itemize}
+Estos valores garantizan que no existen voltajes intermedios que puedan causar indeterminación en el software.
+
+\subsection{Implementación del módulo de procesamiento (M14)}
+
+El núcleo de procesamiento se implementó sobre una \textbf{Raspberry Pi}, ejecutando el sistema operativo Raspberry Pi OS (Linux). La lógica de control se desarrolló íntegramente en lenguaje \textbf{Python 3}, integrando el control de hardware y la interfaz de usuario en una arquitectura multihilo.
+
+\subsubsection{Arquitectura del Software (`app\_fisio\_final.py`)}
+El código desarrollado utiliza librerías específicas para garantizar el rendimiento en tiempo real:
+\begin{itemize}
+	\item \textbf{Generación de Pulsos (pigpio):} A diferencia de las librerías estándar (Rpi.GPIO), se implementó la librería `pigpio` que utiliza el acceso directo a memoria (DMA) del procesador para generar trenes de pulsos hacia los drivers de los motores.
+	\item \textbf{Máquina de Estados:} El software implementa una lógica secuencial para los modos de operación:
+	\begin{enumerate}
+		\item \textit{Idle/Espera:} Sistema detenido, frenos activos.
+		\item \textit{Homing:} Rutina de búsqueda de ceros utilizando los sensores M12.
+		\item \textit{Run:} Ejecución de terapia siguiendo perfiles de velocidad trapezoidales.
+		\item \textit{Alarm:} Estado de bloqueo ante activación de límites de software o hardware.
+	\end{enumerate}
+\end{itemize}
+
+\subsubsection{Verificación del módulo de procesamiento}
+\paragraph*{Prueba S7-03: Precisión de posicionamiento y suavidad de movimiento.}\mbox{}\\
+\textbf{Objetivo:} Verificar que el software traduce correctamente los comandos lógicos en movimiento físico, validando la generación de pulsos sin necesidad de instrumentación osciloscópica.
+\\
+\textbf{Procedimiento:} 
+\begin{enumerate}
+	\item Se configuró el driver del motor Nema 23 a 1600 micropasos/revolución.
+	\item Desde el software, se comandó un desplazamiento de exactamente 1 revolución completa del eje del motor (equivalente a 1600 pulsos).
+	\item Se observó el desplazamiento angular resultante en el eje de salida.
+\end{enumerate}
+\textbf{Resultados:}
+\begin{itemize}
+	\item \textbf{Precisión:} El eje completó un giro de $360^\circ$ con un error visual menor a $1^\circ$, confirmando que no hubo pérdida de pulsos ni pulsos fantasma generados por el software.
+	\item \textbf{Calidad de movimiento:} Se observó una rotación fluida y un sonido constante durante la etapa de velocidad crucero, lo que indica que la librería `pigpio` está generando un tren de pulsos con frecuencia estable.
+\end{itemize}

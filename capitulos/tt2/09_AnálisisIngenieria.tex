@@ -1,0 +1,16 @@
+\section{Análisis de ingeniería}
+\subsection{Desempeño del sistema de control}
+% Este fragmento lo agrego pero después debo complementarlo con más información cuando se haga el análisis más completo.
+Debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo se optó por priorizar la calibración de los interruptores de límite y el botón de paro de emergencia manual como medidas principales, en lugar de solo depender únicamente de la limitación de corriente. 
+\subsection{Evaluación de interfaz de usuario}
+\subsection{Discrepancias entre diseño e implementación}
+Durante el proceso de construcción del proyecto se encontraron diversos desafíos que llevaron a tomar decisiones sobre el diseño planteado inicialmente, lo que llevó a discrepancias entre el diseño e implementación. Las discrepancias encontradas se presentan a continuación:
+\begin{enumerate}
+%	\item \textbf{Placas cortadas por láser.} Las placas que unen los mecanismos de flexión-extensión y abducción-aducción fueron cortadas con láser, y debido al calor generado en el corte, éstas modifican su forma original al doblarse, provocando que el ensamble físico no quede alineado tal cual se obtuvo en la simulación de SolidWorks. \\
+%	Para solucionar esta discrepancia el equipo tuvo que alinear el eje, las chumaceras y las placas al mismo tiempo en el ensamble físico antes de soldar. Esto implicas que las placas presentan un desplazamiento de milímetros en comparación con el modelo CAD.
+%	% Debo entender bien qué placas son las que se desplazaron y si es posible verlo en físico para comprender mejor
+%	\item \textbf{Barreno invertido en clévis (fémur).} En uno de los tubos telescópicos del fémur, un barreno para unión clévis fue soldado en sentido invertido al planteado en el diseño CAD, sin embargo, no afecta al funcionamiento ni el movimiento por lo que se decidió conservar dicho cambio debido a que el funcionamiento es aceptable.
+	\item \textbf{Componentes de seguridad no contemplados.} El diseño original no contemplaba un interruptor general, sin embargo, se decidió incorporar un breaker como protección adicional contra sobrecalentamiento o cortocircuitos. \\ 
+	Así mismo, el sistema no tenía un interruptor de encendido y apagado general integrado en el diseño original, por o que se decidió incorporarlo como parte de la sección de seguridad eléctrica.
+	% Reportar la integración del breaker en la sección correspondiente y hacer mención de la sección aquí en este apartado.	
+\end{enumerate}
