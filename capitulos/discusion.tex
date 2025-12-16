@@ -1,5 +1,5 @@
 \chapter{Discusión / Análisis de resultados}
-En este capítulo se realiza un análisis sobre los resultados de los diferentes sistemas que conforman el proyecto de ortesis robótica. Este análisis se divide en análisis de ingeniería y análisis de costos. El primero de ellos permite evaluar el desempeño del proyecto, identificando posibles áreas de mejora y puntos fuertes del mismo. Por otra parte, el análisis de costos que proporciona un panorama desglosado sobre los gastos y costos realizado, considerando factores como tiempo invertido, recursos utilizados y salarios del equipo de trabajo. A través de estos análisis se busca obtener una visión amplia sobre los alcances que logra este proyecto en términos de ingeniería y el valor económico que tendrá.
+En este capítulo se realiza un análisis sobre los resultados de los diferentes sistemas que conforman el proyecto de ortesis robótica. Este análisis se divide en análisis de ingeniería y análisis de costos. El primero de ellos permite evaluar el desempeño del proyecto, identificando posibles áreas de mejora y puntos fuertes del mismo. Por otra parte, el análisis de costos proporciona un panorama desglosado sobre los gastos y costos realizados, considerando factores como tiempo invertido, recursos utilizados y salarios del equipo de trabajo. A través de estos análisis se busca obtener una visión amplia sobre los alcances que logra este proyecto en términos de ingeniería y el valor económico que tendrá.
 \section{Análisis de ingeniería}
 \label{sec:analisis_ingenieria}
 Durante la fase de implementación e integración del prototipo de ortesis de rehabilitación, se llevaron a cabo validaciones funcionales que permitieron contrastar las estimaciones de diseño con el comportamiento físico real del sistema. Este análisis se centra en la integridad estructural, la respuesta de los sistemas de actuación bajo carga y la fiabilidad de los mecanismos de seguridad implementados.
@@ -8,7 +8,7 @@ Durante la fase de implementación e integración del prototipo de ortesis de re
 La estructura de soporte fue sometida a cargas estáticas y dinámicas superiores a los valores nominales de operación. A diferencia de las simulaciones de elemento finito (FEM) que predecían deformaciones despreciables, las pruebas físicas con una carga distribuida de 92 kg confirmaron que el eje de acero y los mecanismos de aluminio mantienen su rigidez sin presentar pandeo ni deformación plástica permanente.
 
 \textbf{Discrepancia y corrección en manufactura:}
-Se identificó que las tolerancias de corte láser en las placas de unión generaban una fricción no modelada en el ensamble CAD. La corrección mediante alineación activa y el ajuste de chumaceras permitió reducir la resistencia mecánica, validando que el sistema estructural es capaz de soportar a pacientes dentro del percentil P95 (hasta 90 kg).
+Se identificó que las tolerancias de oxicorte en las placas de unión generaban una fricción no modelada en el ensamble CAD. La corrección mediante alineación activa y el ajuste de chumaceras permitió reducir la resistencia mecánica, validando que el sistema estructural es capaz de soportar a pacientes dentro del percentil P95 (hasta 90 kg).
 
 \subsection{Análisis del sistema de actuación y transmisión}
 El desempeño del sistema de movimiento presentó la desviación más significativa respecto al diseño teórico.
@@ -31,6 +31,20 @@ El prototipo final cumple con los objetivos funcionales de realizar movimientos 
 \input{capitulos/tt2/09_AnálisisValorCostos.tex}
 
 \section{Análisis de valor}
+El valor del prototipo desarrollado no reside únicamente en su costo de fabricación, sino en la relación costo-beneficio que ofrece frente a las soluciones actuales de rehabilitación y las problemáticas clínicas detectadas.
+
+\textbf{Valor económico y accesibilidad:}
+Mientras que los equipos comerciales de rehabilitación robótica (como los sistemas CPM de rodilla o exoesqueletos clínicos) tienen costos de mercado que oscilan entre \$150,000 y más de \$1,000,000 MXN, este prototipo se materializó con un costo directo de componentes de \textbf{\$48,951.07 MXN}. Esto representa una reducción de costos de entre el \textbf{65\% y el 95\%} respecto a alternativas comerciales.
+
+\textbf{Valor funcional y operativo:}
+El dispositivo integra cualidades de diseño robusto y seguridad industrial (actuadores con reducción planetaria 10:1 y paro de categoría 0) que permiten:
+\begin{itemize}
+    \item \textbf{Reducir la carga física del terapeuta:} Al automatizar los movimientos repetitivos de flexión-extensión y abducción-aducción, el sistema libera al especialista del esfuerzo mecánico, permitiéndole enfocarse en la supervisión clínica y la evaluación del progreso del paciente.
+    \item \textbf{Garantizar la repetibilidad del tratamiento:} A diferencia de la terapia manual, donde la velocidad y el ángulo pueden variar por fatiga humana, el sistema procura que cada ciclo de terapia se ejecute con los parámetros programados en la interfaz HMI.
+\end{itemize}
+
+\textbf{Valor social e ingeniería:}
+El desarrollo de ingeniería (valuado en \$648,000 MXN) ha generado un activo tecnológico de propiedad intelectual propia, con una arquitectura modular y escalable. Esto elimina la dependencia tecnológica de fabricantes extranjeros para el mantenimiento o reparación, ya que el sistema utiliza componentes industriales estándar y software de código abierto (Python/Qt), con lo cual se busca que el proyecto tenga una vida útil prolongada y bajos costos de operación a largo plazo.
 
 
 

@@ -1,8 +1,15 @@
+\clearpage
 \section{Sistema de Energía (S4)}
 La implementación del sistema de energía se reestructuró para alcanzar la estabilidad operativa, separando físicamente la alimentación de la lógica de control de la alimentación de los actuadores de potencia.
 \subsection{Implementación del módulo de paro de emergencia (M5)}
-\subsubsection{Modificación al módulo de seguridad (paro categoría 0 selectivo)}
-Se configuró el botón de paro tipo hongo (NC) para cortar físicamente la alimentación AC exclusivamente de las fuentes de potencia (48V y 24V).
+\subsubsection{Modificación al módulo de seguridad}
+Se configuró el botón de paro tipo hongo (NC) para cortar físicamente la alimentación AC exclusivamente de las fuentes de potencia (48V y 24V) descartando el uso del relevador contemplado en el diseño. Esto se debió a que al activar y desactivar el botón de paro de emergencia, el relevador recibía corrientes parásitas que no reactivaban el sistema aun después de haber liberado el botón de paro de emergencia de forma manual. \\
+En la Fig. \ref{fig:boton_paro_emergencia_ubicación} se muestra la ubicación en la cual fue posicionado el botón de paro de emergencia sobre la estructura de PTR del sistema estructural (S1).
+ \begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=0.6\textwidth]{figure/img_componentes/boton_paro.png}
+	\caption{Ubicación del botón de paro de emergencia en estructura de la cama.\label{fig:boton_paro_emergencia_ubicación}}
+\end{figure}
 
 \textbf{Funcionalidad dual implementada:}
 \begin{itemize}
@@ -45,7 +52,7 @@ Debido a los requerimientos de corriente diferenciados, se implementaron tres fu
 \end{itemize}
 
 \subsubsection{Verificación de estabilidad}
-\paragraph*{Prueba S4-01: Estabilidad de buses independientes.}\mbox{}\\
+\paragraph*{Prueba S4-01: Estabilidad de fuentes independientes.}\mbox{}\\
 \textbf{Resultado:} La separación de fuentes eliminó las caídas de voltaje en la Raspberry Pi que ocurrían al encender los motores en las pruebas preliminares, validando la decisión de emplear tres fuentes.
 \clearpage
 \section{Sistema de Movimiento (S5)}

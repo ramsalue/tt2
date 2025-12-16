@@ -79,6 +79,25 @@ Los soportes directos para la pierna y pie se fabricaron mediante impresión 3D 
 Aunque el diseño contempla el uso de cintas de velcro para la sujeción final, durante la fase de pruebas funcionales se priorizó la validación del mecanismo de ajuste telescópico y la rigidez de los soportes impresos.
 
 \subsubsection{Verificación del módulo de sujeción (M4)}
-%Se validó el funcionamiento de los topes mecánicos como medida de última instancia ante una falla de control.
-\paragraph*{Prueba S3-02:}
+
+\paragraph*{Prueba S3-02: Validación de sujeción ergonómica y estabilidad.}\mbox{}\\
+\textbf{Objetivo:} Verificar que el sistema de sujeción (soportes impresos y cintas de velcro) mantiene la extremidad fija y alineada con el eje mecánico durante el movimiento.
+En la Fig. \ref{fig:sujeciones} se muestran los tres puntos de sujeción de la pierna para mantenerla fija al mecanismo de flexión-extensión.
+ \begin{figure}[h!]
+	\centering
+	\includegraphics [trim = 0 0cm 0 0, clip, width=0.5\textwidth]{figure/img_estructura/sujeciones.png}
+	\caption{Puntos de sujeción de la extremidad inferior derecha en mecanismo de flexión-extensión.\label{fig:sujeciones}}
+\end{figure}
+
+\textbf{Procedimiento:} 
+\begin{enumerate}
+    \item Se ajustó la longitud telescópica de la estructura para coincidir con la longitud de pierna del usuario de prueba.
+    \item Se colocó la extremidad sobre los soportes acolchados (colchonetas).
+    \item Se aseguraron firmemente los segmentos de muslo y pantorrilla utilizando las tiras de velcro implementadas.
+    \item Se ejecutó un ciclo completo de flexión-extensión.
+\end{enumerate}
+\textbf{Resultados:} 
+\begin{itemize}
+    \item \textbf{Estabilidad:} Las cintas de velcro evitaron cualquier deslizamiento lateral o longitudinal de la pierna durante la terapia, logrando que el movimiento del motor se transmitiera efectivamente a la articulación de la rodilla.
+\end{itemize}
 

@@ -20,18 +20,16 @@ La lógica de interacción se programó en lenguaje \textbf{Python 3}, utilizand
 	\item \textbf{Hilo principal (Main Thread):} Gestiona los eventos de la interfaz (botones, cambio de ventanas) garantizando una respuesta visual fluida.
 	\item \textbf{Hilos de trabajo (Worker Threads):} Se implementaron clases dedicadas (\texttt{QThread}) para ejecutar los bucles de control de los motores y la lectura de sensores mediante la librería \texttt{pigpio}. Esto evita que la interfaz se congele durante la ejecución de las rutinas de terapia.
 \end{itemize}
-
 La navegación se estructuró mediante un \texttt{QStackedWidget} que administra las pantallas de: \textit{Inicio, Posicionamiento inicial, Calibración, Selección de Terapia, Pantalla de ejercicio y Ejecución}.
-
-%\begin{figure}[h!]
-%	\centering
-%	\includegraphics[width=0.45\textwidth]{figure/pantallas_interfaz/App Ver1.0/Inicio.png}
-%	\hfill
-%	\includegraphics[width=0.45\textwidth]{figure/pantallas_interfaz/App Ver1.0/Terapia.png}
-%	\caption{Interfaz gráfica implementada: Pantalla de Bienvenida (izq) y Monitor de Terapia (der).}
-%	\label{fig:gui_screens}
-%\end{figure}
-
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.48\textwidth]{figure/pantallas_interfaz/App Ver1.0/Inicio_tt2.png}
+	\hfill
+	\includegraphics[width=0.48\textwidth]{figure/pantallas_interfaz/App Ver1.0/Terapia_tt2.png}
+	\caption{Interfaz gráfica implementada: Pantalla de Bienvenida (izq) y Monitor de Terapia (der).}
+	\label{fig:gui_screens}
+\end{figure}
+\vspace{-1cm}
 \subsubsection{Verificación del módulo de visualización}
 \paragraph*{Prueba S6-01: Respuesta táctil y fluidez gráfica.}\mbox{}\\
 \textbf{Objetivo:} Verificar que la interfaz responde a los eventos táctiles en tiempo real y se ajusta a la resolución nativa sin distorsión.

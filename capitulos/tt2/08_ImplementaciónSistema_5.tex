@@ -10,7 +10,7 @@ Originalmente, el diseño planteaba el uso de sensores ópticos. Sin embargo, du
 Los sensores ópticos mostraron sensibilidad a las condiciones de iluminación ambiental, la superficie reflectante del aluminio, y requerían una alineación milimétrica difícil de mantener con las vibraciones del movimiento. Los interruptores mecánicos una conmutación entre 0 y 1 detectable para la detección de seguridad.
 
 \textbf{Configuración implementada:}
-Se instalaron un total de 4 sensores, alimentados con una tensión lógica de 3.3V proveniente de la Raspberry Pi:
+Se instalaron un total de 4 sensores, alimentados con una tensión lógica de 3.3V proveniente de la Raspberry Pi [Fig. \ref{fig:sensores_limit_switches}]:
 \begin{itemize}
 	\item \textbf{Eje lineal (flexión-extensión):}
 	\begin{itemize}
@@ -23,6 +23,14 @@ Se instalaron un total de 4 sensores, alimentados con una tensión lógica de 3.
 		\item \textit{Sensor R2 (límite abducción):} Limita la apertura máxima permitida.
 	\end{itemize}
 \end{itemize}
+\begin{figure}[h!]
+	\centering
+	\subcaptionbox{Limit switch para movimiento de extensión.\label{fig:limit_flexion}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_componentes/limit_flexion.png}}
+	\subcaptionbox{Limit switch para movimiento de abducción.\label{fig:limit_abduccion}}
+	{\includegraphics [trim = 0 0cm 0 0, clip,width=6cm]{figure/img_componentes/limit_abduccion.png}}
+	\caption{Sensores limit switches posicionados en mecanismo de flexión-extensión y abducción-aducción.\label{fig:sensores_limit_switches}}
+\end{figure}
 
 \subsubsection{Verificación del módulo de sensores}
 \paragraph*{Prueba S7-01: Detección de estado lógico.}\mbox{}\\
