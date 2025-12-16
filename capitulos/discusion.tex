@@ -1,7 +1,31 @@
 \chapter{Discusión / Análisis de resultados}
-
+En este capítulo se realiza un análisis sobre los resultados de los diferentes sistemas que conforman el proyecto de ortesis robótica. Este análisis se divide en análisis de ingeniería y análisis de costos. El primero de ellos permite evaluar el desempeño del proyecto, identificando posibles áreas de mejora y puntos fuertes del mismo. Por otra parte, el análisis de costos que proporciona un panorama desglosado sobre los gastos y costos realizado, considerando factores como tiempo invertido, recursos utilizados y salarios del equipo de trabajo. A través de estos análisis se busca obtener una visión amplia sobre los alcances que logra este proyecto en términos de ingeniería y el valor económico que tendrá.
 \section{Análisis de ingeniería}
+\label{sec:analisis_ingenieria}
+Durante la fase de implementación e integración del prototipo de ortesis de rehabilitación, se llevaron a cabo validaciones funcionales que permitieron contrastar las estimaciones de diseño con el comportamiento físico real del sistema. Este análisis se centra en la integridad estructural, la respuesta de los sistemas de actuación bajo carga y la fiabilidad de los mecanismos de seguridad implementados.
 
+\subsection{Desempeño estructural y mecánico}
+La estructura de soporte fue sometida a cargas estáticas y dinámicas superiores a los valores nominales de operación. A diferencia de las simulaciones de elemento finito (FEM) que predecían deformaciones despreciables, las pruebas físicas con una carga distribuida de 92 kg confirmaron que el eje de acero y los mecanismos de aluminio mantienen su rigidez sin presentar pandeo ni deformación plástica permanente.
+
+\textbf{Discrepancia y corrección en manufactura:}
+Se identificó que las tolerancias de corte láser en las placas de unión generaban una fricción no modelada en el ensamble CAD. La corrección mediante alineación activa y el ajuste de chumaceras permitió reducir la resistencia mecánica, validando que el sistema estructural es capaz de soportar a pacientes dentro del percentil P95 (hasta 90 kg).
+
+\subsection{Análisis del sistema de actuación y transmisión}
+El desempeño del sistema de movimiento presentó la desviación más significativa respecto al diseño teórico.
+
+\begin{itemize}
+    \item \textbf{Flexión-Extensión (Eje Lineal):} El actuador Nema 23 con transmisión por tornillo sin fin demostró ser suficiente para desplazar la carga, validando los cálculos de par iniciales. La velocidad de operación se mantuvo constante y fluida, confirmando la correcta selección de la relación de transmisión.
+    
+    \item \textbf{Abducción-aducción (eje rotacional):} Las pruebas iniciales revelaron que el par de retención del motor Nema 34 en acople directo era insuficiente para vencer el momento de inercia de la extremidad en ángulos cercanos a la horizontal. La implementación de la caja reductora planetaria 10:1 no solo corrigió este déficit, multiplicando el par efectivo, sino que también mejoró la resolución angular del movimiento, permitiendo terapias más suaves y seguras a bajas velocidades.
+\end{itemize}
+
+\subsection{Modificaciones en sistemas de seguridad y energía}
+La reingeniería del sistema de alimentación, migrando de una fuente única de 5V a una implementación de fuentes independientes (48V, 24V y control aislado), permitió aislar ruido eléctrico que afectaba al sistema de control, y proveer la corriente requerida por cada uno de los drivers para activar a sus respectivos motores.
+
+Desde la perspectiva de seguridad, la implementación del paro de categoría 0 demostró ser una medida eficaz. Las pruebas de tiempo de respuesta confirmaron que la interrupción física de la línea de potencia detiene los actuadores de manera inmediata (<100 ms), mientras que la persistencia del sistema de control (HMI y Raspberry Pi) permite al operador visualizar el estado de alarma, superando la funcionalidad de seguridad de los sistemas comerciales básicos que se apagan totalmente.
+
+\subsection{Valoración global del sistema}
+El prototipo final cumple con los objetivos funcionales de realizar movimientos de terapia pasiva en dos grados de libertad. La sustitución de sensores ópticos por interruptores mecánicos y la adición de la reducción planetaria elevaron la robustez del equipo, transformándolo de un modelo experimental a un prototipo funcional capaz de operar en condiciones reales de carga sin requerir calibración constante.
 
 \section{Análisis de costos}
 %\input{capitulos/tt2/09_AnálisisValorCostos.tex}
