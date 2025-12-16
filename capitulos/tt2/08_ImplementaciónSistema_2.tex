@@ -33,14 +33,14 @@ Se realizó una revisión técnica respecto al diseño original. Dado que el sis
 \section{Sistema de seguridad mecánico (S3)}\label{Implementacion S3}
 La seguridad mecánica constituye la segunda capa de protección del proyecto, actuando como una barrera física pasiva que protege la integridad del paciente y del mecanismo en caso de fallo del sistema de control, ya que, debido a la alta capacidad de par del actuador lineal seleccionado (Nema 23 con driver HSSS57) en relación con la rigidez estructural del mecanismo, existía un riesgo de daño mecánico en caso de colisión por fallo de control.
 \subsection{Modificaciones al diseño del sistema de seguridad mecánico}
-Durante la integración yu verificación del sistema de seguridad mecánico se encontró que los topes mecánicos diseñados para el movimiento lineal de flexión-extensión no resultaban apropiados, debido a que el tornillo mariposa rayaba la superficie de aluminio al intentar detener el mecanismo de flexión-extensión, lo que llevó al diseño de nuevo topes que se pudieran adaptar a la estructura estática de aluminio.
+Durante la integración y verificación del sistema de seguridad mecánico se encontró que los topes mecánicos diseñados para el movimiento lineal de flexión-extensión no resultaban apropiados, debido a que el tornillo mariposa rayaba la superficie de aluminio al intentar detener el mecanismo de flexión-extensión, lo que llevó al diseño de nuevo topes que se pudieran adaptar a la estructura estática de aluminio.
  \begin{figure}[h!]
 	\centering
 	\includegraphics [trim = 0 0cm 0 0, clip, width=0.48\textwidth]{figure/img_estructura/tope_flexion_lateral}
 	\caption{Vista frontal del nuevo diseño para la sujeción del tope mecánico en el movimiento lineal de flexión-extensión.\label{fig:tope_flexion_frontal}}
 \end{figure}
 
-La principal diferencia con los topes diseñados [Fig. \ref{fig:Pina_Figura17}] radica en la forma en la que el tornillo mariposa hace contacto con la estructura de aluminio. En la Fig. \ref{fig:tope_flexion_frontal} se puede observar el nuevo diseño donde el tornillo mariposa hace presión sobre la cara superior de la estructura estática de aluminio donde se interpone una placa de XX mm de grosor que evita el contacto directo del tornillo con la estructura.
+La principal diferencia con los topes diseñados [Fig. \ref{fig:Pina_Figura17}] radica en la forma en la que el tornillo mariposa hace contacto con la estructura de aluminio. En la Fig. \ref{fig:tope_flexion_frontal} se puede observar el nuevo diseño donde el tornillo mariposa hace presión sobre la cara superior de la estructura estática de aluminio donde se interpone una placa de 1 mm de grosor que evita el contacto directo del tornillo con la estructura.
 
 Se procede con la descripción de la implementación de los módulos del sistema de seguridad mecánico. El sistema se compone de dos módulos: M3 y M4.
 \subsection{Implementación de topes mecánicos (M3)}

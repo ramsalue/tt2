@@ -21,7 +21,7 @@ La lógica de interacción se programó en lenguaje \textbf{Python 3}, utilizand
 	\item \textbf{Hilos de trabajo (Worker Threads):} Se implementaron clases dedicadas (\texttt{QThread}) para ejecutar los bucles de control de los motores y la lectura de sensores mediante la librería \texttt{pigpio}. Esto evita que la interfaz se congele durante la ejecución de las rutinas de terapia.
 \end{itemize}
 
-La navegación se estructuró mediante un \texttt{QStackedWidget} que administra las pantallas de: \textit{Inicio, Calibración, Selección de Terapia y Ejecución}.
+La navegación se estructuró mediante un \texttt{QStackedWidget} que administra las pantallas de: \textit{Inicio, Posicionamiento inicial, Calibración, Selección de Terapia, Pantalla de ejercicio y Ejecución}.
 
 %\begin{figure}[h!]
 %	\centering
@@ -36,7 +36,7 @@ La navegación se estructuró mediante un \texttt{QStackedWidget} que administra
 \paragraph*{Prueba S6-01: Respuesta táctil y fluidez gráfica.}\mbox{}\\
 \textbf{Objetivo:} Verificar que la interfaz responde a los eventos táctiles en tiempo real y se ajusta a la resolución nativa sin distorsión.
 \\
-\textbf{Procedimiento:} Se ejecutó el script \texttt{app\_fisio\_final.py} en el entorno real. Se realizaron pulsaciones rápidas en los botones de navegación y se observó el consumo de CPU.
+\textbf{Procedimiento:} Se ejecutó el script \texttt{app\_fisioterapia.py} en el entorno real. Se realizaron pulsaciones rápidas en los botones de navegación y se observó el consumo de CPU.
 \\
 \textbf{Resultados:} La interfaz ocupa la totalidad del área activa (Fullscreen). La transición entre menús es menor a 100ms. Los botones táctiles activan correctamente las señales lógicas sin necesidad de teclado/mouse externo.
 
@@ -49,9 +49,9 @@ Se utilizó una tarjeta MicroSD de 32GB (Clase 10 / UHS-I) para conseguir altas 
 La estructura de directorios se organizó para permitir el acceso relativo a los recursos, independientemente de la ruta absoluta de instalación:
 \begin{verbatim}
 	/home/pi/TT2_Software/
-	├── app_fisio_final.py   (Código fuente principal)
+	├── app_fisioterapia.py   (Código fuente principal)
 	├── styles.py            (Hoja de estilos y constantes visuales)
-	└── assets/              (Iconos, logotipos y diagramas de ayuda)
+	└── icons/              (Iconos, logotipos y diagramas de ayuda)
 \end{verbatim}
 
 Esta organización permite que el software sea portable y facilita la actualización de los archivos de imagen sin modificar el código fuente.

@@ -40,7 +40,7 @@ Para realizar la lectura de las señales digitales provenientes de los interrupt
 Se diseñó y manufacturó una placa de circuito impreso (PCB) de propósito específico para la Raspberry Pi. Esta placa cumple dos funciones:
 \begin{enumerate}
 	\item \textbf{Concentrador de conexiones:} Recibe el cableado de los 4 sensores distribuidos en la estructura y centraliza las tierras (GND).
-	\item \textbf{Arreglo pull-up:} Integra resistencias de $10\text{k}\Omega$ conectadas a 3.3V en cada línea de señal. Esto asegura que, cuando el interruptor está abierto, el pin de la Raspberry lea un 1 estable, y solo cambie a 0 cuando el interruptor cierre el circuito a tierra.
+	\item \textbf{Arreglo pull-up:} Integra resistencias de $10\text{k}\Omega$ en paralelo con capacitores que actuan como un filtro de ruido, conectadas a 3.3V en cada línea de señal. Esto asegura que, cuando el interruptor está abierto, el pin de la Raspberry lea un 1 estable, y solo cambie a 0 cuando el interruptor cierre el circuito a tierra.
 \end{enumerate}
 
 \subsubsection{Verificación del módulo de acondicionamiento}
@@ -69,7 +69,7 @@ El código desarrollado utiliza librerías específicas para garantizar el rendi
 		\item \textit{Idle/Espera:} Sistema detenido, frenos activos.
 		\item \textit{Homing:} Rutina de búsqueda de ceros utilizando los sensores M12.
 		\item \textit{Run:} Ejecución de terapia siguiendo perfiles de velocidad trapezoidales.
-		\item \textit{Alarm:} Estado de bloqueo ante activación de límites de software o hardware.
+		\item \textit{Stop:} Estado de bloqueo ante activación de límites de software o hardware.
 	\end{enumerate}
 \end{itemize}
 
