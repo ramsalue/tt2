@@ -1,5 +1,5 @@
 \clearpage
-\section{Sistema de SEBAS (S7)}
+\section{Sistema de control (S7)}
 El sistema de control actúa integra la lectura del estado físico del mecanismo (sensores) y la ejecución de los algoritmos de movimiento (procesamiento) para enviar señales a los actuadores y estos puedan realizar los movimientos de flexión-extensión.
 
 \subsection{Implementación del módulo de sensores (M12)}
@@ -60,7 +60,7 @@ Estos valores garantizan que no existen voltajes intermedios que puedan causar i
 
 El núcleo de procesamiento se implementó sobre una \textbf{Raspberry Pi}, ejecutando el sistema operativo Raspberry Pi OS (Linux). La lógica de control se desarrolló íntegramente en lenguaje \textbf{Python 3}, integrando el control de hardware y la interfaz de usuario en una arquitectura multihilo.
 
-\subsubsection{Arquitectura del Software (`app\_fisio\_final.py`)}
+\subsubsection{Arquitectura del Software (app\_fisio\_final.py)}
 El código desarrollado utiliza librerías específicas para garantizar el rendimiento en tiempo real:
 \begin{itemize}
 	\item \textbf{Generación de Pulsos (pigpio):} A diferencia de las librerías estándar (Rpi.GPIO), se implementó la librería `pigpio` que utiliza el acceso directo a memoria (DMA) del procesador para generar trenes de pulsos hacia los drivers de los motores.
