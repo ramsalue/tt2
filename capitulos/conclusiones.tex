@@ -1,13 +1,62 @@
 
 \chapter{Conclusiones}
+Con base en los resultados obtenidos a través del diseño, la implementación y la integración del prototipo de ortesis robótica, se presentan los siguientes logros significativos que destacan la funcionalidad, seguridad y el impacto del dispositivo desarrollado.
 
-una conclusi\'on\index{conclusión}
+Se logró implementar un sistema de actuadores para los dos grados de libertad requeridos (flexión-extensión y abducción-aducción). La integración estratégica de una caja reductora planetaria 10:1 en el eje de cadera permitió superar las limitaciones de par iniciales, logrando con ello el levantamiento de la extremidad de pacientes reales con un movimiento controlado, validando la capacidad del sistema para realizar terapias pasivas.
 
-\section{Recomendaciones y trabajo futuro}
+La seguridad del paciente y del operador se logró mediante una arquitectura de protección en capas. La implementación de un esquema de paro de categoría 0 interrumpe físicamente la alimentación de potencia mientras mantiene activo el sistema de monitoreo y control, junto con la modificación de topes mecánicos y sensores de límite, lo que permite que el dispositivo opere dentro de rangos seguros.
 
-%
+La estabilidad del sistema se optimizó gracias a la reestructuración del sistema de energía. La separación de las etapas de potencia y control mediante fuentes independientes eliminó la interferencia electromagnética y las caídas de tensión, permitiendo que el procesador central y la interfaz HMI funcionen de manera ininterrumpida incluso bajo condiciones de alta demanda de corriente de los motores.
 
+El desarrollo de una interfaz Humano-Máquina (HMI), basada en una arquitectura de software multihilo, permite la interacción del terapeuta con el equipo. Esto permite la configuración de rutinas de rehabilitación y la visualización de parámetros en el momento en que se realiza la sesión de terapia, transformando un sistema electromecánico complejo en una herramienta clínica operable.
 
+Finalmente, el análisis de valor confirma que el prototipo es una alternativa viable y accesible. Con un costo de material inferior a \$50,000 MXN, el dispositivo ofrece funcionalidades comparables a equipos comerciales de gama alta, cumpliendo con el objetivo de facilitar el acceso a la tecnología de rehabilitación sin comprometer la calidad, la ergonomía o la seguridad del tratamiento.
 
+En conclusión, el prototipo desarrollado no solo cumple con los objetivos técnicos y clínicos planteados, sino que representa una plataforma tecnológica robusta y escalable que sienta las bases para futuras investigaciones en sistemas de asistencia robótica de bajo costo y alto impacto social.
+
+\section*{Recomendaciones y trabajo a futuro}
+\addcontentsline{toc}{section}{Recomendaciones y trabajo a futuro}
+Con el objetivo de incrementar la robustez, seguridad y adaptabilidad del prototipo para futuras iteraciones clínicas, se plantean las siguientes líneas de mejora técnica y operativa:
+
+\subsection*{Seguridad ante fallos de suministro eléctrico}
+Durante la operación del sistema de la ortesis existe la posibilidad de una pérdida del suministro eléctrico mientras el paciente se encuentra utilizando el dispositivo. Este escenario representa un riesgo de inmovilización del usuario y posibles lesiones debido a la detención inesperada de los actuadores y la pérdida de control de los mecanismos de sujeción.
+
+\subsubsection*{Consecuencias principales}
+\begin{itemize}
+	\item Interrupción inmediata del movimiento, que puede provocar incomodidad o dolor al paciente si el dispositivo se detiene en una posición desfavorable.
+	\item Dificultad para retirar al paciente del sistema en caso de bloqueo mecánico de la transmisión.
+\end{itemize}
+
+\subsubsection*{Medidas de mitigación propuestas}
+Aunque en la presente fase del proyecto (Trabajo Terminal II) no se implementará una solución definitiva, se recomienda considerar las siguientes acciones en el desarrollo posterior:
+\begin{itemize}
+	\item \textbf{Sistema de respaldo de energía:} Incorporar una unidad de alimentación ininterrumpida (UPS) o batería de respaldo que permita, al menos, liberar los actuadores lineales y rotativos para retirar al paciente con seguridad.
+	\item \textbf{Mecanismo de liberación manual:} Diseñar un sistema mecánico \textit{fail-safe} (desembrague mecánico) que permita desacoplar los actuadores de forma manual, permitiendo la movilidad libre del miembro ortopédico para la evacuación.
+	\item \textbf{Alarma sonora y visual:} Implementar una señal acústica y luminosa que alerte inmediatamente al personal de la pérdida de alimentación eléctrica.
+\end{itemize}
+
+\subsection*{Optimización del control de movimiento en abducción-aducción}
+Durante las pruebas de validación, se observó que el mecanismo de abducción-aducción presenta oscilaciones mecánicas al alcanzar los puntos extremos de la trayectoria. Este comportamiento se atribuye a la inercia de la estructura en movimiento y al cambio abrupto de estado al detener el tren de pulsos.
+\subsubsection*{Estrategias de control avanzado}
+Para amortiguar este comportamiento y suavizar la transición en los cambios de dirección, se proponen las siguientes mejoras en el algoritmo de control:
+\begin{itemize}
+    \item \textbf{Implementación de rampas de velocidad:} Sustituir la generación de trenes de pulsos rectangulares (velocidad constante instantánea) por perfiles de velocidad trapezoidales o curvas en S (\textit{S-curves}). Esto permitirá una aceleración y desaceleración progresiva, minimizando el "jerk" (tirones) y absorbiendo la inercia remanente del mecanismo antes de la parada total.
+    \item \textbf{Control PID de posición:} Integrar un algoritmo de control Proporcional-Integral-Derivativo (PID) en lazo cerrado. Al aprovechar la retroalimentación del encoder del motor en tiempo real, el controlador podrá anticipar la llegada al \textit{setpoint} y ajustar la potencia suavemente, eliminando el sobreimpulso (\textit{overshoot}) y las vibraciones finales.
+\end{itemize}
+
+\subsection*{Personalización de perfiles de velocidad en interfaz HMI}
+Actualmente, la velocidad de operación es constante una vez iniciada la rutina. Para mejorar la experiencia terapéutica y adaptarla a pacientes con diferentes grados de sensibilidad o espasticidad, se recomienda ampliar las funcionalidades del software de control.
+\begin{itemize}
+    \item \textbf{Configuración de rampas de inicio:} Incluir en la interfaz gráfica (GUI) un selector de "Perfil de Arranque" que permita al fisioterapeuta definir si el movimiento debe iniciar de manera muy lenta (para calentamiento) e incrementar gradualmente, o mantener una velocidad constante desde el principio.
+    \item \textbf{Modulación dinámica:} Permitir la configuración de diferentes velocidades para las fases de ida (flexión/abducción) y retorno (extensión/aducción), brindando mayor versatilidad en los protocolos de rehabilitación.
+\end{itemize}
+
+\subsection*{Protección y rediseño de PCB}
+Actualmente, el sistema utiliza una PCB de interfaz diseñada y manufacturada de forma artesanal (planchado y cloruro férrico) para el acondicionamiento de señales. Para mejorar su durabilidad y profesionalismo, se recomiendan las siguientes mejoras:
+\begin{itemize}
+    \item \textbf{Fabricación de PCB (solder mask): }Rediseñar la PCB para mandarla a fabricar industrialmente con una máscara antisoldante (habitualmente verde). Esto previene la oxidación de las pistas de cobre expuestas y evita cortocircuitos por humedad o manipulación.
+    \item \textbf{Recubrimiento conformado (conformal coating)}:Aplicar un barniz protector aislante sobre la placa terminada para protegerla de agentes externos, polvo y la vibración mecánica detectada en el entorno terapéutico.
+    \item \textbf{Serigrafía de componentes:} Incluir una capa de serigrafía (silkscreen) para identificar cada pin de conexión (sensores L1, L2, R1, R2), lo cual facilita el mantenimiento y evita errores de conexión en futuras reparaciones .
+\end{itemize}
 %%%%%%fin del archivo
 \endinput 

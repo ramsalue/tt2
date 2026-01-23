@@ -26,10 +26,34 @@ Desde la perspectiva de seguridad, la implementación del paro de categoría 0 d
 
 \subsection{Valoración global del sistema}
 El prototipo final cumple con los objetivos funcionales de realizar movimientos de terapia pasiva en dos grados de libertad. La sustitución de sensores ópticos por interruptores mecánicos y la adición de la reducción planetaria elevaron la robustez del equipo, transformándolo de un modelo experimental a un prototipo funcional capaz de operar en condiciones reales de carga sin requerir calibración constante.
+\subsection{Consumo energético y conexión}
+El proyecto está diseñado para ser operado en entornos clínicos o domésticos convencionales, sin necesidad de instalaciones eléctricas especiales.
+\begin{itemize}
+	\item \textbf{Tipo de conexión:}  
+	El sistema requiere una toma de corriente monofásica estándar de \SI{127}{\volt} a \SI{60}{\hertz}. Capaz para ser operado en entornos clínicos o domésticos convencionales, sin necesidad de instalaciones eléctricas especiales.
 
+	\item \textbf{Consumo máximo:}  
+    El sistema integra tres fuentes de alimentación independientes con el objetivo de aislar el ruido eléctrico. La demanda máxima de corriente desde la red se encuentra protegida mediante un fusible de \SI{10}{\ampere}. El consumo interno se distribuye entre el motor NEMA 34 (con corriente nominal de hasta \SI{8}{\ampere}) y el motor NEMA 23, además del consumo del sistema de control, estimado en \SI{3}{\ampere} para la Raspberry Pi y la interfaz hombre-máquina (HMI).
+
+	\item \textbf{Potencia instalada:}  
+	La fuente de alimentación principal (Mean Well LRS-600-48) cuenta con una capacidad nominal de \SI{600}{\watt}, lo que permite un suministro estable incluso durante condiciones de arranque con alta demanda de potencia.
+\end{itemize}
+\subsection{Especificaciones de usuario}
+De acuerdo con los requerimientos técnicos y funcionales establecidos en el diseño del sistema, se definen las siguientes especificaciones de usuario:
+\begin{itemize}
+	\item \textbf{Perfil clínico:}  
+	Adultos con diagnóstico de hemiplejia derecha en etapa de flacidez, correspondiente a un nivel 0 en la Escala de Ashworth, que requieran movilización pasiva de la extremidad inferior.
+	\item \textbf{Dimensiones antropométricas:}  
+	El sistema es adaptable a usuarios con estaturas comprendidas entre \SI{150}{\centi\meter} y \SI{180}{\centi\meter}; sin embargo, la compatibilidad final está determinada por la coincidencia de las longitudes de los segmentos corporales (fémur y tibia) con los rangos de ajuste del mecanismo.
+	\item \textbf{Límites de segmentos:}  
+	Los tubos telescópicos permiten el ajuste de la longitud del fémur en un rango de \SI{31}{\centi\meter} a \SI{45}{\centi\meter}, así como de la tibia entre \SI{32}{\centi\meter} y \SI{55}{\centi\meter}.
+	\item \textbf{Carga máxima:}  
+	La estructura de la cama soporta una carga máxima de \SI{100}{\kilo\gram}, mientras que el mecanismo móvil ha sido validado para soportar una extremidad inferior con un peso de hasta \SI{20}{\kilo\gram}.
+\end{itemize}
+
+\clearpage
 \section{Análisis de costos}
 \input{capitulos/tt2/09_AnálisisValorCostos.tex}
-
 \section{Análisis de valor}
 El valor del prototipo desarrollado no reside únicamente en su costo de fabricación, sino en la relación costo-beneficio que ofrece frente a las soluciones actuales de rehabilitación y las problemáticas clínicas detectadas.
 

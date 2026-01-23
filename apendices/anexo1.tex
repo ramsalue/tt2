@@ -1,38 +1,113 @@
 % ==============================================================================
 % ANEXO A (o 1, según configuración)
 % ==============================================================================
-
-\chapter{Hoja de datos}
-% Este será "Anexo A" o "Anexo 1" automáticamente
-
-Una ficha técnica, hoja técnica u hoja de datos (datasheet en inglés), también 
-ficha de características u hoja de características, es un documento que resume 
-el funcionamiento y otras características de un componente (por ejemplo, un 
-componente electrónico) o subsistema (por ejemplo, una fuente de alimentación) 
-con el suficiente detalle para ser utilizado por un ingeniero de diseño y 
-diseñar el componente en un sistema.
-
-Comienza típicamente con una página introductoria que describe el resto del 
-documento, seguido por los listados de componentes específicos, con la 
-información adicional sobre la conectividad de los dispositivos. En caso de 
-que haya código fuente relevante a incluir, se une cerca del extremo del 
-documento o se separa generalmente en otro archivo.
-
-Las fichas técnicas no se limitan solo a componentes electrónicos, sino que 
-también se dan en otros campos de la ciencia, como por ejemplo compuestos 
-químicos o alimentos.
-
-% Ejemplo de tabla en anexo
-\begin{table}[H]
+\section*{Hojas de especificaciones de componentes}
+\addcontentsline{toc}{section}{Hojas de especificaciones de componentes}
+    \section*{Sistema estructural}
+    \begin{figure}[h!]
 	\centering
-	\caption{Especificaciones del componente}
-	\label{tab:anexo-especificaciones}
-	\begin{tabular}{|l|c|}
-		\hline
-		\textbf{Parámetro} & \textbf{Valor} \\
-		\hline
-		Voltaje & 12V \\
-		Corriente & 2A \\
-		\hline
-	\end{tabular}
-\end{table}
+	\includegraphics[trim={0 0cm 0 0},clip, angle =90, width=0.7\textwidth]{figure/planos_manufactura/Chumacera-3.pdf}
+	\caption{Chumacera.}
+	\label{fig:Chumacera}
+	\end{figure}
+    
+
+    \begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.85\textwidth]{figure/planos_manufactura/Rodamiento Axial-3-4.pdf}
+	\caption{Rodamiento axial.}
+	\label{fig:Rodamiento}
+	\end{figure}
+
+    \begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.85\textwidth, page=2]{figure/planos_manufactura/Rodamiento Axial-3-4.pdf}
+	\caption{Rodamiento axial (Parte 2).}
+	\label{fig:Rodamiento2}
+	\end{figure}
+
+    \clearpage
+	\section*{Sistema de seguridad eléctrico}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figure/Datasheets/ds_fusible10am.pdf}
+		\caption[Fusible Americano de 10 A 250 Vca.]{Especificaciones del fusible Americano de 10 A 250 Vca.}
+		\label{fig:ds_fusible}
+	\end{figure}
+	
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figure/Datasheets/ds_TVS SMAJ.pdf}
+		\caption[Diodo TVS unidireccional SMAJ5.0A.]{Características del diodo TVS unidireccional SMAJ5.0A.\label{fig:ds_TVS_5V}}
+	\end{figure}
+	\clearpage
+
+    
+	\section*{Sistema de energía} \label{Anexo_sistema de energia}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle =0, width=0.7\textwidth]{figure/Datasheets/ds_LRS-600-spec.pdf}
+		\caption[MEAN WELL LRS-600-48.]{Características de fuente conmutada MEAN WELL LRS-600-48.}
+		\label{fig:ds_fuente_conmutada}
+	\end{figure}
+
+    \begin{figure}[h!]
+		\centering
+		\includegraphics[trim={0 10cm 0 0},clip, angle =0, width=1\textwidth]{figure/Datasheets/ds_LRS-600-spec_dimensiones.pdf}
+		\caption[MEAN WELL LRS-600-48.]{Dimensiones de fuente conmutada MEAN WELL LRS-600-48.}
+		\label{fig:ds_fuente_conmutada_dimensiones}
+	\end{figure}
+	
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[angle =0, width=0.8\textwidth]{figure/Datasheets/ds_LRS-50-SPEC.pdf}
+	\caption[MEAN WELL LRS-50-5.]{Características de fuente conmutada MEAN WELL LRS-50-5.}
+	\label{fig:ds_fuente_conmutada_5V}
+	\end{figure}
+
+    \begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 10cm 0 0},clip, angle =0, width=1\textwidth]{figure/Datasheets/ds_LRS-50-SPEC_dimensiones.pdf}
+	\caption[MEAN WELL LRS-50-5.]{Dimensiones de fuente conmutada MEAN WELL LRS-50-5.}
+	\label{fig:ds_fuente_conmutada_5V_dimensiones}
+	\end{figure}
+
+\clearpage
+
+
+\section*{Sistema de movimiento}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.75\textwidth, page=2]{figure/Datasheets/HSS57.pdf}
+	\caption{Hoja de datos de driver HSS57. (Página 2)}
+	\label{fig:Data_HSS57}
+	\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.85\textwidth, page=2]{figure/Datasheets/HSS86.pdf}
+	\caption{Hoja de datos de driver HSS86. (Página 2)}
+	\label{fig:Data_HSS86}
+	\end{figure}
+
+\clearpage
+
+
+\section*{Sistema de control}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.75\textwidth]{figure/Datasheets/vl53l1x.pdf}
+	\caption{Hoja de datos de sensor vl53l1x. }
+	\label{fig:Data_Vl42l1x}
+	\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[trim={0 0cm 0 0},clip, angle =0, width=0.8\textwidth, page=2]{figure/Datasheets/RASP4.pdf}
+	\caption{Hoja de datos de Raspberry Pi 4 Model B (Página 2). }
+	\label{fig:Data_RASP}
+\end{figure}
+
+    
+	\clearpage

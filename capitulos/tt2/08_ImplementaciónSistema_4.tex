@@ -1,9 +1,7 @@
-\clearpage
-\section{Sistema de Comunicación HMI (S6)}
+\section{Sistema de Comunicación Humano-Máquina (S6)}
+La implementación del sistema de comunicación humano-máquina se realizó apegándose a la arquitectura definida en la fase de diseño, integrando un módulo de visualización física para entradas y salidas, y un módulo lógico de gestión de datos. La interfaz actúa como el puente intercambiando información con el sistema de control. A continuación se describe la implementación de los módulos que conforman este sistema.
 
-La implementación del sistema de interfaz Humano-Máquina se realizó apegándose a la arquitectura definida en la fase de diseño, integrando un módulo de visualización física parea entradas y salidas, y un módulo lógico de gestión de datos. La interfaz actúa como el puente intercambiando información con sistema de control. A continuación se describe la implementación de los módulos que conforman a este sistema.
-
-\subsection{Implementación del módulo de E/S (M10)}
+\subsection{Implementación del módulo E/S (M10)}
 
 El módulo de Entrada/Salida se implementó mediante la integración de hardware de visualización y el desarrollo de una aplicación gráfica de escritorio.
 
@@ -20,7 +18,7 @@ La lógica de interacción se programó en lenguaje \textbf{Python 3}, utilizand
 	\item \textbf{Hilo principal (Main Thread):} Gestiona los eventos de la interfaz (botones, cambio de ventanas) garantizando una respuesta visual fluida.
 	\item \textbf{Hilos de trabajo (Worker Threads):} Se implementaron clases dedicadas (\texttt{QThread}) para ejecutar los bucles de control de los motores y la lectura de sensores mediante la librería \texttt{pigpio}. Esto evita que la interfaz se congele durante la ejecución de las rutinas de terapia.
 \end{itemize}
-La navegación se estructuró mediante un \texttt{QStackedWidget} que administra las pantallas de: \textit{Inicio, Posicionamiento inicial, Calibración, Selección de Terapia, Pantalla de ejercicio y Ejecución}.
+La navegación se estructuró mediante un \texttt{QStackedWidget} que administra las pantallas de: \textit{Inicio, Posicionamiento inicial, Calibración, Selección de Terapia, Pantalla de ejercicio y Ejecución}\footnote{El código fuente completo de la aplicación, incluyendo la interfaz gráfica, se encuentra disponible en el repositorio público del proyecto: \url{https://github.com/ramsalue/ortesis-robotica}}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.48\textwidth]{figure/pantallas_interfaz/App Ver1.0/Inicio_tt2.png}
@@ -29,8 +27,8 @@ La navegación se estructuró mediante un \texttt{QStackedWidget} que administra
 	\caption{Interfaz gráfica implementada: Pantalla de Bienvenida (izq) y Monitor de Terapia (der).}
 	\label{fig:gui_screens}
 \end{figure}
-\vspace{-1cm}
-\subsubsection{Verificación del módulo de visualización}
+\vspace{-0.5cm}
+\subsubsection{Verificación del módulo E/S}
 \paragraph*{Prueba S6-01: Respuesta táctil y fluidez gráfica.}\mbox{}\\
 \textbf{Objetivo:} Verificar que la interfaz responde a los eventos táctiles en tiempo real y se ajusta a la resolución nativa sin distorsión.
 \\
@@ -54,7 +52,7 @@ La estructura de directorios se organizó para permitir el acceso relativo a los
 
 Esta organización permite que el software sea portable y facilita la actualización de los archivos de imagen sin modificar el código fuente.
 
-\subsubsection{Verificación del módulo de interacción y datos}
+\subsubsection{Verificación del módulo de almacenamiento}
 \paragraph*{Prueba S6-02: Integridad de recursos y persistencia.}\mbox{}\\
 \textbf{Objetivo:} Confirmar que el sistema puede leer correctamente los archivos almacenados en el módulo M11 durante la ejecución.
 \\

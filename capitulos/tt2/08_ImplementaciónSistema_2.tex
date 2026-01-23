@@ -1,7 +1,6 @@
-\clearpage
 \section{Sistema de seguridad eléctrico (S2)}
 
-La implementación de la seguridad eléctrica tiene como objetivo proteger la integridad de los componentes electrónicos y prevenir riesgos operacionales. El sistema de seguridad eléctrica constituye la primera capa de protección del sistema.
+La implementación de la seguridad eléctrica tiene como objetivo proteger la integridad de los componentes eléctricos y electrónicos y prevenir riesgos operacionales. El sistema de seguridad eléctrico constituye la primera capa de protección del sistema.
 
 \subsection{Implementación del módulo de protección por sobrecorriente (M1)}
 Se mantuvo el diseño de protección principal en la entrada de línea (127 VAC) mediante un fusible, actuando como la primera barrera ante cortocircuitos generales antes de ingresar al circuito de control de encendido.
@@ -43,7 +42,7 @@ Durante la integración y verificación del sistema de seguridad mecánico se en
 La principal diferencia con los topes diseñados [Fig. \ref{fig:Pina_Figura17}] radica en la forma en la que el tornillo mariposa hace contacto con la estructura de aluminio. En la Fig. \ref{fig:tope_flexion_frontal} se puede observar el nuevo diseño donde el tornillo mariposa hace presión sobre la cara superior de la estructura estática de aluminio donde se interpone una placa de 1 mm de grosor que evita el contacto directo del tornillo con la estructura.
 
 Se procede con la descripción de la implementación de los módulos del sistema de seguridad mecánico. El sistema se compone de dos módulos: M3 y M4.
-\subsection{Implementación de topes mecánicos (M3)}
+\subsection{Implementación del módulo de topes mecánicos (M3)}
 Se integraron al sistema estructural los topes mecánicos que impiden la extensión o flexión excesiva del mecanismo de flexión-extensión. Estos topes se colocaron de forma perpendicular al eje de desplazamiento lineal del mecanismo, sirviendo como referencia para los puntos de inicio y fin de la trayectoria al momento de calibrar el sistema cuando se inicia una rutina. En la Fig. \ref{fig:topes_flexion_extension01} se muestra la disposición de los topes que limitan el movimiento lineal. El mecanismo de flexión-extensión también cuenta con un tope que limita el movimiento angular al momento de flexionar el mecanismo [Fig. \ref{fig:topes_flexion_extension02}].
 \begin{figure}[h!]
 	\centering
@@ -54,7 +53,7 @@ Se integraron al sistema estructural los topes mecánicos que impiden la extensi
 	\caption{Topes para mecanismo de flexión-extensión.\label{fig:topes_flexion_extension}}
 \end{figure}
 
-Para el movimiento de abducción-aducción se colocaron topes para limitar la apertura del ángulo más allá de los límites permitidos ($0^\circ$ a $40^\circ$). Los topes fueron realizados con el material PTR, mismo que comparte con la estructura de la cama soporte, y soldados a la misma estructura.
+Para el movimiento de abducción-aducción se colocaron topes para limitar la apertura del ángulo más allá de los límites permitidos ($0^\circ$ a $50^\circ$). Los topes fueron realizados con el material PTR, mismo que comparte con la estructura de la cama soporte, y soldados a la misma estructura.
 \begin{figure}[h!]
 	\centering
 	\subcaptionbox{Tope para máximo ángulo de apertura.\label{fig:topes_abducción_aducción01}}
@@ -67,18 +66,17 @@ Para el movimiento de abducción-aducción se colocaron topes para limitar la ap
 \paragraph*{Prueba S3-01: Resistencia al impacto controlado}\mbox{}\\
 \textbf{Objetivo:} Verificar que la estructura y los topes soportan el par del motor sin sufrir daño permanente en caso de que el software no detenga el movimiento.
 \\
-\textbf{Justificación de seguridad:} Debido al alto par del actuador Nema 23 seleccionado, existe el riesgo de que el motor venza la estructura si no se limita su avance.
+\textbf{Justificación de seguridad:} Debido al alto par del actuador Nema 34 seleccionado, existe el riesgo de que el motor venza la estructura si no se limita su avance.
 \\
-\textbf{Procedimiento:} Se deshabilitaron intencionalmente los límites de software y se comandó el motor hacia el extremo del riel a baja velocidad, provocando una colisión controlada contra el tope mecánico.
+\textbf{Procedimiento:} Se deshabilitaron intencionalmente los límites de software y se comandó el motor hacia el extremo angular a baja velocidad, provocando una colisión controlada contra el tope mecánico de abducción.
 \\
-\textbf{Resultados:} El tope mecánico detuvo el avance del mecanismo sin deformar la estructura ni descarrilarlo, validando la robustez de la barrera física como segunda capa de protección.
+\textbf{Resultados:} El tope mecánico detuvo el avance del mecanismo sin deformar la estructura, validando la robustez de la barrera física como segunda capa de protección.
 
-\subsection{Implementación del módulo de sujeción (M4)}
-% DESCRIBIR MÁS INFORMACION SOBRE ESTE MÓDULO Y PRUEBAS
-Los soportes directos para la pierna y pie se fabricaron mediante impresión 3D (manufactura aditiva) utilizando PLA para permitir geometrías ergonómicas complejas que no serían viables por métodos sustractivos. Estos soportes se acoplaron a los tubos telescópicos de aluminio que forman parte del mecanismo de flexión-extensión, permitiendo el ajuste longitudinal.\\
+\subsection{Implementación del módulo de sujeción y ajuste (M4)}
+Los soportes directos para la pierna y el pie se fabricaron mediante impresión 3D (manufactura aditiva) utilizando PLA para permitir geometrías ergonómicas complejas que no serían viables por métodos sustractivos. Estos soportes se acoplaron a los tubos telescópicos de aluminio que forman parte del mecanismo de flexión-extensión, permitiendo el ajuste longitudinal.\\
 Aunque el diseño contempla el uso de cintas de velcro para la sujeción final, durante la fase de pruebas funcionales se priorizó la validación del mecanismo de ajuste telescópico y la rigidez de los soportes impresos.
 
-\subsubsection{Verificación del módulo de sujeción (M4)}
+\subsubsection{Verificación del módulo de sujeción de sujeción y ajuste}
 
 \paragraph*{Prueba S3-02: Validación de sujeción ergonómica y estabilidad.}\mbox{}\\
 \textbf{Objetivo:} Verificar que el sistema de sujeción (soportes impresos y cintas de velcro) mantiene la extremidad fija y alineada con el eje mecánico durante el movimiento.

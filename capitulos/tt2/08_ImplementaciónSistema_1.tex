@@ -163,14 +163,14 @@ Para ajustar y fijar la longitud de los tubos telescópicos se emplearon tornill
 \subsubsection{Discrepancias entre diseño e implementación del mecanismo de flexión-extensión}
 %\paragraph*{Soporte distal (pie).}
 %Durante el ensamble del soporte distal (pie)\footnote{Se proporciona mayor información de la manufactura de los soportes en la subsección \nameref{Implementacion S3}.}, se encontró una interferencia dimensional en la unión de la impresión 3D plegada que actúa como soporte del pie con la estructura de aluminio, por lo que se aplicó un proceso de ajuste mecánico (desbaste de 3 mm) en las caras laterales para lograr un acople deslizante.
-\paragraph*{Barreno invertido en clévis (fémur).}\mbox{}\\
-En uno de los tubos telescópicos del fémur, un barreno para ajustar la posición del tubo telescópico fue soldado en sentido invertido al planteado en el diseño CAD, sin embargo, no afecta al funcionamiento ni el movimiento por lo que se decidió conservar dicho cambio debido a que el funcionamiento es aceptable.
+\paragraph*{Barreno invertido en Clévis (fémur).}\mbox{}\\
+En uno de los tubos telescópicos del fémur, un barreno para ajustar la posición del tubo telescópico fue soldado en sentido invertido al planteado en el diseño CAD, sin embargo, no afecta al funcionamiento ni al movimiento por lo que se decidió conservar dicho cambio debido a que el funcionamiento es aceptable.
 \subsection{Construcción del mecanismo de abducción-aducción.}
-El mecanismo de abducción-aducción se encarga de soportar la carga del subsistema de flexión y la pierna del paciente, y produce la rotación de un eje vertical. Para este mecanismo se utilizó el motor Nema 34 acoplado un eje de acero 4140 tratado que fue maquinado. Sobre el eje se tienen los puntos de apoyo distribuidos que reducen el momento flector en los extremos.
+El mecanismo de abducción-aducción se encarga de soportar la carga del subsistema de flexión-extensión y la pierna del paciente, y produce la rotación de un eje vertical. Para este mecanismo se utilizó el motor Nema 34 acoplado a un eje de acero 4140 tratado que fue maquinado. Sobre el eje se tienen los puntos de apoyo distribuidos que reducen el momento flector en los extremos.
 \subsubsection*{Selección de elementos de rotación}
 Durante la validación del diseño, se analizó la selección de los elementos rodantes para las articulaciones superior e inferior.
 \begin{enumerate}
-	\item \textbf{Eje inferior (carga principal):} Se implementaron chumaceras de bolas y un rodamiento axial en la base. Esto para soportar la carga axial combinada (aprox. 25 kg) con mínima fricción.
+	\item \textbf{Eje inferior (carga principal):} Se implementaron chumaceras de bolas y un rodamiento axial en la base. Esto para soportar la carga axial combinada (aprox. 50 kg) con la mínima fricción.
 	\item \textbf{Uniones superiores (nivel coxofemoral):} Para las articulaciones superiores del mecanismo de flexión-extensión, se emplearon las juntas Clevis seleccionadas mediante tablas de decisión, la cuales no tienen rodamientos de bolas, esto se debe a que la velocidad angular de operación es muy baja ($< 0.5$ rad/s) y el ciclo de trabajo no es continuo, lo que implica que la fricción generada por el contacto metal-metal lubricado es despreciable en comparación con el par disponible de los actuadores. 
 \end{enumerate}
 \subsubsection{Implementación de la placa base y eje de transmisión}
@@ -197,7 +197,7 @@ En la Fig. \ref{fig:integracion_mecanismos} se observa la integración de ambos 
 
 \subsection{Verificación del sistema estructural}
 
-Una vez ensamblado el sistema S1, se procedió a su validación estática antes de integrar los componentes de los sistemas de seguridad mecánica, eléctrica, controlo y comunicación.
+Una vez ensamblado el sistema estructural, se procedió a su validación estática antes de integrar los componentes de los sistemas de seguridad mecánica, eléctrica, control y comunicación.
 
 \subsubsection{Prueba S1-01: Integridad estructural bajo carga}
 \textbf{Objetivo:} Verificar que la estructura soporta la carga de diseño sin deformaciones plásticas ni fallos en las soldaduras.

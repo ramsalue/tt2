@@ -1,13 +1,12 @@
-\clearpage
 \section{Sistema de control (S7)}
-El sistema de control actúa integra la lectura del estado físico del mecanismo (sensores) y la ejecución de los algoritmos de movimiento (procesamiento) para enviar señales a los actuadores y estos puedan realizar los movimientos de flexión-extensión.
+El sistema de control actúa integrando la lectura del estado físico del mecanismo (sensores) y la ejecución de los algoritmos de movimiento (procesamiento) para enviar señales a los actuadores y estos puedan realizar los movimientos de flexión-extensión.
 
 \subsection{Implementación del módulo de sensores (M12)}
 \subsubsection{Modificación al diseño del módulo de sensores}
 Originalmente, el diseño planteaba el uso de sensores ópticos. Sin embargo, durante la fase de implementación se realizó una modificación técnica sustituyéndolos por interruptores de límite mecánicos (\textit{limit switches}). 
 
 \textbf{Justificación del cambio:}
-Los sensores ópticos mostraron sensibilidad a las condiciones de iluminación ambiental, la superficie reflectante del aluminio, y requerían una alineación milimétrica difícil de mantener con las vibraciones del movimiento. Los interruptores mecánicos una conmutación entre 0 y 1 detectable para la detección de seguridad.
+Los sensores ópticos mostraron sensibilidad a las condiciones de iluminación ambiental, la superficie reflectante del aluminio, y requerían una alineación milimétrica difícil de mantener con las vibraciones del movimiento. Los interruptores mecánicos utilizan una conmutación entre 0 y 1 detectable para lograr el frenado de seguridad.
 
 \textbf{Configuración implementada:}
 Se instalaron un total de 4 sensores, alimentados con una tensión lógica de 3.3V proveniente de la Raspberry Pi [Fig. \ref{fig:sensores_limit_switches}]:
@@ -51,7 +50,7 @@ Se diseñó y manufacturó una placa de circuito impreso (PCB) de propósito esp
 	\item \textbf{Arreglo pull-up:} Integra resistencias de $10\text{k}\Omega$ en paralelo con capacitores que actuan como un filtro de ruido, conectadas a 3.3V en cada línea de señal. Esto asegura que, cuando el interruptor está abierto, el pin de la Raspberry lea un 1 estable, y solo cambie a 0 cuando el interruptor cierre el circuito a tierra.
 \end{enumerate}
 
-\subsubsection{Verificación del módulo de acondicionamiento}
+\subsubsection{Verificación del módulo de acondicionamiento de señales}
 \paragraph*{Prueba S7-02: Estabilidad de voltaje y filtrado de ruido.}\mbox{}\\
 \textbf{Objetivo:} Confirmar que los niveles de tensión en los pines de entrada son compatibles con la lógica de 3.3V de la Raspberry Pi.
 \\
@@ -62,13 +61,11 @@ Se diseñó y manufacturó una placa de circuito impreso (PCB) de propósito esp
 	\item Estado reposo: $3.28 \text{V}$ (Lógica 1).
 	\item Estado activo: $0.02 \text{V}$ (Lógica 0).
 \end{itemize}
-Estos valores garantizan que no existen voltajes intermedios que puedan causar indeterminación en el software.
-
+Estos valores buscan que no existan voltajes intermedios que puedan causar indeterminación en el software. 
 \subsection{Implementación del módulo de procesamiento (M14)}
-
 El núcleo de procesamiento se implementó sobre una \textbf{Raspberry Pi}, ejecutando el sistema operativo Raspberry Pi OS (Linux). La lógica de control se desarrolló íntegramente en lenguaje \textbf{Python 3}, integrando el control de hardware y la interfaz de usuario en una arquitectura multihilo.
 
-\subsubsection{Arquitectura del Software (app\_fisio\_final.py)}
+\subsubsection{Arquitectura del Software (app\_fisioterapia.py)}
 El código desarrollado utiliza librerías específicas para garantizar el rendimiento en tiempo real:
 \begin{itemize}
 	\item \textbf{Generación de Pulsos (pigpio):} A diferencia de las librerías estándar (Rpi.GPIO), se implementó la librería `pigpio` que utiliza el acceso directo a memoria (DMA) del procesador para generar trenes de pulsos hacia los drivers de los motores.
@@ -96,3 +93,11 @@ El código desarrollado utiliza librerías específicas para garantizar el rendi
 	\item \textbf{Precisión:} El eje completó un giro de $360^\circ$ con un error visual menor a $1^\circ$, confirmando que no hubo pérdida de pulsos ni pulsos fantasma generados por el software.
 	\item \textbf{Calidad de movimiento:} Se observó una rotación fluida y un sonido constante durante la etapa de velocidad crucero, lo que indica que la librería `pigpio` está generando un tren de pulsos con frecuencia estable.
 \end{itemize}
+
+En la Fig. \ref{fig:circuito_control_fisico} se observa el flujo de señales correspondientes al sistema de control, donde la Raspberry Pi 4 se desempeña como el cerebro del sistema coordinando el envío y recepción de señales tal como se esperaba en la etapa de diseño de este sistema.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figure/img_componentes/circuito_control.png}
+    \caption{Esquema de circuito de conexiones para el sistema de control.}
+    \label{fig:circuito_control_fisico}
+\end{figure}
